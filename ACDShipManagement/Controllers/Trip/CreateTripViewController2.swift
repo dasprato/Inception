@@ -38,8 +38,8 @@ class CreateTripViewController2: UIViewController {
         
         NSLayoutConstraint.activate([containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor), containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor)])
         
-        qrCodePortraintContrainstsArray = [containerView.heightAnchor.constraint(equalToConstant: 140), containerView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9)]
-        qrCodeLandscapetContrainstsArray = [containerView.heightAnchor.constraint(equalToConstant: 140), containerView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9)]
+        qrCodePortraintContrainstsArray = [containerView.heightAnchor.constraint(equalToConstant: 136), containerView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9)]
+        qrCodeLandscapetContrainstsArray = [containerView.heightAnchor.constraint(equalToConstant: 136), containerView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9)]
         
         checkAndAdjustContraintst()
         

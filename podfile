@@ -7,7 +7,6 @@ target 'ACDShipManagement' do
 
   # Pods for ACDShipManagement
 
-
 pod 'QRCode'
 pod 'IQKeyboardManagerSwift'
 pod 'Mapbox-iOS-SDK'
@@ -17,16 +16,17 @@ pod 'Firebase/Auth'
 pod 'Firebase/Storage'
 pod 'Firebase/Core'
 pod 'Firebase/Firestore'
+pod 'FirebaseMessaging', '2.0.8' 
 pod 'SDWebImage'
 pod 'M13PDFKit'
 pod 'ImagePicker'
 pod 'Firebase'
-pod 'FirebaseMessaging', '2.0.8' 
 pod 'Bolts'
 pod 'FBSDKCoreKit'
 pod 'FBSDKShareKit'
 pod 'FBSDKLoginKit'
 pod 'NotificationBannerSwift'
+
   target 'ACDShipManagementTests' do
     inherit! :search_paths
     # Pods for testing

@@ -120,11 +120,6 @@ class SailTripViewController1: UIViewController {
                             print("Document does not exist")
                         }
                     }
-
-                    
-
-
-                    
                 }
                 
                 if (difference.type == .modified) {
@@ -151,9 +146,6 @@ class SailTripViewController1: UIViewController {
                                     print("Document does not exist")
                                 }
                             }
-                            
-                            
-
                             return
                         }
                     }
@@ -184,10 +176,11 @@ extension SailTripViewController1: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = QRCodeViewController()
+        let vc = UINavigationController(rootViewController: SailTripViewController2())
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overCurrentContext
-        vc.id = "Trip Id: " + self.arrayOfTrips![indexPath.row].tripId!
+        
+//        vc.id = "Trip Id: " + self.arrayOfTrips![indexPath.row].tripId!
         present(vc, animated: true, completion: nil)
     }
     
@@ -231,7 +224,7 @@ class SailTripCollectionViewCell: UICollectionViewCell {
         }
     }
     override init(frame: CGRect) {
-        self.trip = Trip(amount: "", cargo: "", from: "", to: "", initiliased: "", tripStatus: "", vesselReferencePath: "", tripId: "", fromDate: "", toDate: "", vesselName: "]")
+        self.trip = Trip(amount: "", cargo: "", from: "", to: "", initiliased: "", tripStatus: "", vesselReferencePath: "", tripId: "", fromDate: "", toDate: "", vesselName: "")
         self.shipName = ""
         super.init(frame: frame)
         
