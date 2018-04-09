@@ -16,6 +16,7 @@
 		D207895E2073BFAC00B5509E /* SailTripViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207895D2073BFAC00B5509E /* SailTripViewController2.swift */; };
 		D20789602074555A00B5509E /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207895F2074555A00B5509E /* Trip.swift */; };
 		D2153E342024D03400B3D2A2 /* QuickActionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2153E332024D03400B3D2A2 /* QuickActionCollectionViewCell.swift */; };
+		D229D325207AAE270081AA87 /* DeviceModelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D229D324207AAE270081AA87 /* DeviceModelExtension.swift */; };
 		D22EAA4B205E970800439F00 /* DeveloperInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22EAA4A205E970800439F00 /* DeveloperInfoViewController.swift */; };
 		D23EF2E6207127D900190B64 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23EF2E5207127D900190B64 /* QRCodeViewController.swift */; };
 		D23EF2E820715CA600190B64 /* QRCodeReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23EF2E720715CA600190B64 /* QRCodeReaderViewController.swift */; };
@@ -44,6 +45,7 @@
 		D25D0C9E20775A96001E99F7 /* Parking_Tags_Data_2016_1.csv in Resources */ = {isa = PBXBuildFile; fileRef = D25D0C8D20775A95001E99F7 /* Parking_Tags_Data_2016_1.csv */; };
 		D25D0C9F20775A96001E99F7 /* Parking_Tags_Data_2016_2.csv in Resources */ = {isa = PBXBuildFile; fileRef = D25D0C8E20775A95001E99F7 /* Parking_Tags_Data_2016_2.csv */; };
 		D25D0CA020775A96001E99F7 /* Parking_Tags_Data_2016_4.csv in Resources */ = {isa = PBXBuildFile; fileRef = D25D0C8F20775A96001E99F7 /* Parking_Tags_Data_2016_4.csv */; };
+		D267ABD6207A7E8A00A118D7 /* ConnectionBetweenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D267ABD5207A7E8A00A118D7 /* ConnectionBetweenVC.swift */; };
 		D276CDB4202928C700CDAD18 /* ReadShipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276CDB3202928C700CDAD18 /* ReadShipViewController.swift */; };
 		D276CDB6202928D700CDAD18 /* CreateShipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276CDB5202928D700CDAD18 /* CreateShipViewController.swift */; };
 		D276CDB8202928E600CDAD18 /* UpdateShipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276CDB7202928E600CDAD18 /* UpdateShipViewController.swift */; };
@@ -114,6 +116,7 @@
 		D207895D2073BFAC00B5509E /* SailTripViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SailTripViewController2.swift; sourceTree = "<group>"; };
 		D207895F2074555A00B5509E /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		D2153E332024D03400B3D2A2 /* QuickActionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickActionCollectionViewCell.swift; sourceTree = "<group>"; };
+		D229D324207AAE270081AA87 /* DeviceModelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModelExtension.swift; sourceTree = "<group>"; };
 		D22EAA4A205E970800439F00 /* DeveloperInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperInfoViewController.swift; sourceTree = "<group>"; };
 		D23EF2E5207127D900190B64 /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		D23EF2E720715CA600190B64 /* QRCodeReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeReaderViewController.swift; sourceTree = "<group>"; };
@@ -142,6 +145,7 @@
 		D25D0C8D20775A95001E99F7 /* Parking_Tags_Data_2016_1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Parking_Tags_Data_2016_1.csv; sourceTree = "<group>"; };
 		D25D0C8E20775A95001E99F7 /* Parking_Tags_Data_2016_2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Parking_Tags_Data_2016_2.csv; sourceTree = "<group>"; };
 		D25D0C8F20775A96001E99F7 /* Parking_Tags_Data_2016_4.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Parking_Tags_Data_2016_4.csv; sourceTree = "<group>"; };
+		D267ABD5207A7E8A00A118D7 /* ConnectionBetweenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionBetweenVC.swift; sourceTree = "<group>"; };
 		D276CDB3202928C700CDAD18 /* ReadShipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadShipViewController.swift; sourceTree = "<group>"; };
 		D276CDB5202928D700CDAD18 /* CreateShipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShipViewController.swift; sourceTree = "<group>"; };
 		D276CDB7202928E600CDAD18 /* UpdateShipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateShipViewController.swift; sourceTree = "<group>"; };
@@ -306,6 +310,7 @@
 				D23EF2EF2071E7E500190B64 /* CreateTripViewController2.swift */,
 				D207895B2073B98E00B5509E /* SailTripViewController1.swift */,
 				D207895D2073BFAC00B5509E /* SailTripViewController2.swift */,
+				D267ABD5207A7E8A00A118D7 /* ConnectionBetweenVC.swift */,
 			);
 			path = Trip;
 			sourceTree = "<group>";
@@ -403,6 +408,7 @@
 				D29F0EC6201D2C8700D75A52 /* AccountViewController.swift */,
 				D29F0EC8201D2C9B00D75A52 /* ShipViewController.swift */,
 				D24B8E8A206A43E6003C477F /* Launch Screen.storyboard */,
+				D229D324207AAE270081AA87 /* DeviceModelExtension.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -921,6 +927,7 @@
 				D276CDD2202A5B0300CDAD18 /* DismissAnimator.swift in Sources */,
 				D2C000CE201A87710094138D /* AppDelegate.swift in Sources */,
 				D276CDBA202928F100CDAD18 /* DeleteShipViewController.swift in Sources */,
+				D267ABD6207A7E8A00A118D7 /* ConnectionBetweenVC.swift in Sources */,
 				D207895E2073BFAC00B5509E /* SailTripViewController2.swift in Sources */,
 				D276CDB8202928E600CDAD18 /* UpdateShipViewController.swift in Sources */,
 				D276CDB4202928C700CDAD18 /* ReadShipViewController.swift in Sources */,
@@ -932,6 +939,7 @@
 				D24B8E8720696EE3003C477F /* Reachability.swift in Sources */,
 				D276CDBE2029311D00CDAD18 /* CreateCompanyViewController.swift in Sources */,
 				D2FE0CF52024C366006C8BCE /* MenuTitleCollectionViewCell.swift in Sources */,
+				D229D325207AAE270081AA87 /* DeviceModelExtension.swift in Sources */,
 				D24B8E89206973AF003C477F /* NoReachabilityViewController.swift in Sources */,
 				D29F0ECF201F2E0200D75A52 /* NotificationCollectionViewCell.swift in Sources */,
 				D207895C2073B98E00B5509E /* SailTripViewController1.swift in Sources */,

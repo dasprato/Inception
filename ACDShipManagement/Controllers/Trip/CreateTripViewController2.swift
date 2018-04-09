@@ -262,7 +262,7 @@ extension CreateTripViewController2 {
         let tripId = UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString +
             UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString
         let db = Firestore.firestore()
-        let tripDictionary: [String: Any?] = ["from": from, "to": to, "cargo": cargo, "amount": amount, "vesselReferencePath": (ship?.shipId)!, "fromDate": fromDateForDatabase, "toDate": toDateForDatabase, "initialised": timeStamp, "tripStatus": "Intialised"]
+        let tripDictionary: [String: Any?] = ["from": from, "to": to, "cargo": cargo, "amount": amount, "vesselReferencePath": (ship?.shipId)!, "fromDate": fromDateForDatabase, "toDate": toDateForDatabase, "initialised": timeStamp, "tripStatus": "Initialised"]
         db.collection("Trips").document(tripId).setData(tripDictionary)
         
         let basicTripDictionary: [String: Any?] = ["tripReferencePath": tripId]

@@ -35,6 +35,8 @@ class SailTripViewController1: UIViewController {
         barButtonClose.tintColor = .white
         self.navigationItem.setLeftBarButton(barButtonClose, animated: true)
         
+         
+        
         
         searchBar.placeholder = "Search"
         navigationItem.titleView = searchBar
@@ -177,10 +179,8 @@ extension SailTripViewController1: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = UINavigationController(rootViewController: SailTripViewController2())
-        vc.modalTransitionStyle = .crossDissolve
-        vc.modalPresentationStyle = .overCurrentContext
-        
-//        vc.id = "Trip Id: " + self.arrayOfTrips![indexPath.row].tripId!
+        ConnectionBetweenVC.tripID = "Trip Id: " + self.arrayOfTrips![indexPath.row].tripId!
+        ConnectionBetweenVC.trip = self.arrayOfTrips![indexPath.row]
         present(vc, animated: true, completion: nil)
     }
     
