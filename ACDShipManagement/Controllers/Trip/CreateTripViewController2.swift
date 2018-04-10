@@ -262,11 +262,17 @@ extension CreateTripViewController2 {
         let tripId = UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString +
             UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString + UUID().uuidString
         let db = Firestore.firestore()
-        let tripDictionary: [String: Any?] = ["from": from, "to": to, "cargo": cargo, "amount": amount, "vesselReferencePath": (ship?.shipId)!, "fromDate": fromDateForDatabase, "toDate": toDateForDatabase, "initialised": timeStamp, "tripStatus": "Initialised"]
+        let tripDictionary: [String: Any?] = ["from": from, "to": to, "cargo": cargo, "amount": amount, "vesselReferencePath": (ship?.shipId)!, "fromDate": fromDateForDatabase, "toDate": toDateForDatabase, "tripStatus": "Initialised"]
         db.collection("Trips").document(tripId).setData(tripDictionary)
         
-        let basicTripDictionary: [String: Any?] = ["tripReferencePath": tripId]
-db.collection("Ships").document((ship?.shipId)!).collection("Trips").document(tripId).setData(basicTripDictionary)
+        let tripStatusDictionary: [String: Any?] = ["Initialised": timeStamp]
+        db.collection("Trips").document(tripId).collection("TripStatusLog").document(timeStamp).setData(tripStatusDictionary)
+        
+        let tripDictionaryForShips: [String: Any?] = ["tripReferencePath": tripId]
+        db.collection("Ships").document((ship?.shipId)!).collection("Trips").document(tripId).setData(tripDictionaryForShips)
+        
+        
+        
         
         closeAndAlertPreviousViewController()
         let banner = StatusBarNotificationBanner(title: "Trip Initialised", style: .info)

@@ -108,7 +108,7 @@ class ReadTripViewController: UIViewController {
                     guard let tripStatus = difference.document.data()["tripStatus"] as? String else { return }
                     guard let fromDate = difference.document.data()["fromDate"] as? String else { return }
                     guard let toDate = difference.document.data()["toDate"] as? String else { return }
-                    self.arrayOfTrips?.append(Trip(amount: amount, cargo: cargo, from: from, to: to, initiliased: initiliased, tripStatus: tripStatus, vesselReferencePath: vesselReferencePath, tripId: difference.document.documentID, fromDate: fromDate, toDate: toDate, vesselName: ""))
+                    self.arrayOfTrips?.append(Trip(amount: amount, cargo: cargo, from: from, to: to, tripStatus: tripStatus, vesselReferencePath: vesselReferencePath, tripId: difference.document.documentID, fromDate: fromDate, toDate: toDate, vesselName: ""))
                 }
 
                 if (difference.type == .modified) {
@@ -185,7 +185,7 @@ class ReadTripCollectionViewCell: UICollectionViewCell {
         }
     }
     override init(frame: CGRect) {
-        self.trip = Trip(amount: "", cargo: "", from: "", to: "", initiliased: "", tripStatus: "", vesselReferencePath: "", tripId: "", fromDate: "", toDate: "", vesselName: "")
+        self.trip = Trip(amount: "", cargo: "", from: "", to: "", tripStatus: "", vesselReferencePath: "", tripId: "", fromDate: "", toDate: "", vesselName: "")
         super.init(frame: frame)
 
 

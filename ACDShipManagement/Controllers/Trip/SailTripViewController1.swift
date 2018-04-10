@@ -104,7 +104,6 @@ class SailTripViewController1: UIViewController {
                     guard let cargo = difference.document.data()["cargo"] as? String else { return }
                     guard let from = difference.document.data()["from"] as? String else { return }
                     guard let to = difference.document.data()["to"] as? String else { return }
-                    guard let initialised = difference.document.data()["initialised"] as? String else { return }
 
                     guard let vesselReferencePath = difference.document.data()["vesselReferencePath"] as? String else { return }
                     guard let tripStatus = difference.document.data()["tripStatus"] as? String else { return }
@@ -117,7 +116,7 @@ class SailTripViewController1: UIViewController {
                         if let document = document {
                             vesselName = document.data()!["vesselName"] as! String
                             
-                            self.arrayOfTrips?.append(Trip(amount: amount, cargo: cargo, from: from, to: to, initiliased: tripStatus, tripStatus: tripStatus, vesselReferencePath: vesselReferencePath, tripId: difference.document.documentID, fromDate: fromDate, toDate: toDate, vesselName: vesselName))
+                            self.arrayOfTrips?.append(Trip(amount: amount, cargo: cargo, from: from, to: to, tripStatus: tripStatus, vesselReferencePath: vesselReferencePath, tripId: difference.document.documentID, fromDate: fromDate, toDate: toDate, vesselName: vesselName))
                         } else {
                             print("Document does not exist")
                         }
@@ -131,7 +130,6 @@ class SailTripViewController1: UIViewController {
                             guard let cargo = difference.document.data()["cargo"] as? String else { return }
                             guard let from = difference.document.data()["from"] as? String else { return }
                             guard let to = difference.document.data()["to"] as? String else { return }
-                            guard let initialised = difference.document.data()["initialised"] as? String else { return }
                             guard let vesselReferencePath = difference.document.data()["vesselReferencePath"] as? String else { return }
                             guard let tripStatus = difference.document.data()["tripStatus"] as? String else { return }
                             guard let fromDate = difference.document.data()["fromDate"] as? String else { return }
@@ -143,7 +141,7 @@ class SailTripViewController1: UIViewController {
                             docRef.getDocument { (document, error) in
                                 if let document = document {
                                     vesselName = document.data()!["vesselName"] as! String
-                                   self.arrayOfTrips![i] = Trip(amount: amount, cargo: cargo, from: from, to: to, initiliased: tripStatus, tripStatus: tripStatus, vesselReferencePath: vesselReferencePath, tripId: difference.document.documentID, fromDate: fromDate, toDate: toDate, vesselName: vesselName)
+                                   self.arrayOfTrips![i] = Trip(amount: amount, cargo: cargo, from: from, to: to, tripStatus: tripStatus, vesselReferencePath: vesselReferencePath, tripId: difference.document.documentID, fromDate: fromDate, toDate: toDate, vesselName: vesselName)
                                 } else {
                                     print("Document does not exist")
                                 }
@@ -224,7 +222,7 @@ class SailTripCollectionViewCell: UICollectionViewCell {
         }
     }
     override init(frame: CGRect) {
-        self.trip = Trip(amount: "", cargo: "", from: "", to: "", initiliased: "", tripStatus: "", vesselReferencePath: "", tripId: "", fromDate: "", toDate: "", vesselName: "")
+        self.trip = Trip(amount: "", cargo: "", from: "", to: "", tripStatus: "", vesselReferencePath: "", tripId: "", fromDate: "", toDate: "", vesselName: "")
         self.shipName = ""
         super.init(frame: frame)
         

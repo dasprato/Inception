@@ -13,7 +13,6 @@ struct Trip {
     let cargo: String?
     let from: String?
     let to: String?
-    let initiliased: String?
     let tripStatus: String?
     let vesselReferencePath: String?
     let tripId: String?
