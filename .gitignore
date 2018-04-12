@@ -1,5 +1,8 @@
 Pods
-  
+.gitignore.swo
+.gitignore.swp
+.ignore
+NotificationServer/  
 
 # Xcode
 #

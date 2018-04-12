@@ -270,10 +270,7 @@ extension CreateTripViewController2 {
         
         let tripDictionaryForShips: [String: Any?] = ["tripReferencePath": tripId]
         db.collection("Ships").document((ship?.shipId)!).collection("Trips").document(tripId).setData(tripDictionaryForShips)
-        
-        
-        
-        
+
         closeAndAlertPreviousViewController()
         let banner = StatusBarNotificationBanner(title: "Trip Initialised", style: .info)
         banner.show()

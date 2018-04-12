@@ -119,15 +119,16 @@ class CreateTripViewController1: UIViewController, CreateTripViewController2DidC
                     guard let representativeName = difference.document.data()["representativeName"] as? String else { return }
                     guard let representativePhone = difference.document.data()["representativePhone"] as? String else { return }
                     guard let vesselCapacity = difference.document.data()["vesselCapacity"] as? String else { return }
-                    guard let vesselName = difference.document.data()["vesselName"] as? String else { return }
+                    
                     guard let currentStatus = difference.document.data()["currentStatus"] as? String else { return }
+                    guard let vesselName = difference.document.data()["vesselName"] as? String else { return }
                     self.arrayOfShips?.append(Ship(representativeEmail: representativeEmail, representativeName: representativeName, representativePhone: representativePhone, vesselCapacity: vesselCapacity, vesselName: vesselName, shipId: difference.document.documentID, currentStatus: currentStatus))
                 }
                 
                 if (difference.type == .modified) {
                     for i in 0..<self.arrayOfShips!.count {
                         if self.arrayOfShips![i].shipId == difference.document.documentID {
-                            self.arrayOfShips![i] = (Ship(representativeEmail: difference.document.data()["representativeEmail"]! as? String, representativeName: difference.document.data()["representativeName"]! as? String, representativePhone: difference.document.data()["representativePhone"]! as? String, vesselCapacity: difference.document.data()["vesselCapacity"]! as? String, vesselName: difference.document.data()["vesselName"]! as? String, shipId: difference.document.documentID, currentStatus: difference.document.data()["difference"]! as? String))
+                            self.arrayOfShips![i] = (Ship(representativeEmail: difference.document.data()["representativeEmail"]! as? String, representativeName: difference.document.data()["representativeName"]! as? String, representativePhone: difference.document.data()["representativePhone"]! as? String, vesselCapacity: difference.document.data()["vesselCapacity"]! as? String, vesselName: difference.document.data()["vesselName"]! as? String, shipId: difference.document.documentID, currentStatus: difference.document.data()["currentStatus"]! as? String))
                             return
                         }
                     }

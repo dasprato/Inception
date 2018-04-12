@@ -12,7 +12,7 @@ import QRCode
 
 class SailTripViewController1: UIViewController {
     
-    var arrayOfShipNames: [String] = [String]()
+    var arrayOfShipNames: [Ship] = [Ship]()
     var arrayOfTrips: [Trip]? {
         didSet {
             self.tripsCollectionView.reloadData()
@@ -34,10 +34,7 @@ class SailTripViewController1: UIViewController {
         let barButtonClose = UIBarButtonItem(image: UIImage(named: "arrow")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(closeView(_:)))
         barButtonClose.tintColor = .white
         self.navigationItem.setLeftBarButton(barButtonClose, animated: true)
-        
-         
-        
-        
+    
         searchBar.placeholder = "Search"
         navigationItem.titleView = searchBar
         
@@ -111,11 +108,24 @@ class SailTripViewController1: UIViewController {
                     guard let toDate = difference.document.data()["toDate"] as? String else { return }
                     
                     var vesselName = ""
+                    var representativeEmail = ""
+                    var representativeName = ""
+                    var representativePhone = ""
+                    var vesselCapacity = ""
+                    var shipId = ""
+                    var currentStatus = ""
                     let docRef = db.collection("Ships").document(vesselReferencePath)
                     docRef.getDocument { (document, error) in
                         if let document = document {
                             vesselName = document.data()!["vesselName"] as! String
+                            representativeEmail = document.data()!["representativeEmail"] as! String
+                            representativeName = document.data()!["representativeName"] as! String
+                            representativePhone = document.data()!["representativePhone"] as! String
+                            vesselCapacity = document.data()!["vesselCapacity"] as! String
+                            currentStatus = document.data()!["currentStatus"] as! String
+                            shipId = document.documentID
                             
+                            self.arrayOfShipNames.append(Ship(representativeEmail: representativeEmail, representativeName: representativeName, representativePhone: representativePhone, vesselCapacity: vesselCapacity, vesselName: vesselName, shipId: shipId, currentStatus: currentStatus))
                             self.arrayOfTrips?.append(Trip(amount: amount, cargo: cargo, from: from, to: to, tripStatus: tripStatus, vesselReferencePath: vesselReferencePath, tripId: difference.document.documentID, fromDate: fromDate, toDate: toDate, vesselName: vesselName))
                         } else {
                             print("Document does not exist")
@@ -137,11 +147,25 @@ class SailTripViewController1: UIViewController {
                             
                             
                             var vesselName = ""
+                            var representativeEmail = ""
+                            var representativeName = ""
+                            var representativePhone = ""
+                            var vesselCapacity = ""
+                            var shipId = ""
+                            var currentStatus = ""
                             let docRef = db.collection("Ships").document(vesselReferencePath)
                             docRef.getDocument { (document, error) in
                                 if let document = document {
                                     vesselName = document.data()!["vesselName"] as! String
-                                   self.arrayOfTrips![i] = Trip(amount: amount, cargo: cargo, from: from, to: to, tripStatus: tripStatus, vesselReferencePath: vesselReferencePath, tripId: difference.document.documentID, fromDate: fromDate, toDate: toDate, vesselName: vesselName)
+                                    representativeEmail = document.data()!["representativeEmail"] as! String
+                                    representativeName = document.data()!["representativeName"] as! String
+                                    representativePhone = document.data()!["representativePhone"] as! String
+                                    vesselCapacity = document.data()!["vesselCapacity"] as! String
+                                    currentStatus = document.data()!["currentStatus"] as! String
+                                    shipId = document.documentID
+                                    
+                                    self.arrayOfShipNames[i] = Ship(representativeEmail: representativeEmail, representativeName: representativeName, representativePhone: representativePhone, vesselCapacity: vesselCapacity, vesselName: vesselName, shipId: shipId, currentStatus: currentStatus)
+                                    self.arrayOfTrips![i] = Trip(amount: amount, cargo: cargo, from: from, to: to, tripStatus: tripStatus, vesselReferencePath: vesselReferencePath, tripId: difference.document.documentID, fromDate: fromDate, toDate: toDate, vesselName: vesselName)
                                 } else {
                                     print("Document does not exist")
                                 }
@@ -156,6 +180,7 @@ class SailTripViewController1: UIViewController {
                     for i in 0..<self.arrayOfTrips!.count {
                         if self.arrayOfTrips![i].tripId == difference.document.documentID {
                             self.arrayOfTrips?.remove(at: i)
+                            self.arrayOfShipNames.remove(at: i)
                             return
                         }
                     }
@@ -177,8 +202,8 @@ extension SailTripViewController1: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = UINavigationController(rootViewController: SailTripViewController2())
-        ConnectionBetweenVC.tripID = "Trip Id: " + self.arrayOfTrips![indexPath.row].tripId!
         ConnectionBetweenVC.trip = self.arrayOfTrips![indexPath.row]
+        ConnectionBetweenVC.ship = self.arrayOfShipNames[indexPath.row]
         present(vc, animated: true, completion: nil)
     }
     
@@ -201,14 +226,14 @@ extension SailTripViewController1: UICollectionViewDelegate, UICollectionViewDat
 class SailTripCollectionViewCell: UICollectionViewCell {
     var trip: Trip {
         didSet {
-            fromLabel.text = trip.from! + " ⛵️ "
+            fromLabel.text = trip.from! + " ••• "
             toLabel.text = trip.to!
-            fromDateLabel.text = trip.fromDate! + "  📆  "
+            fromDateLabel.text = trip.fromDate! + " ••• "
             toDateLabel.text = trip.toDate
             vesselNameLabel.text = trip.vesselName
             if trip.tripStatus == "Initialised" {
                 statusViewCircle.backgroundColor = .blue
-            } else if trip.tripStatus == "In Trip" {
+            } else if trip.tripStatus == "Trip Paused" {
                 statusViewCircle.backgroundColor = .green
             }
             let qrCode = QRCode("Trip Id: " + trip.tripId!)
@@ -216,14 +241,14 @@ class SailTripCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    var shipName: String {
+    var ship: Ship {
         didSet {
-            vesselNameLabel.text = shipName
+            vesselNameLabel.text = ship.vesselName!
         }
     }
     override init(frame: CGRect) {
         self.trip = Trip(amount: "", cargo: "", from: "", to: "", tripStatus: "", vesselReferencePath: "", tripId: "", fromDate: "", toDate: "", vesselName: "")
-        self.shipName = ""
+        self.ship = Ship(representativeEmail: "", representativeName: "", representativePhone: "", vesselCapacity: "", vesselName: "", shipId: "", currentStatus: "")
         super.init(frame: frame)
         
         contentView.addSubview(vesselNameLabel)

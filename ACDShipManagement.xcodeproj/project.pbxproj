@@ -28,23 +28,6 @@
 		D24B8E89206973AF003C477F /* NoReachabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24B8E88206973AF003C477F /* NoReachabilityViewController.swift */; };
 		D24B8E8B206A43E6003C477F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D24B8E8A206A43E6003C477F /* Launch Screen.storyboard */; };
 		D24B8E8D206AB518003C477F /* CreateContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24B8E8C206AB518003C477F /* CreateContactViewController.swift */; };
-		D25D0C9020775A96001E99F7 /* Parking_Tags_data_2009.csv in Resources */ = {isa = PBXBuildFile; fileRef = D25D0C7F20775A80001E99F7 /* Parking_Tags_data_2009.csv */; };
-		D25D0C9120775A96001E99F7 /* Parking_Tags_Data_2015_1.csv in Resources */ = {isa = PBXBuildFile; fileRef = D25D0C8020775A80001E99F7 /* Parking_Tags_Data_2015_1.csv */; };
-		D25D0C9220775A96001E99F7 /* Parking_Tags_Data_2014_3.csv in Resources */ = {isa = PBXBuildFile; fileRef = D25D0C8120775A81001E99F7 /* Parking_Tags_Data_2014_3.csv */; };
-		D25D0C9320775A96001E99F7 /* Parking_Tags_Data_2012.csv in Resources */ = {isa = PBXBuildFile; fileRef = D25D0C8220775A83001E99F7 /* Parking_Tags_Data_2012.csv */; };
-		D25D0C9420775A96001E99F7 /* Parking_Tags_Data_2014_2.csv in Resources */ = {isa = PBXBuildFile; fileRef = D25D0C8320775A84001E99F7 /* Parking_Tags_Data_2014_2.csv */; };
-		D25D0C9520775A96001E99F7 /* Parking_Tags_data_2008.csv in Resources */ = {isa = PBXBuildFile; fileRef = D25D0C8420775A87001E99F7 /* Parking_Tags_data_2008.csv */; };
-		D25D0C9620775A96001E99F7 /* Parking_Tags_Data_2015_2.csv in Resources */ = {isa = PBXBuildFile; fileRef = D25D0C8520775A88001E99F7 /* Parking_Tags_Data_2015_2.csv */; };
-		D25D0C9720775A96001E99F7 /* Parking_Tags_data_2011.csv in Resources */ = {isa = PBXBuildFile; fileRef = D25D0C8620775A8A001E99F7 /* Parking_Tags_data_2011.csv */; };
-		D25D0C9820775A96001E99F7 /* Parking_Tags_Data_2015_3.csv in Resources */ = {isa = PBXBuildFile; fileRef = D25D0C8720775A8B001E99F7 /* Parking_Tags_Data_2015_3.csv */; };
-		D25D0C9920775A96001E99F7 /* Parking_Tags_Data_2014_1.csv in Resources */ = {isa = PBXBuildFile; fileRef = D25D0C8820775A8B001E99F7 /* Parking_Tags_Data_2014_1.csv */; };
-		D25D0C9A20775A96001E99F7 /* Parking_Tags_Data_2014_4.csv in Resources */ = {isa = PBXBuildFile; fileRef = D25D0C8920775A8B001E99F7 /* Parking_Tags_Data_2014_4.csv */; };
-		D25D0C9B20775A96001E99F7 /* Parking_Tags_Data_2013.csv in Resources */ = {isa = PBXBuildFile; fileRef = D25D0C8A20775A8D001E99F7 /* Parking_Tags_Data_2013.csv */; };
-		D25D0C9C20775A96001E99F7 /* Parking_Tags_data_2010.csv in Resources */ = {isa = PBXBuildFile; fileRef = D25D0C8B20775A91001E99F7 /* Parking_Tags_data_2010.csv */; };
-		D25D0C9D20775A96001E99F7 /* Parking_Tags_Data_2016_3.csv in Resources */ = {isa = PBXBuildFile; fileRef = D25D0C8C20775A94001E99F7 /* Parking_Tags_Data_2016_3.csv */; };
-		D25D0C9E20775A96001E99F7 /* Parking_Tags_Data_2016_1.csv in Resources */ = {isa = PBXBuildFile; fileRef = D25D0C8D20775A95001E99F7 /* Parking_Tags_Data_2016_1.csv */; };
-		D25D0C9F20775A96001E99F7 /* Parking_Tags_Data_2016_2.csv in Resources */ = {isa = PBXBuildFile; fileRef = D25D0C8E20775A95001E99F7 /* Parking_Tags_Data_2016_2.csv */; };
-		D25D0CA020775A96001E99F7 /* Parking_Tags_Data_2016_4.csv in Resources */ = {isa = PBXBuildFile; fileRef = D25D0C8F20775A96001E99F7 /* Parking_Tags_Data_2016_4.csv */; };
 		D267ABD6207A7E8A00A118D7 /* ConnectionBetweenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D267ABD5207A7E8A00A118D7 /* ConnectionBetweenVC.swift */; };
 		D276CDB4202928C700CDAD18 /* ReadShipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276CDB3202928C700CDAD18 /* ReadShipViewController.swift */; };
 		D276CDB6202928D700CDAD18 /* CreateShipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276CDB5202928D700CDAD18 /* CreateShipViewController.swift */; };
@@ -128,23 +111,6 @@
 		D24B8E88206973AF003C477F /* NoReachabilityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoReachabilityViewController.swift; sourceTree = "<group>"; };
 		D24B8E8A206A43E6003C477F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		D24B8E8C206AB518003C477F /* CreateContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateContactViewController.swift; sourceTree = "<group>"; };
-		D25D0C7F20775A80001E99F7 /* Parking_Tags_data_2009.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Parking_Tags_data_2009.csv; sourceTree = "<group>"; };
-		D25D0C8020775A80001E99F7 /* Parking_Tags_Data_2015_1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Parking_Tags_Data_2015_1.csv; sourceTree = "<group>"; };
-		D25D0C8120775A81001E99F7 /* Parking_Tags_Data_2014_3.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Parking_Tags_Data_2014_3.csv; sourceTree = "<group>"; };
-		D25D0C8220775A83001E99F7 /* Parking_Tags_Data_2012.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Parking_Tags_Data_2012.csv; sourceTree = "<group>"; };
-		D25D0C8320775A84001E99F7 /* Parking_Tags_Data_2014_2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Parking_Tags_Data_2014_2.csv; sourceTree = "<group>"; };
-		D25D0C8420775A87001E99F7 /* Parking_Tags_data_2008.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Parking_Tags_data_2008.csv; sourceTree = "<group>"; };
-		D25D0C8520775A88001E99F7 /* Parking_Tags_Data_2015_2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Parking_Tags_Data_2015_2.csv; sourceTree = "<group>"; };
-		D25D0C8620775A8A001E99F7 /* Parking_Tags_data_2011.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Parking_Tags_data_2011.csv; sourceTree = "<group>"; };
-		D25D0C8720775A8B001E99F7 /* Parking_Tags_Data_2015_3.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Parking_Tags_Data_2015_3.csv; sourceTree = "<group>"; };
-		D25D0C8820775A8B001E99F7 /* Parking_Tags_Data_2014_1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Parking_Tags_Data_2014_1.csv; sourceTree = "<group>"; };
-		D25D0C8920775A8B001E99F7 /* Parking_Tags_Data_2014_4.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Parking_Tags_Data_2014_4.csv; sourceTree = "<group>"; };
-		D25D0C8A20775A8D001E99F7 /* Parking_Tags_Data_2013.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Parking_Tags_Data_2013.csv; sourceTree = "<group>"; };
-		D25D0C8B20775A91001E99F7 /* Parking_Tags_data_2010.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Parking_Tags_data_2010.csv; sourceTree = "<group>"; };
-		D25D0C8C20775A94001E99F7 /* Parking_Tags_Data_2016_3.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Parking_Tags_Data_2016_3.csv; sourceTree = "<group>"; };
-		D25D0C8D20775A95001E99F7 /* Parking_Tags_Data_2016_1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Parking_Tags_Data_2016_1.csv; sourceTree = "<group>"; };
-		D25D0C8E20775A95001E99F7 /* Parking_Tags_Data_2016_2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Parking_Tags_Data_2016_2.csv; sourceTree = "<group>"; };
-		D25D0C8F20775A96001E99F7 /* Parking_Tags_Data_2016_4.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Parking_Tags_Data_2016_4.csv; sourceTree = "<group>"; };
 		D267ABD5207A7E8A00A118D7 /* ConnectionBetweenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionBetweenVC.swift; sourceTree = "<group>"; };
 		D276CDB3202928C700CDAD18 /* ReadShipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadShipViewController.swift; sourceTree = "<group>"; };
 		D276CDB5202928D700CDAD18 /* CreateShipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShipViewController.swift; sourceTree = "<group>"; };
@@ -361,23 +327,6 @@
 		D25D0C7E20775A50001E99F7 /* FilesToRead */ = {
 			isa = PBXGroup;
 			children = (
-				D25D0C8420775A87001E99F7 /* Parking_Tags_data_2008.csv */,
-				D25D0C7F20775A80001E99F7 /* Parking_Tags_data_2009.csv */,
-				D25D0C8B20775A91001E99F7 /* Parking_Tags_data_2010.csv */,
-				D25D0C8620775A8A001E99F7 /* Parking_Tags_data_2011.csv */,
-				D25D0C8220775A83001E99F7 /* Parking_Tags_Data_2012.csv */,
-				D25D0C8A20775A8D001E99F7 /* Parking_Tags_Data_2013.csv */,
-				D25D0C8820775A8B001E99F7 /* Parking_Tags_Data_2014_1.csv */,
-				D25D0C8320775A84001E99F7 /* Parking_Tags_Data_2014_2.csv */,
-				D25D0C8120775A81001E99F7 /* Parking_Tags_Data_2014_3.csv */,
-				D25D0C8920775A8B001E99F7 /* Parking_Tags_Data_2014_4.csv */,
-				D25D0C8020775A80001E99F7 /* Parking_Tags_Data_2015_1.csv */,
-				D25D0C8520775A88001E99F7 /* Parking_Tags_Data_2015_2.csv */,
-				D25D0C8720775A8B001E99F7 /* Parking_Tags_Data_2015_3.csv */,
-				D25D0C8D20775A95001E99F7 /* Parking_Tags_Data_2016_1.csv */,
-				D25D0C8E20775A95001E99F7 /* Parking_Tags_Data_2016_2.csv */,
-				D25D0C8C20775A94001E99F7 /* Parking_Tags_Data_2016_3.csv */,
-				D25D0C8F20775A96001E99F7 /* Parking_Tags_Data_2016_4.csv */,
 			);
 			path = FilesToRead;
 			sourceTree = "<group>";
@@ -638,24 +587,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D25D0CA020775A96001E99F7 /* Parking_Tags_Data_2016_4.csv in Resources */,
-				D25D0C9920775A96001E99F7 /* Parking_Tags_Data_2014_1.csv in Resources */,
-				D25D0C9420775A96001E99F7 /* Parking_Tags_Data_2014_2.csv in Resources */,
-				D25D0C9120775A96001E99F7 /* Parking_Tags_Data_2015_1.csv in Resources */,
-				D25D0C9E20775A96001E99F7 /* Parking_Tags_Data_2016_1.csv in Resources */,
-				D25D0C9F20775A96001E99F7 /* Parking_Tags_Data_2016_2.csv in Resources */,
-				D25D0C9820775A96001E99F7 /* Parking_Tags_Data_2015_3.csv in Resources */,
-				D25D0C9520775A96001E99F7 /* Parking_Tags_data_2008.csv in Resources */,
-				D25D0C9D20775A96001E99F7 /* Parking_Tags_Data_2016_3.csv in Resources */,
-				D25D0C9220775A96001E99F7 /* Parking_Tags_Data_2014_3.csv in Resources */,
-				D25D0C9A20775A96001E99F7 /* Parking_Tags_Data_2014_4.csv in Resources */,
 				D24B8E8B206A43E6003C477F /* Launch Screen.storyboard in Resources */,
-				D25D0C9620775A96001E99F7 /* Parking_Tags_Data_2015_2.csv in Resources */,
-				D25D0C9C20775A96001E99F7 /* Parking_Tags_data_2010.csv in Resources */,
-				D25D0C9B20775A96001E99F7 /* Parking_Tags_Data_2013.csv in Resources */,
-				D25D0C9020775A96001E99F7 /* Parking_Tags_data_2009.csv in Resources */,
-				D25D0C9720775A96001E99F7 /* Parking_Tags_data_2011.csv in Resources */,
-				D25D0C9320775A96001E99F7 /* Parking_Tags_Data_2012.csv in Resources */,
 				D2C000D8201A87710094138D /* Assets.xcassets in Resources */,
 				D284D556206C858500BCB1F5 /* GoogleService-Info.plist in Resources */,
 			);
