@@ -91,17 +91,6 @@ class ReadTripViewController: UIViewController {
     func fetchTrips() {
         let db = Firestore.firestore()
         
-        //        db.collection("cities").whereField("capital", isEqualTo: true)
-        //            .getDocuments() { (querySnapshot, err) in
-        //                if let err = err {
-        //                    print("Error getting documents: \(err)")
-        //                } else {
-        //                    for document in querySnapshot!.documents {
-        //                        print("\(document.documentID) => \(document.data())")
-        //                    }
-        //                }
-        //        }
-        //.whereField("tripStatus", isEqualTo: "Initialised")
         
         db.collection("Trips").addSnapshotListener { (snapshot, error) in
             guard let _ = snapshot?.documents else {

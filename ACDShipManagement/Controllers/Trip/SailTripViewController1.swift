@@ -91,17 +91,6 @@ class SailTripViewController1: UIViewController {
     func fetchTrips() {
         let db = Firestore.firestore()
         
-//        db.collection("cities").whereField("capital", isEqualTo: true)
-//            .getDocuments() { (querySnapshot, err) in
-//                if let err = err {
-//                    print("Error getting documents: \(err)")
-//                } else {
-//                    for document in querySnapshot!.documents {
-//                        print("\(document.documentID) => \(document.data())")
-//                    }
-//                }
-//        }
-        
         db.collection("Trips").whereField("tripStatus", isEqualTo: "Initialised").addSnapshotListener { (snapshot, error) in
             guard let _ = snapshot?.documents else {
                 print("Error fetching documents: \(error!)")
