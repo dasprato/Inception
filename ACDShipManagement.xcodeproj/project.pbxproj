@@ -40,7 +40,6 @@
 		D276CDC62029318C00CDAD18 /* CreateTripViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276CDC52029318C00CDAD18 /* CreateTripViewController1.swift */; };
 		D276CDC82029319700CDAD18 /* UpdateTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276CDC72029319700CDAD18 /* UpdateTripViewController.swift */; };
 		D276CDCA202931A000CDAD18 /* DeleteTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276CDC9202931A000CDAD18 /* DeleteTripViewController.swift */; };
-		D276CDCE202938B500CDAD18 /* ReadTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276CDCD202938B500CDAD18 /* ReadTripViewController.swift */; };
 		D276CDD0202A5AE200CDAD18 /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276CDCF202A5AE200CDAD18 /* Interactor.swift */; };
 		D276CDD2202A5B0300CDAD18 /* DismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276CDD1202A5B0300CDAD18 /* DismissAnimator.swift */; };
 		D276CDD4202A5E5500CDAD18 /* Interactive.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276CDD3202A5E5500CDAD18 /* Interactive.swift */; };
@@ -62,6 +61,9 @@
 		D2C000D8201A87710094138D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2C000D7201A87710094138D /* Assets.xcassets */; };
 		D2C000E6201A87710094138D /* ACDShipManagementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C000E5201A87710094138D /* ACDShipManagementTests.swift */; };
 		D2C000F1201A87710094138D /* ACDShipManagementUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C000F0201A87710094138D /* ACDShipManagementUITests.swift */; };
+		D2C975212080ECD1001FD285 /* SailingTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C975202080ECD1001FD285 /* SailingTripViewController.swift */; };
+		D2C975232080ED2A001FD285 /* ReadTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C975222080ED2A001FD285 /* ReadTripViewController.swift */; };
+		D2C975252080EE02001FD285 /* InitialisedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C975242080EE02001FD285 /* InitialisedViewController.swift */; };
 		D2FE0CEC20248449006C8BCE /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FE0CEB20248449006C8BCE /* MenuViewController.swift */; };
 		D2FE0CF32024886B006C8BCE /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FE0CF22024886B006C8BCE /* Menu.swift */; };
 		D2FE0CF52024C366006C8BCE /* MenuTitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FE0CF42024C366006C8BCE /* MenuTitleCollectionViewCell.swift */; };
@@ -123,7 +125,6 @@
 		D276CDC52029318C00CDAD18 /* CreateTripViewController1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTripViewController1.swift; sourceTree = "<group>"; };
 		D276CDC72029319700CDAD18 /* UpdateTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTripViewController.swift; sourceTree = "<group>"; };
 		D276CDC9202931A000CDAD18 /* DeleteTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTripViewController.swift; sourceTree = "<group>"; };
-		D276CDCD202938B500CDAD18 /* ReadTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadTripViewController.swift; sourceTree = "<group>"; };
 		D276CDCF202A5AE200CDAD18 /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		D276CDD1202A5B0300CDAD18 /* DismissAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAnimator.swift; sourceTree = "<group>"; };
 		D276CDD3202A5E5500CDAD18 /* Interactive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactive.swift; sourceTree = "<group>"; };
@@ -150,6 +151,9 @@
 		D2C000EC201A87710094138D /* ACDShipManagementUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ACDShipManagementUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C000F0201A87710094138D /* ACDShipManagementUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACDShipManagementUITests.swift; sourceTree = "<group>"; };
 		D2C000F2201A87710094138D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2C975202080ECD1001FD285 /* SailingTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SailingTripViewController.swift; sourceTree = "<group>"; };
+		D2C975222080ED2A001FD285 /* ReadTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadTripViewController.swift; sourceTree = "<group>"; };
+		D2C975242080EE02001FD285 /* InitialisedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialisedViewController.swift; sourceTree = "<group>"; };
 		D2FE0CEB20248449006C8BCE /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		D2FE0CF22024886B006C8BCE /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		D2FE0CF42024C366006C8BCE /* MenuTitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTitleCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -269,10 +273,10 @@
 		D24B8E90206AB538003C477F /* Trip */ = {
 			isa = PBXGroup;
 			children = (
+				D2C9751F2080ECAA001FD285 /* ReadTripViewController */,
 				D276CDC52029318C00CDAD18 /* CreateTripViewController1.swift */,
 				D276CDC72029319700CDAD18 /* UpdateTripViewController.swift */,
 				D276CDC9202931A000CDAD18 /* DeleteTripViewController.swift */,
-				D276CDCD202938B500CDAD18 /* ReadTripViewController.swift */,
 				D23EF2EF2071E7E500190B64 /* CreateTripViewController2.swift */,
 				D207895B2073B98E00B5509E /* SailTripViewController1.swift */,
 				D207895D2073BFAC00B5509E /* SailTripViewController2.swift */,
@@ -421,6 +425,16 @@
 				D2C000F2201A87710094138D /* Info.plist */,
 			);
 			path = ACDShipManagementUITests;
+			sourceTree = "<group>";
+		};
+		D2C9751F2080ECAA001FD285 /* ReadTripViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D2C975222080ED2A001FD285 /* ReadTripViewController.swift */,
+				D2C975202080ECD1001FD285 /* SailingTripViewController.swift */,
+				D2C975242080EE02001FD285 /* InitialisedViewController.swift */,
+			);
+			path = ReadTripViewController;
 			sourceTree = "<group>";
 		};
 		D2FE0CEA20237366006C8BCE /* View */ = {
@@ -846,6 +860,7 @@
 				D276CDD0202A5AE200CDAD18 /* Interactor.swift in Sources */,
 				D22EAA4B205E970800439F00 /* DeveloperInfoViewController.swift in Sources */,
 				D2FE0CEC20248449006C8BCE /* MenuViewController.swift in Sources */,
+				D2C975212080ECD1001FD285 /* SailingTripViewController.swift in Sources */,
 				D276CDC22029313200CDAD18 /* DeleteCompanyViewController.swift in Sources */,
 				D284D55F206FBC2E00BCB1F5 /* ReadContactViewController.swift in Sources */,
 				D276CDC02029312800CDAD18 /* UpdateCompanyViewController.swift in Sources */,
@@ -861,6 +876,7 @@
 				D276CDBA202928F100CDAD18 /* DeleteShipViewController.swift in Sources */,
 				D267ABD6207A7E8A00A118D7 /* ConnectionBetweenVC.swift in Sources */,
 				D207895E2073BFAC00B5509E /* SailTripViewController2.swift in Sources */,
+				D2C975232080ED2A001FD285 /* ReadTripViewController.swift in Sources */,
 				D276CDB8202928E600CDAD18 /* UpdateShipViewController.swift in Sources */,
 				D276CDB4202928C700CDAD18 /* ReadShipViewController.swift in Sources */,
 				D276CDC62029318C00CDAD18 /* CreateTripViewController1.swift in Sources */,
@@ -876,9 +892,9 @@
 				D29F0ECF201F2E0200D75A52 /* NotificationCollectionViewCell.swift in Sources */,
 				D207895C2073B98E00B5509E /* SailTripViewController1.swift in Sources */,
 				D29F0EC5201D2A7200D75A52 /* CustomTabBarController.swift in Sources */,
-				D276CDCE202938B500CDAD18 /* ReadTripViewController.swift in Sources */,
 				D276CDC82029319700CDAD18 /* UpdateTripViewController.swift in Sources */,
 				D2C000D6201A87710094138D /* ACDShipManagement.xcdatamodeld in Sources */,
+				D2C975252080EE02001FD285 /* InitialisedViewController.swift in Sources */,
 				D23EF2F02071E7E500190B64 /* CreateTripViewController2.swift in Sources */,
 				D276CDCA202931A000CDAD18 /* DeleteTripViewController.swift in Sources */,
 				D2FE0CFC2024C811006C8BCE /* MenuCollectionViewCell.swift in Sources */,

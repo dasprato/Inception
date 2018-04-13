@@ -23,7 +23,7 @@ let mainCollectionViewCellId = "mainCollectionViewCellId"
         
         arrayOfMenus.append(Menu(titleForCell: "Ship", operations: "cr"))
         arrayOfMenus.append(Menu(titleForCell: "Company", operations: "cr"))
-        arrayOfMenus.append(Menu(titleForCell: "Trip", operations: "cs"))
+        arrayOfMenus.append(Menu(titleForCell: "Trip", operations: "crs"))
         arrayOfMenus.append(Menu(titleForCell: "Contact", operations: "cr"))
         arrayOfMenus.append(Menu(titleForCell: "QR Code", operations: "r"))
         arrayOfMenus.append(Menu(titleForCell: "Developer", operations: ""))

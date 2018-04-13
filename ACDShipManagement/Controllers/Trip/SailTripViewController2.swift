@@ -99,6 +99,8 @@ class SailTripViewController2: UIViewController, CLLocationManagerDelegate {
         
         
         ourTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(sendLocationToDatabase), userInfo: nil, repeats: true)
+        
+        
     }
     
     
@@ -119,6 +121,13 @@ class SailTripViewController2: UIViewController, CLLocationManagerDelegate {
         view.addSubview(actionButton)
         NSLayoutConstraint.activate([actionButton.leftAnchor.constraint(equalTo: view.leftAnchor), actionButton.rightAnchor.constraint(equalTo: view.rightAnchor), actionButton.heightAnchor.constraint(equalToConstant: 60), actionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)])
         
+        
+        loadingButton.alpha = 0
+        unloadingButton.alpha = 0
+        loadingWaitingButton.alpha = 0
+        unloadingWaitingButton.alpha = 0
+        otherButton.alpha = 0
+        completeTripButton.alpha = 0
         
         view.addSubview(loadingButton)
         view.addSubview(unloadingButton)
@@ -228,16 +237,42 @@ class SailTripViewController2: UIViewController, CLLocationManagerDelegate {
         loadingWaitingButton.addShadow()
         unloadingWaitingButton.addShadow()
         otherButton.addShadow()
+        completeTripButton.addShadow()
     }
+    fileprivate func HideActionButtons() {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+            self.loadingButton.alpha = 0
+            self.unloadingButton.alpha = 0
+            self.loadingWaitingButton.alpha = 0
+            self.unloadingWaitingButton.alpha = 0
+            self.otherButton.alpha = 0
+            self.completeTripButton.alpha = 0
+        }, completion: nil)
+    }
+    
+    fileprivate func ShowActionButtons() {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+            self.loadingButton.alpha = 1
+            self.unloadingButton.alpha = 1
+            self.loadingWaitingButton.alpha = 1
+            self.unloadingWaitingButton.alpha = 1
+            self.otherButton.alpha = 1
+            self.completeTripButton.alpha = 1
+        }, completion: nil)
+    }
+    
     func performLogicOnButtonTitle() {
         if ConnectionBetweenVC.trip.tripStatus == "Initialised" {
             actionButton.setTitle("Sail Trip", for: .normal)
+            ShowActionButtons()
         }
         if ConnectionBetweenVC.trip.tripStatus == "Sailing" {
             actionButton.setTitle("Pause Trip", for: .normal)
+            HideActionButtons()
         }
         if ConnectionBetweenVC.trip.tripStatus == "TripPaused" {
             actionButton.setTitle("Sail Trip", for: .normal)
+            ShowActionButtons()
         }
     }
     
@@ -323,11 +358,17 @@ class SailTripViewController2: UIViewController, CLLocationManagerDelegate {
     
     
     @objc func onCompleteButtonTapped() {
+       
+        
+        ConnectionBetweenVC.ship = Ship(representativeEmail: ConnectionBetweenVC.ship.representativeEmail!, representativeName: ConnectionBetweenVC.ship.representativeName!, representativePhone: ConnectionBetweenVC.ship.representativePhone!, vesselCapacity: ConnectionBetweenVC.ship.vesselCapacity!, vesselName: ConnectionBetweenVC.ship.vesselName!, shipId: ConnectionBetweenVC.ship.shipId!, currentStatus: "Available")
+        updateShipStatusNotAvailable()
+        
         let timeStamp = "\(String(describing: Date().timeIntervalSince1970))"
         let db = Firestore.firestore()
         let tripStatusDictionary: [String: Any?] = ["Completed": timeStamp]
         db.collection("Trips").document(ConnectionBetweenVC.trip.tripId!).collection("TripStatusLog").document(timeStamp).setData(tripStatusDictionary)
     }
+    
     @objc func onLoadingTapped() {
         let timeStamp = "\(String(describing: Date().timeIntervalSince1970))"
         let db = Firestore.firestore()
@@ -392,6 +433,10 @@ extension SailTripViewController2 {
             
             ConnectionBetweenVC.trip = Trip(amount: ConnectionBetweenVC.trip.amount!, cargo: ConnectionBetweenVC.trip.cargo!, from: ConnectionBetweenVC.trip.from!, to: ConnectionBetweenVC.trip.to!, tripStatus: "TripPaused", vesselReferencePath: ConnectionBetweenVC.trip.vesselReferencePath!, tripId: ConnectionBetweenVC.trip.tripId!, fromDate: ConnectionBetweenVC.trip.fromDate!, toDate: ConnectionBetweenVC.trip.toDate!, vesselName: ConnectionBetweenVC.trip.vesselName!)
             performLogicOnButtonTitle()
+            
+            ShowActionButtons()
+
+            
             updateTripStatus()
         }
         else if ConnectionBetweenVC.trip.tripStatus == "TripPaused" {
@@ -399,6 +444,9 @@ extension SailTripViewController2 {
             // Between trip hits
             ConnectionBetweenVC.trip = Trip(amount: ConnectionBetweenVC.trip.amount!, cargo: ConnectionBetweenVC.trip.cargo!, from: ConnectionBetweenVC.trip.from!, to: ConnectionBetweenVC.trip.to!, tripStatus: "Sailing", vesselReferencePath: ConnectionBetweenVC.trip.vesselReferencePath!, tripId: ConnectionBetweenVC.trip.tripId!, fromDate: ConnectionBetweenVC.trip.fromDate!, toDate: ConnectionBetweenVC.trip.toDate!, vesselName: ConnectionBetweenVC.trip.vesselName!)
             performLogicOnButtonTitle()
+            HideActionButtons()
+
+            
             updateTripStatus()
         }
     }

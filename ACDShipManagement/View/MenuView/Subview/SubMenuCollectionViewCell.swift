@@ -155,7 +155,7 @@ class SubMenuCollectionViewCell: UICollectionViewCell {
             
         case "create Trip":
             NotificationCenter.default.post(name: NSNotification.Name.init("create Trip"), object: self, userInfo: nil)
-        case "start  Trip":
+        case "read Trip":
             NotificationCenter.default.post(name: NSNotification.Name.init("read Trip"), object: self, userInfo: nil)
         case "update Trip":
             NotificationCenter.default.post(name: NSNotification.Name.init("update Trip"), object: self, userInfo: nil)

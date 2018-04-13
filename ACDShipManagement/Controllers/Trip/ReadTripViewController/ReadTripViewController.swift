@@ -1,16 +1,16 @@
 //
-//  SailTripViewController1.swift
+//  ReadTripViewController.swift
 //  ACDShipManagement
 //
-//  Created by Prato Das on 2018-04-03.
+//  Created by Prato Das on 2018-04-13.
 //  Copyright © 2018 Prato Das. All rights reserved.
 //
 
 import UIKit
-import Firebase
 import QRCode
+import Firebase
 
-class SailTripViewController1: UIViewController {
+class ReadTripViewController: UIViewController {
     
     var arrayOfShipNames: [Ship] = [Ship]()
     var arrayOfTrips: [Trip]? {
@@ -34,7 +34,7 @@ class SailTripViewController1: UIViewController {
         let barButtonClose = UIBarButtonItem(image: UIImage(named: "arrow")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(closeView(_:)))
         barButtonClose.tintColor = .white
         self.navigationItem.setLeftBarButton(barButtonClose, animated: true)
-    
+        
         searchBar.placeholder = "Search"
         navigationItem.titleView = searchBar
         
@@ -91,18 +91,19 @@ class SailTripViewController1: UIViewController {
     func fetchTrips() {
         let db = Firestore.firestore()
         
-//        db.collection("cities").whereField("capital", isEqualTo: true)
-//            .getDocuments() { (querySnapshot, err) in
-//                if let err = err {
-//                    print("Error getting documents: \(err)")
-//                } else {
-//                    for document in querySnapshot!.documents {
-//                        print("\(document.documentID) => \(document.data())")
-//                    }
-//                }
-//        }
+        //        db.collection("cities").whereField("capital", isEqualTo: true)
+        //            .getDocuments() { (querySnapshot, err) in
+        //                if let err = err {
+        //                    print("Error getting documents: \(err)")
+        //                } else {
+        //                    for document in querySnapshot!.documents {
+        //                        print("\(document.documentID) => \(document.data())")
+        //                    }
+        //                }
+        //        }
+        //.whereField("tripStatus", isEqualTo: "Initialised")
         
-        db.collection("Trips").whereField("tripStatus", isEqualTo: "Initialised").addSnapshotListener { (snapshot, error) in
+        db.collection("Trips").addSnapshotListener { (snapshot, error) in
             guard let _ = snapshot?.documents else {
                 print("Error fetching documents: \(error!)")
                 return
@@ -113,7 +114,7 @@ class SailTripViewController1: UIViewController {
                     guard let cargo = difference.document.data()["cargo"] as? String else { return }
                     guard let from = difference.document.data()["from"] as? String else { return }
                     guard let to = difference.document.data()["to"] as? String else { return }
-
+                    
                     guard let vesselReferencePath = difference.document.data()["vesselReferencePath"] as? String else { return }
                     guard let tripStatus = difference.document.data()["tripStatus"] as? String else { return }
                     guard let fromDate = difference.document.data()["fromDate"] as? String else { return }
@@ -203,7 +204,7 @@ class SailTripViewController1: UIViewController {
 }
 
 
-extension SailTripViewController1: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension ReadTripViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let numberOfContacts = self.arrayOfTrips?.count {
             return numberOfContacts
@@ -232,146 +233,3 @@ extension SailTripViewController1: UICollectionViewDelegate, UICollectionViewDat
         return CGSize(width: collectionView.frame.width - 32, height: 64)
     }
 }
-
-
-
-class SailTripCollectionViewCell: UICollectionViewCell {
-    var trip: Trip {
-        didSet {
-            fromLabel.text = trip.from! + " to "
-            toLabel.text = trip.to!
-            fromDateLabel.text = trip.fromDate! + " ••• "
-            toDateLabel.text = trip.toDate
-            if trip.tripStatus! == "TripPaused" { vesselNameLabel.text = trip.vesselName! + ", " + "Trip Paused"
-            } else { vesselNameLabel.text = trip.vesselName! + ", " + trip.tripStatus! }
-            if trip.tripStatus == "Initialised" {
-                statusViewCircle.backgroundColor = .blue
-            } else if trip.tripStatus == "Trip Paused" {
-                statusViewCircle.backgroundColor = .green
-            }
-            let qrCode = QRCode("Trip Id: " + trip.tripId!)
-            QRCodeImageView.image = qrCode?.image
-        }
-    }
-    
-
-    override init(frame: CGRect) {
-        self.trip = Trip(amount: "", cargo: "", from: "", to: "", tripStatus: "", vesselReferencePath: "", tripId: "", fromDate: "", toDate: "", vesselName: "")
-//        self.ship = Ship(representativeEmail: "", representativeName: "", representativePhone: "", vesselCapacity: "", vesselName: "", shipId: "", currentStatus: "")
-        super.init(frame: frame)
-        
-        contentView.addSubview(vesselNameLabel)
-        contentView.addSubview(fromLabel)
-        contentView.addSubview(toLabel)
-        contentView.addSubview(fromDateLabel)
-        contentView.addSubview(toDateLabel)
-        contentView.addSubview(QRCodeImageViewBackground)
-        contentView.addSubview(QRCodeImageView)
-        
-        
-        NSLayoutConstraint.activate([vesselNameLabel.topAnchor.constraint(equalTo: topAnchor), vesselNameLabel.leftAnchor.constraint(equalTo: leftAnchor)])
-        NSLayoutConstraint.activate([fromLabel.topAnchor.constraint(equalTo: vesselNameLabel.bottomAnchor), fromLabel.leftAnchor.constraint(equalTo: leftAnchor)])
-        NSLayoutConstraint.activate([toLabel.topAnchor.constraint(equalTo: vesselNameLabel.bottomAnchor), toLabel.leftAnchor.constraint(equalTo: fromLabel.rightAnchor)])
-        
-        NSLayoutConstraint.activate([fromDateLabel.topAnchor.constraint(equalTo: fromLabel.bottomAnchor), fromDateLabel.leftAnchor.constraint(equalTo: fromLabel.leftAnchor)])
-        NSLayoutConstraint.activate([toDateLabel.topAnchor.constraint(equalTo: toLabel.bottomAnchor), toDateLabel.leftAnchor.constraint(equalTo: fromDateLabel.rightAnchor)])
-        
-        
-        
-        NSLayoutConstraint.activate([QRCodeImageViewBackground.topAnchor.constraint(equalTo: topAnchor), QRCodeImageViewBackground.bottomAnchor.constraint(equalTo: bottomAnchor), QRCodeImageViewBackground.rightAnchor.constraint(equalTo: rightAnchor), QRCodeImageViewBackground.widthAnchor.constraint(equalTo: heightAnchor)])
-        
-        NSLayoutConstraint.activate([QRCodeImageView.topAnchor.constraint(equalTo: topAnchor), QRCodeImageView.bottomAnchor.constraint(equalTo: bottomAnchor), QRCodeImageView.rightAnchor.constraint(equalTo: rightAnchor), QRCodeImageView.widthAnchor.constraint(equalTo: heightAnchor)])
-        
-        
-        QRCodeImageViewBackground.addShadow()
-        
-    }
-    
-    
-    // Text fields
-    private var fromLabel: UILabel = {
-        let cntf = UILabel()
-        cntf.translatesAutoresizingMaskIntoConstraints = false
-        cntf.textColor = .white
-        cntf.font = UIFont.boldSystemFont(ofSize: cntf.font.pointSize + 2)
-        return cntf
-    }()
-    
-    
-    private var toLabel: UILabel = {
-        let cntf = UILabel()
-        cntf.translatesAutoresizingMaskIntoConstraints = false
-        cntf.textColor = .white
-        cntf.font = UIFont.boldSystemFont(ofSize: cntf.font.pointSize + 2)
-        return cntf
-    }()
-    
-    
-    private var fromDateLabel: UILabel = {
-        let cntf = UILabel()
-        cntf.translatesAutoresizingMaskIntoConstraints = false
-        cntf.textColor = .white
-        return cntf
-    }()
-    
-    private var toDateLabel: UILabel = {
-        let cntf = UILabel()
-        cntf.translatesAutoresizingMaskIntoConstraints = false
-        cntf.textColor = .white
-        return cntf
-    }()
-    
-    
-    private var statusViewCircle: UIView = {
-        let cntf = UIView()
-        cntf.translatesAutoresizingMaskIntoConstraints = false
-        cntf.layer.cornerRadius = 5.0
-        return cntf
-    }()
-    
-    private var statusLabel: UILabel = {
-        let cntf = UILabel()
-        cntf.translatesAutoresizingMaskIntoConstraints = false
-        cntf.textColor = .white
-        return cntf
-    }()
-    
-    private var vesselNameLabel: UILabel = {
-        let cntf = UILabel()
-        cntf.translatesAutoresizingMaskIntoConstraints = false
-        cntf.textColor = .white
-        cntf.font = UIFont.boldSystemFont(ofSize: cntf.font.pointSize + 2)
-        return cntf
-    }()
-    
-    
-    // QRCode image
-    
-    var QRCodeImageView: UIImageView = {
-        let civ = UIImageView()
-        civ.image = UIImage(named: "contact")
-        civ.translatesAutoresizingMaskIntoConstraints = false
-        civ.clipsToBounds = true
-        civ.backgroundColor = .white
-        civ.isUserInteractionEnabled = true
-        civ.contentMode = .scaleAspectFit
-        civ.layer.cornerRadius = 5.0
-        return civ
-    }()
-    
-    
-    private var QRCodeImageViewBackground: UIView = {
-        let civb = UIView()
-        civb.translatesAutoresizingMaskIntoConstraints = false
-        civb.isUserInteractionEnabled = false
-        civb.backgroundColor = .white
-        civb.layer.cornerRadius = 5.0
-        return civb
-    }()
-    
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
