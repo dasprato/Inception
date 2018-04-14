@@ -25,6 +25,7 @@ class AccountViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         self.backgroundLayer.frame = view.frame
+        logout.addShadow()
     }
     
     
@@ -42,17 +43,18 @@ class AccountViewController: UIViewController {
         
         view.addSubview(logout)
         
-        NSLayoutConstraint.activate([logout.centerXAnchor.constraint(equalTo: view.centerXAnchor), logout.centerYAnchor.constraint(equalTo: view.centerYAnchor)])
+        NSLayoutConstraint.activate([logout.centerXAnchor.constraint(equalTo: view.centerXAnchor), logout.centerYAnchor.constraint(equalTo: view.centerYAnchor), logout.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16), logout.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16), logout.heightAnchor.constraint(equalToConstant: 32)])
         
     }
 
-    var logout: UIButton = {
-        let lgt = UIButton(type: .system)
+    var logout: CustomUIButton = {
+        let lgt = CustomUIButton(type: .system)
         lgt.translatesAutoresizingMaskIntoConstraints = false
-        lgt.backgroundColor = .blue
-        lgt.setTitle("LOGOUT", for: .normal)
+        lgt.backgroundColor = .green
+        lgt.setTitle("Logout", for: .normal)
         lgt.setTitleColor(.white, for: .normal)
         lgt.addTarget(self, action: #selector(handleLogout), for: .touchUpInside)
+        lgt.layer.cornerRadius = 5.0
         return lgt
     }()
     
