@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseMessaging
 
 class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        checkIfUserIsLoggedIn()
         
         let shipViewController = UINavigationController(rootViewController: ShipTrackViewController())
         shipViewController.title = "Ship"
@@ -30,14 +34,13 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
         
         let menuViewController = UINavigationController(rootViewController: MenuViewController())
         menuViewController.title = "Menu"
-        
         menuViewController.tabBarItem.image = UIImage(named: "menu")
         
         
         
         
     
-        viewControllers = [menuViewController, shipViewController, notificationViewController]
+        viewControllers = [menuViewController, shipViewController, notificationViewController, accountViewController]
         tabBar.backgroundColor = .gray
         tabBar.backgroundImage = UIImage()
         
@@ -58,6 +61,9 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
         tabBar.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         tabBar.layer.shadowOpacity = 1.0
         tabBar.layer.masksToBounds = false
+        
+        
+        
     
     }
     
@@ -66,6 +72,21 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
         NotificationCenter.default.post(name: NSNotification.Name.init("didSelectADifferentTab"), object: self, userInfo: nil)
     }
     
+    func checkIfUserIsLoggedIn() {
+        if Auth.auth().currentUser?.uid == nil {
+            perform(#selector(handleLogout), with: nil, afterDelay: 0)
+        }
+    }
+    @objc func handleLogout() {
+        do {
+            try Auth.auth().signOut()
+        } catch let logoutError {
+            print(logoutError)
+        }
+        let viewControllerToPresent = LoginController()
+        
+        self.present(UINavigationController(rootViewController: viewControllerToPresent), animated: true, completion: nil)
+    }
     
 
 

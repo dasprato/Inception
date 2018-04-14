@@ -15,17 +15,31 @@ import UserNotifications
 import UserNotificationsUI
 import FirebaseMessaging
 
+import UIKit
+import CoreData
+import FirebaseInstanceID
+import UserNotifications
+import Firebase
+import FBSDKCoreKit
+import FirebaseMessaging
+import GoogleSignIn
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {
 
+    
+    
     
     let gcmMessageIDKey = "gcm.message_id"
     let gcmVesselIdKey = "data.gcm.vessel_id"
     let apsKey = "aps"
     var window: UIWindow?
     
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+    
         FirebaseApp.configure() 
         // Basics of the UI Declared here including the intitial launch View Controller
         window = UIWindow(frame: UIScreen.main.bounds)

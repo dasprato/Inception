@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		50E5CF61B2043D79041A558D /* Pods_ACDShipManagementUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20FBC6502B45D5B0B7262588 /* Pods_ACDShipManagementUITests.framework */; };
 		53B0306B2E6E438C3E16C87A /* Pods_ACDShipManagementTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 431F09CA57F02588F8973831 /* Pods_ACDShipManagementTests.framework */; };
-		57C2D1AF8E5D645DFD137C4B /* Pods_ACDShipManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC3E1E8244A7FD56A1830979 /* Pods_ACDShipManagement.framework */; };
 		BCCFB72438AD6FA33FFEAE1E /* Pods_ACDShipManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF016A3DC420BC0D8EBA8DF1 /* Pods_ACDShipManagement.framework */; };
 		CE60549380700FE55E3A0190 /* Pods_ACDShipManagementTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72EFA2F47D6768ADB2892CB0 /* Pods_ACDShipManagementTests.framework */; };
 		D207895C2073B98E00B5509E /* SailTripViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207895B2073B98E00B5509E /* SailTripViewController1.swift */; };
@@ -55,6 +54,10 @@
 		D29F0ECB201D3AAA00D75A52 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F0ECA201D3AAA00D75A52 /* NotificationViewController.swift */; };
 		D29F0ECF201F2E0200D75A52 /* NotificationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F0ECE201F2E0200D75A52 /* NotificationCollectionViewCell.swift */; };
 		D29F0ED120214B0500D75A52 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F0ED020214B0500D75A52 /* Extensions.swift */; };
+		D2B437E7208223890018E75B /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B437E4208223850018E75B /* LoginController.swift */; };
+		D2B437E8208223890018E75B /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B437E5208223870018E75B /* SignUpController.swift */; };
+		D2B437E9208223890018E75B /* SignUpPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B437E6208223890018E75B /* SignUpPasswordViewController.swift */; };
+		D2B437EC208225870018E75B /* SignUpCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B437EB208225870018E75B /* SignUpCollectionViewCell.swift */; };
 		D2C000CE201A87710094138D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C000CD201A87710094138D /* AppDelegate.swift */; };
 		D2C000D0201A87710094138D /* ShipTrackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C000CF201A87710094138D /* ShipTrackViewController.swift */; };
 		D2C000D6201A87710094138D /* ACDShipManagement.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D2C000D4201A87710094138D /* ACDShipManagement.xcdatamodeld */; };
@@ -140,6 +143,10 @@
 		D29F0ECA201D3AAA00D75A52 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		D29F0ECE201F2E0200D75A52 /* NotificationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCollectionViewCell.swift; sourceTree = "<group>"; };
 		D29F0ED020214B0500D75A52 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		D2B437E4208223850018E75B /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		D2B437E5208223870018E75B /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
+		D2B437E6208223890018E75B /* SignUpPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpPasswordViewController.swift; sourceTree = "<group>"; };
+		D2B437EB208225870018E75B /* SignUpCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpCollectionViewCell.swift; sourceTree = "<group>"; };
 		D2C000CA201A87710094138D /* ACDShipManagement.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ACDShipManagement.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C000CD201A87710094138D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2C000CF201A87710094138D /* ShipTrackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShipTrackViewController.swift; sourceTree = "<group>"; };
@@ -174,7 +181,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCCFB72438AD6FA33FFEAE1E /* Pods_ACDShipManagement.framework in Frameworks */,
-				57C2D1AF8E5D645DFD137C4B /* Pods_ACDShipManagement.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +357,7 @@
 		D29F0ECD201F2DDF00D75A52 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D2B437EA208223920018E75B /* Setup */,
 				D23EF2E42071278900190B64 /* QRCode */,
 				D24B8E95206AB6EC003C477F /* Menu */,
 				D24B8E94206AB6E0003C477F /* ShipTrack */,
@@ -367,6 +374,17 @@
 				D229D324207AAE270081AA87 /* DeviceModelExtension.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D2B437EA208223920018E75B /* Setup */ = {
+			isa = PBXGroup;
+			children = (
+				D2B437E4208223850018E75B /* LoginController.swift */,
+				D2B437E5208223870018E75B /* SignUpController.swift */,
+				D2B437E6208223890018E75B /* SignUpPasswordViewController.swift */,
+				D2B437EB208225870018E75B /* SignUpCollectionViewCell.swift */,
+			);
+			path = Setup;
 			sourceTree = "<group>";
 		};
 		D2C000C1201A87710094138D = {
@@ -433,6 +451,7 @@
 		D2C9751F2080ECAA001FD285 /* ReadTripViewController */ = {
 			isa = PBXGroup;
 			children = (
+				D2C975272081808F001FD285 /* TripHistoryViewController.swift */,
 				D2C975222080ED2A001FD285 /* ReadTripViewController.swift */,
 				D2C975202080ECD1001FD285 /* SailingTripViewController.swift */,
 				D2C975242080EE02001FD285 /* InitialisedViewController.swift */,
@@ -443,7 +462,6 @@
 		D2C9752620818077001FD285 /* TripEssentials */ = {
 			isa = PBXGroup;
 			children = (
-				D2C975272081808F001FD285 /* TripHistoryViewController.swift */,
 			);
 			path = TripEssentials;
 			sourceTree = "<group>";
@@ -720,6 +738,7 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
@@ -758,6 +777,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
@@ -798,9 +818,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ACDShipManagement/Pods-ACDShipManagement-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -874,6 +897,8 @@
 				D2C975212080ECD1001FD285 /* SailingTripViewController.swift in Sources */,
 				D276CDC22029313200CDAD18 /* DeleteCompanyViewController.swift in Sources */,
 				D284D55F206FBC2E00BCB1F5 /* ReadContactViewController.swift in Sources */,
+				D2B437E9208223890018E75B /* SignUpPasswordViewController.swift in Sources */,
+				D2B437E8208223890018E75B /* SignUpController.swift in Sources */,
 				D276CDC02029312800CDAD18 /* UpdateCompanyViewController.swift in Sources */,
 				D276CDBC2029311300CDAD18 /* ReadCompanyViewController.swift in Sources */,
 				D249AA6620233B3D00A3C908 /* NotificationDetailViewController.swift in Sources */,
@@ -884,10 +909,12 @@
 				D29F0ECB201D3AAA00D75A52 /* NotificationViewController.swift in Sources */,
 				D276CDD2202A5B0300CDAD18 /* DismissAnimator.swift in Sources */,
 				D2C000CE201A87710094138D /* AppDelegate.swift in Sources */,
+				D2B437EC208225870018E75B /* SignUpCollectionViewCell.swift in Sources */,
 				D276CDBA202928F100CDAD18 /* DeleteShipViewController.swift in Sources */,
 				D267ABD6207A7E8A00A118D7 /* ConnectionBetweenVC.swift in Sources */,
 				D207895E2073BFAC00B5509E /* SailTripViewController2.swift in Sources */,
 				D2C975232080ED2A001FD285 /* ReadTripViewController.swift in Sources */,
+				D2B437E7208223890018E75B /* LoginController.swift in Sources */,
 				D276CDB8202928E600CDAD18 /* UpdateShipViewController.swift in Sources */,
 				D276CDB4202928C700CDAD18 /* ReadShipViewController.swift in Sources */,
 				D276CDC62029318C00CDAD18 /* CreateTripViewController1.swift in Sources */,

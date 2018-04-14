@@ -44,7 +44,9 @@ let mainCollectionViewCellId = "mainCollectionViewCellId"
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }
-
+    
+    
+    
     func setupMainCollectionView() {
         
         menuCollectionView.delegate = self

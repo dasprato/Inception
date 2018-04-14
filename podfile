@@ -26,6 +26,7 @@ pod 'FBSDKCoreKit'
 pod 'FBSDKShareKit'
 pod 'FBSDKLoginKit'
 pod 'NotificationBannerSwift'
+pod 'GoogleSignIn'
 
   target 'ACDShipManagementTests' do
     inherit! :search_paths
