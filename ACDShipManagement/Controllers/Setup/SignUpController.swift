@@ -9,9 +9,35 @@
 import UIKit
 import Firebase
 
-
+class ColorForSignUp {
+    var gl:CAGradientLayer!
+    
+    init() {
+        let colorTop = UIColor(red: (CGFloat(arc4random_uniform(255)))/255, green: (CGFloat(arc4random_uniform(255)))/255, blue: (CGFloat(arc4random_uniform(255)))/255, alpha: 1.0).cgColor
+        let colorBottom = UIColor(red: (CGFloat(arc4random_uniform(255)))/255, green: (CGFloat(arc4random_uniform(255)))/255, blue: (CGFloat(arc4random_uniform(255)))/255, alpha: 1.0).cgColor
+        
+        self.gl = CAGradientLayer()
+        self.gl.colors = [colorTop, colorBottom]
+        self.gl.locations = [0.0, 0.5]
+    }
+}
 class SignUpController: UIViewController {
 
+
+
+    let colors = ColorForSignUp()
+    var backgroundLayer = CAGradientLayer()
+    
+    func refresh() {
+        view.backgroundColor = UIColor.clear
+        backgroundLayer = colors.gl
+        view.layer.insertSublayer(backgroundLayer, at: 0)
+    }
+    
+    
+    override func viewDidLayoutSubviews() {
+        self.backgroundLayer.frame = view.frame
+    }
     
     var userEmail: String? {
         didSet {
@@ -28,10 +54,11 @@ class SignUpController: UIViewController {
     let arrayOfUIImages = [UIImage(named: "email")]
     let arrayOfMediaNames = ["Email"]
     let signUpCollectionViewCellId = "signUpCollectionViewCellId"
+    
     override func viewDidLoad() {
+        refresh()
 
         super.viewDidLoad()
-        view.backgroundColor = .red
 
         view.addSubview(signUpCollectionView)
 //        view.addSubview(googleSingnInButton)
@@ -72,7 +99,7 @@ class SignUpController: UIViewController {
         layout.minimumLineSpacing = 8
         let ma = UICollectionView(frame: .zero, collectionViewLayout: layout)
         ma.translatesAutoresizingMaskIntoConstraints = false
-        ma.backgroundColor = .red
+        ma.backgroundColor = .clear
         ma.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         ma.bounces = true
         ma.bouncesZoom = true

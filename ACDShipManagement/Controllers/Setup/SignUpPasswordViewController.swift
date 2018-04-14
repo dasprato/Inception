@@ -10,6 +10,20 @@ import UIKit
 import Firebase
 
 
+class ColorForSignUpPassword {
+    var gl:CAGradientLayer!
+    
+    init() {
+        let colorTop = UIColor(red: (CGFloat(arc4random_uniform(255)))/255, green: (CGFloat(arc4random_uniform(255)))/255, blue: (CGFloat(arc4random_uniform(255)))/255, alpha: 1.0).cgColor
+        let colorBottom = UIColor(red: (CGFloat(arc4random_uniform(255)))/255, green: (CGFloat(arc4random_uniform(255)))/255, blue: (CGFloat(arc4random_uniform(255)))/255, alpha: 1.0).cgColor
+        
+        self.gl = CAGradientLayer()
+        self.gl.colors = [colorTop, colorBottom]
+        self.gl.locations = [0.0, 0.5]
+    }
+}
+
+
 class SignUpPasswordViewController: UIViewController {
     
     var emailAddress: String? {
@@ -17,20 +31,40 @@ class SignUpPasswordViewController: UIViewController {
             emailField.text = emailAddress
         }
     }
+    
+
+    
+    let colors = ColorForSignUpPassword()
+    var backgroundLayer = CAGradientLayer()
+    
+    func refresh() {
+        view.backgroundColor = UIColor.clear
+        backgroundLayer = colors.gl
+        view.layer.insertSublayer(backgroundLayer, at: 0)
+    }
+    
+    
+    override func viewDidLayoutSubviews() {
+        self.backgroundLayer.frame = view.frame
+        signUpButton.addShadow()
+        emailField.addShadow()
+        passwordField.addShadow()
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
         
+        refresh()
         view.addSubview(emailField)
         view.addSubview(passwordField)
         view.addSubview(signUpButton)
         
-        NSLayoutConstraint.activate([signUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor), signUpButton.centerYAnchor.constraint(equalTo: view.centerYAnchor), signUpButton.heightAnchor.constraint(equalToConstant: 40)])
+        NSLayoutConstraint.activate([signUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor), signUpButton.centerYAnchor.constraint(equalTo: view.centerYAnchor), signUpButton.heightAnchor.constraint(equalToConstant: 40), signUpButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16), signUpButton.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16)])
         
-        NSLayoutConstraint.activate([passwordField.centerXAnchor.constraint(equalTo: view.centerXAnchor), passwordField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -8), passwordField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 8), passwordField.bottomAnchor.constraint(equalTo: signUpButton.topAnchor, constant: -8), passwordField.heightAnchor.constraint(equalToConstant: 40)])
+        NSLayoutConstraint.activate([passwordField.centerXAnchor.constraint(equalTo: view.centerXAnchor), passwordField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16), passwordField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16), passwordField.bottomAnchor.constraint(equalTo: signUpButton.topAnchor, constant: -8), passwordField.heightAnchor.constraint(equalToConstant: 40)])
         
-        NSLayoutConstraint.activate([emailField.centerXAnchor.constraint(equalTo: view.centerXAnchor), emailField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -8), emailField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 8), emailField.bottomAnchor.constraint(equalTo: passwordField.topAnchor, constant: -8), emailField.heightAnchor.constraint(equalToConstant: 40)])
+        NSLayoutConstraint.activate([emailField.centerXAnchor.constraint(equalTo: view.centerXAnchor), emailField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16), emailField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16), emailField.bottomAnchor.constraint(equalTo: passwordField.topAnchor, constant: -8), emailField.heightAnchor.constraint(equalToConstant: 40)])
     }
     
     var emailField: UITextField = {
@@ -46,7 +80,6 @@ class SignUpPasswordViewController: UIViewController {
     }()
 
     @objc func handleSignUp() {
-        print("Trying to sign up and send data to firebase")
         guard let email = emailField.text else { return }
         guard let password = passwordField.text else { return }
         var title = ""
@@ -54,33 +87,18 @@ class SignUpPasswordViewController: UIViewController {
         Auth.auth().createUser(withEmail: email, password: password, completion: { (User, error) in
             
             if error != nil {
-                print(error ?? "")
-                if error.debugDescription.lowercased().range(of: "error_user_not_found") != nil {
-                    title = "User Not Found"
-                    message = "Looks like you never registered!"
-                }
-                else if error.debugDescription.lowercased().range(of: "error_wrong_password") != nil {
-                    title = "Wrong Password"
-                    message = "Please check your password and retry!"
-                    
-                }
-                else if error.debugDescription.lowercased().range(of: "error_invalid_email") != nil {
-                    title = "Invalid Email"
-                    message = "That email is not a real one!"
-                } else if  error.debugDescription.lowercased().range(of: "error_email_already_in_use") != nil {
-                    title = "Email In Use"
-                    message = "Looks like you signed up already! Try the password reset options"
-                }
+                print(error.debugDescription ?? "")
+                title = "Error"
+                message = (error?.localizedDescription)!
                     
                 self.createAlert(title: title, message: message)
                 return
             }
 
-            let firebaseUserDict: [String: Any] = ["emailAddress": email, "fieldOfStudy": "", "name": "Prato Das", "profilePictureStorageReference": ""]
+            let userDictionary: [String: Any] = ["emailAddress": email, "fieldOfStudy": "", "name": "Prato Das", "profilePictureStorageReference": ""]
             let db = Firestore.firestore()
-            db.collection("Users").document(User!.uid).setData(firebaseUserDict)
-            
-            //successfully authenticated
+            db.collection("Users").document(User!.uid).setData(userDictionary)
+            self.dismiss(animated: true, completion: nil)
             
 
         })
@@ -88,12 +106,15 @@ class SignUpPasswordViewController: UIViewController {
     }
     
     
-    var signUpButton: UIButton = {
-        let lb = UIButton()
+    var signUpButton: CustomUIButton = {
+        
+        let lb = CustomUIButton(type: .system)
         lb.translatesAutoresizingMaskIntoConstraints = false
+        lb.setTitleColor(.white, for: .normal)
+        lb.backgroundColor = .green
         lb.setTitle("Sign Up", for: .normal)
-        lb.setTitleColor(UIColor.white, for: .normal)
         lb.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
+        lb.layer.cornerRadius = 5.0
         return lb
     }()
     

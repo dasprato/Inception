@@ -24,6 +24,10 @@ class LoginController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         self.backgroundLayer.frame = view.frame
+        loginButton.addShadow()
+        signUpButton.addShadow()
+        emailField.addShadow()
+        passwordField.addShadow()
     }
 
     
@@ -36,14 +40,14 @@ class LoginController: UIViewController {
         view.addSubview(emailField)
         view.addSubview(passwordField)
 
-        NSLayoutConstraint.activate([loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor), loginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor), loginButton.widthAnchor.constraint(equalToConstant: 40), loginButton.heightAnchor.constraint(equalToConstant: 40)])
+        NSLayoutConstraint.activate([loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor), loginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor), loginButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16), loginButton.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16), loginButton.heightAnchor.constraint(equalToConstant: 40)])
         
-        NSLayoutConstraint.activate([signUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor), signUpButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor)])
+        NSLayoutConstraint.activate([signUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor), signUpButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 8), signUpButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16), signUpButton.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16), signUpButton.heightAnchor.constraint(equalToConstant: 40)])
 
         
-        NSLayoutConstraint.activate([passwordField.centerXAnchor.constraint(equalTo: view.centerXAnchor), passwordField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -8), passwordField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 8), passwordField.bottomAnchor.constraint(equalTo: loginButton.topAnchor, constant: -8), passwordField.heightAnchor.constraint(equalToConstant: 40)])
+        NSLayoutConstraint.activate([passwordField.centerXAnchor.constraint(equalTo: view.centerXAnchor), passwordField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16), passwordField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16), passwordField.bottomAnchor.constraint(equalTo: loginButton.topAnchor, constant: -8), passwordField.heightAnchor.constraint(equalToConstant: 40)])
         
-        NSLayoutConstraint.activate([emailField.centerXAnchor.constraint(equalTo: view.centerXAnchor), emailField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -8), emailField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 8), emailField.bottomAnchor.constraint(equalTo: passwordField.topAnchor, constant: -8), emailField.heightAnchor.constraint(equalToConstant: 40)])
+        NSLayoutConstraint.activate([emailField.centerXAnchor.constraint(equalTo: view.centerXAnchor), emailField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16), emailField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16), emailField.bottomAnchor.constraint(equalTo: passwordField.topAnchor, constant: -8), emailField.heightAnchor.constraint(equalToConstant: 40)])
         navigationController?.navigationItem.title = ""
         navigationItem.title = ""
         // to completely get rid of the nav bar and status bar
@@ -58,14 +62,14 @@ class LoginController: UIViewController {
         }
     
     
-    var loginButton: UIButton = {
-        let lb = UIButton(type: .system)
+    var loginButton: CustomUIButton = {
+        let lb = CustomUIButton(type: .system)
         lb.translatesAutoresizingMaskIntoConstraints = false
-        let imageForLogin = UIImage(named: "login")?.withRenderingMode(.alwaysOriginal)
-        lb.setImage(imageForLogin, for: .normal)
-        lb.tintColor = UIColor.white
-        lb.contentMode = .scaleAspectFit
+        lb.setTitleColor(.white, for: .normal)
+        lb.backgroundColor = .green
+        lb.setTitle("Login", for: .normal)
         lb.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
+        lb.layer.cornerRadius = 5.0
         return lb
     }()
     
@@ -77,11 +81,13 @@ class LoginController: UIViewController {
     
     
     var signUpButton: UIButton = {
-        let lb = UIButton(type: .system)
+        let lb = CustomUIButton(type: .system)
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.setTitle("Have not signed up? Sign Up", for: .normal)
-        lb.setTitleColor(UIColor.white, for: .normal)
+        lb.setTitleColor(.white, for: .normal)
+        lb.backgroundColor = .green
+        lb.setTitle("Have not signed up? Sign up", for: .normal)
         lb.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
+        lb.layer.cornerRadius = 5.0
         return lb
     }()
     
