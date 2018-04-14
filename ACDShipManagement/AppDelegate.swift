@@ -13,7 +13,7 @@ import CoreData
 import Firebase
 import UserNotifications
 import UserNotificationsUI
-
+import FirebaseMessaging
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {
@@ -71,6 +71,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 40
+        
+        
         return true
     }
 
@@ -130,6 +132,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         
         // TODO: If necessary send token to application server.
         // Note: This callback is fired at each app startup and whenever a new token is generated.
+        Messaging.messaging().subscribe(toTopic: "pushNotifications")
     }
     
     func application(application: UIApplication,

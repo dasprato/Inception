@@ -18,6 +18,21 @@ class ReadTripViewController: InteractiveViewController {
             self.tripsCollectionView.reloadData()
         }
     }
+    let colors = Colors()
+    var backgroundLayer = CAGradientLayer()
+    
+    func refresh() {
+        view.backgroundColor = UIColor.clear
+        backgroundLayer = colors.gl
+        view.layer.insertSublayer(backgroundLayer, at: 0)
+    }
+
+    
+    override func viewDidLayoutSubviews() {
+        self.backgroundLayer.frame = view.frame
+    }
+
+
     
     let contactsCollectionViewCellId = "contactsCollectionViewCellId"
     override func viewDidLoad() {
@@ -29,7 +44,15 @@ class ReadTripViewController: InteractiveViewController {
         self.navigationController?.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.barTintColor = .gray
         self.navigationController?.navigationBar.addShadow()
+        self.navigationController?.title = ""
+        self.navigationController?.navigationBar.topItem?.title = ""
         view.backgroundColor = .darkGray
+        
+        self.navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.darkGray]
+        self.navigationController?.navigationBar.barTintColor = .darkGray
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         
         let barButtonClose = UIBarButtonItem(image: UIImage(named: "arrow")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(closeView(_:)))
         barButtonClose.tintColor = .white
@@ -39,6 +62,7 @@ class ReadTripViewController: InteractiveViewController {
         navigationItem.titleView = searchBar
         
         searchBar.becomeFirstResponder()
+        refresh()
     }
     
     func setupCollectionView() {
@@ -56,8 +80,13 @@ class ReadTripViewController: InteractiveViewController {
         tripsCollectionView.dataSource = self
         
         tripsCollectionView.register(SailTripCollectionViewCell.self, forCellWithReuseIdentifier: contactsCollectionViewCellId)
+        
+
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        refresh()
+    }
     var tripsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -204,8 +233,10 @@ extension ReadTripViewController: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if self.arrayOfTrips![indexPath.row].tripStatus! == "Completed" {
-            let vc = TripCompletedViewController()
-            vc.showInteractive()
+            let vc = TripHistoryViewController()
+            ConnectionBetweenVC.trip = self.arrayOfTrips![indexPath.row]
+            ConnectionBetweenVC.ship = self.arrayOfShipNames[indexPath.row]
+            self.navigationController?.pushViewController(vc, animated: true)
         } else {
             let vc = UINavigationController(rootViewController: SailTripViewController2())
             ConnectionBetweenVC.trip = self.arrayOfTrips![indexPath.row]
@@ -226,5 +257,19 @@ extension ReadTripViewController: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width - 32, height: 64)
+    }
+}
+
+
+class Colors {
+    var gl:CAGradientLayer!
+    
+    init() {
+        let colorTop = UIColor.darkGray.cgColor
+        let colorBottom = UIColor.gray.cgColor
+        
+        self.gl = CAGradientLayer()
+        self.gl.colors = [colorTop, colorBottom]
+        self.gl.locations = [0.0, 0.4]
     }
 }

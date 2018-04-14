@@ -20,13 +20,12 @@ let mainCollectionViewCellId = "mainCollectionViewCellId"
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        arrayOfMenus.append(Menu(titleForCell: "Trip", operations: "crs"))
         arrayOfMenus.append(Menu(titleForCell: "Ship", operations: "cr"))
         arrayOfMenus.append(Menu(titleForCell: "Company", operations: "cr"))
-        arrayOfMenus.append(Menu(titleForCell: "Trip", operations: "crs"))
         arrayOfMenus.append(Menu(titleForCell: "Contact", operations: "cr"))
         arrayOfMenus.append(Menu(titleForCell: "QR Code", operations: "r"))
-        arrayOfMenus.append(Menu(titleForCell: "Developer", operations: ""))
+//        arrayOfMenus.append(Menu(titleForCell: "Developer", operations: ""))
         
         setupMainCollectionView()
         
@@ -85,10 +84,10 @@ let mainCollectionViewCellId = "mainCollectionViewCellId"
         
         NotificationCenter.default.addObserver(self, selector: #selector(readQRCode), name: NSNotification.Name.init("read QR Code"), object: nil)
         
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(openShubranilInfo), name: NSNotification.Name.init("shubranil"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(openSumitInfo), name: NSNotification.Name.init("sumit"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(openPratoInfo), name: NSNotification.Name.init("prato"), object: nil)
+//
+//        NotificationCenter.default.addObserver(self, selector: #selector(openShubranilInfo), name: NSNotification.Name.init("shubranil"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(openSumitInfo), name: NSNotification.Name.init("sumit"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(openPratoInfo), name: NSNotification.Name.init("prato"), object: nil)
     }
     
 
