@@ -359,7 +359,7 @@
 		D29F0ECD201F2DDF00D75A52 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D2B437EA208223920018E75B /* Setup */,
+				D2B437EA208223920018E75B /* LoginSignUp */,
 				D23EF2E42071278900190B64 /* QRCode */,
 				D24B8E95206AB6EC003C477F /* Menu */,
 				D24B8E94206AB6E0003C477F /* ShipTrack */,
@@ -378,7 +378,7 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		D2B437EA208223920018E75B /* Setup */ = {
+		D2B437EA208223920018E75B /* LoginSignUp */ = {
 			isa = PBXGroup;
 			children = (
 				D2B437E4208223850018E75B /* LoginController.swift */,
@@ -386,7 +386,7 @@
 				D2B437E6208223890018E75B /* SignUpPasswordViewController.swift */,
 				D2B437EB208225870018E75B /* SignUpCollectionViewCell.swift */,
 			);
-			path = Setup;
+			path = LoginSignUp;
 			sourceTree = "<group>";
 		};
 		D2C000C1201A87710094138D = {
