@@ -10,7 +10,7 @@ import UIKit
 import QRCode
 import Firebase
 
-class ReadTripViewController: UIViewController {
+class ReadTripViewController: InteractiveViewController {
     
     var arrayOfShipNames: [Ship] = [Ship]()
     var arrayOfTrips: [Trip]? {
@@ -205,7 +205,7 @@ extension ReadTripViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if self.arrayOfTrips![indexPath.row].tripStatus! == "Completed" {
             let vc = TripCompletedViewController()
-            present(vc, animated: true, completion: nil)
+            vc.showInteractive()
         } else {
             let vc = UINavigationController(rootViewController: SailTripViewController2())
             ConnectionBetweenVC.trip = self.arrayOfTrips![indexPath.row]

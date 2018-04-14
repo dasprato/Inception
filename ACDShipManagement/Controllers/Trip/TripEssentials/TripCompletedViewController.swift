@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TripCompletedViewController: UIViewController {
+class TripCompletedViewController: InteractiveViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
