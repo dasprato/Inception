@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class AccountViewController: UIViewController {
 
@@ -34,14 +35,38 @@ class AccountViewController: UIViewController {
         refresh()
         self.navigationController?.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.barTintColor = .gray
-        self.navigationController?.navigationBar.topItem?.title = "Ship"
-        navigationController?.hidesBarsOnSwipe = true
+        self.navigationController?.navigationBar.topItem?.title = "Account"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.isHidden = true
         
         
+        view.addSubview(logout)
+        
+        NSLayoutConstraint.activate([logout.centerXAnchor.constraint(equalTo: view.centerXAnchor), logout.centerYAnchor.constraint(equalTo: view.centerYAnchor)])
+        
     }
 
+    var logout: UIButton = {
+        let lgt = UIButton(type: .system)
+        lgt.translatesAutoresizingMaskIntoConstraints = false
+        lgt.backgroundColor = .blue
+        lgt.setTitle("LOGOUT", for: .normal)
+        lgt.setTitleColor(.white, for: .normal)
+        lgt.addTarget(self, action: #selector(handleLogout), for: .touchUpInside)
+        return lgt
+    }()
+    
+    @objc func handleLogout() {
+        do {
+            try Auth.auth().signOut()
+        } catch let logoutError {
+            print(logoutError)
+        }
+        let viewControllerToPresent = LoginController()
+        
+        self.present(UINavigationController(rootViewController: viewControllerToPresent), animated: true, completion: nil)
+    }
+    
     class ColorForAccount {
         var gl:CAGradientLayer!
         
