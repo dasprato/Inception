@@ -203,10 +203,16 @@ extension ReadTripViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = UINavigationController(rootViewController: SailTripViewController2())
-        ConnectionBetweenVC.trip = self.arrayOfTrips![indexPath.row]
-        ConnectionBetweenVC.ship = self.arrayOfShipNames[indexPath.row]
-        present(vc, animated: true, completion: nil)
+        if self.arrayOfTrips![indexPath.row].tripStatus! == "Completed" {
+            let vc = TripCompletedViewController()
+            present(vc, animated: true, completion: nil)
+        } else {
+            let vc = UINavigationController(rootViewController: SailTripViewController2())
+            ConnectionBetweenVC.trip = self.arrayOfTrips![indexPath.row]
+            ConnectionBetweenVC.ship = self.arrayOfShipNames[indexPath.row]
+            present(vc, animated: true, completion: nil)
+        }
+
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

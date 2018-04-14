@@ -176,6 +176,7 @@ extension UIViewController {
             }
             banner.backgroundColor = .red
             banner.titleLabel?.text = "No Internet"
+            banner.duration = 0.8
             banner.show()
         case .wifi:
             if banner.isDisplaying == true {
@@ -183,6 +184,7 @@ extension UIViewController {
             }
             banner.backgroundColor = .green
             banner.titleLabel?.text = "Connected via Wifi"
+            banner.duration = 0.8
             banner.show()
         case .wwan:
             if banner.isDisplaying == true {
@@ -190,6 +192,7 @@ extension UIViewController {
             }
              banner.backgroundColor = .green
             banner.titleLabel?.text = "Connected via Cellular"
+            banner.duration = 0.8
             banner.show()
         }
     }

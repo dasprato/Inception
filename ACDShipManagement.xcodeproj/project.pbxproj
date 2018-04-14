@@ -64,6 +64,7 @@
 		D2C975212080ECD1001FD285 /* SailingTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C975202080ECD1001FD285 /* SailingTripViewController.swift */; };
 		D2C975232080ED2A001FD285 /* ReadTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C975222080ED2A001FD285 /* ReadTripViewController.swift */; };
 		D2C975252080EE02001FD285 /* InitialisedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C975242080EE02001FD285 /* InitialisedViewController.swift */; };
+		D2C975282081808F001FD285 /* TripCompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C975272081808F001FD285 /* TripCompletedViewController.swift */; };
 		D2FE0CEC20248449006C8BCE /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FE0CEB20248449006C8BCE /* MenuViewController.swift */; };
 		D2FE0CF32024886B006C8BCE /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FE0CF22024886B006C8BCE /* Menu.swift */; };
 		D2FE0CF52024C366006C8BCE /* MenuTitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FE0CF42024C366006C8BCE /* MenuTitleCollectionViewCell.swift */; };
@@ -154,6 +155,7 @@
 		D2C975202080ECD1001FD285 /* SailingTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SailingTripViewController.swift; sourceTree = "<group>"; };
 		D2C975222080ED2A001FD285 /* ReadTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadTripViewController.swift; sourceTree = "<group>"; };
 		D2C975242080EE02001FD285 /* InitialisedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialisedViewController.swift; sourceTree = "<group>"; };
+		D2C975272081808F001FD285 /* TripCompletedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCompletedViewController.swift; sourceTree = "<group>"; };
 		D2FE0CEB20248449006C8BCE /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		D2FE0CF22024886B006C8BCE /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		D2FE0CF42024C366006C8BCE /* MenuTitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTitleCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 		D24B8E90206AB538003C477F /* Trip */ = {
 			isa = PBXGroup;
 			children = (
+				D2C9752620818077001FD285 /* TripEssentials */,
 				D2C9751F2080ECAA001FD285 /* ReadTripViewController */,
 				D276CDC52029318C00CDAD18 /* CreateTripViewController1.swift */,
 				D276CDC72029319700CDAD18 /* UpdateTripViewController.swift */,
@@ -435,6 +438,14 @@
 				D2C975242080EE02001FD285 /* InitialisedViewController.swift */,
 			);
 			path = ReadTripViewController;
+			sourceTree = "<group>";
+		};
+		D2C9752620818077001FD285 /* TripEssentials */ = {
+			isa = PBXGroup;
+			children = (
+				D2C975272081808F001FD285 /* TripCompletedViewController.swift */,
+			);
+			path = TripEssentials;
 			sourceTree = "<group>";
 		};
 		D2FE0CEA20237366006C8BCE /* View */ = {
@@ -898,6 +909,7 @@
 				D23EF2F02071E7E500190B64 /* CreateTripViewController2.swift in Sources */,
 				D276CDCA202931A000CDAD18 /* DeleteTripViewController.swift in Sources */,
 				D2FE0CFC2024C811006C8BCE /* MenuCollectionViewCell.swift in Sources */,
+				D2C975282081808F001FD285 /* TripCompletedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

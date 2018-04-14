@@ -350,9 +350,10 @@ class SailTripViewController2: UIViewController, CLLocationManagerDelegate {
     
     var completeTripButton: CustomUIButton = {
         let civ = CustomUIButton(type: .system)
-        civ.backgroundColor = .orange
+        civ.backgroundColor = .white
         civ.addTarget(self, action: #selector(onCompleteButtonTapped), for: .touchUpInside)
-        civ.setTitle("C", for: .normal)
+        civ.setImage(UIImage(named: "greenCheck")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        civ.contentMode = .scaleToFill
         return civ
     }()
     
@@ -361,7 +362,11 @@ class SailTripViewController2: UIViewController, CLLocationManagerDelegate {
        
         
         ConnectionBetweenVC.ship = Ship(representativeEmail: ConnectionBetweenVC.ship.representativeEmail!, representativeName: ConnectionBetweenVC.ship.representativeName!, representativePhone: ConnectionBetweenVC.ship.representativePhone!, vesselCapacity: ConnectionBetweenVC.ship.vesselCapacity!, vesselName: ConnectionBetweenVC.ship.vesselName!, shipId: ConnectionBetweenVC.ship.shipId!, currentStatus: "Available")
-        updateShipStatusNotAvailable()
+        updateShipStatus()
+        
+        // Between trip hits
+        ConnectionBetweenVC.trip = Trip(amount: ConnectionBetweenVC.trip.amount!, cargo: ConnectionBetweenVC.trip.cargo!, from: ConnectionBetweenVC.trip.from!, to: ConnectionBetweenVC.trip.to!, tripStatus: "Completed", vesselReferencePath: ConnectionBetweenVC.trip.vesselReferencePath!, tripId: ConnectionBetweenVC.trip.tripId!, fromDate: ConnectionBetweenVC.trip.fromDate!, toDate: ConnectionBetweenVC.trip.toDate!, vesselName: ConnectionBetweenVC.trip.vesselName!)
+        updateTripStatus()
         
         let timeStamp = "\(String(describing: Date().timeIntervalSince1970))"
         let db = Firestore.firestore()
@@ -416,7 +421,7 @@ extension SailTripViewController2 {
         
         
         ConnectionBetweenVC.ship = Ship(representativeEmail: ConnectionBetweenVC.ship.representativeEmail!, representativeName: ConnectionBetweenVC.ship.representativeName!, representativePhone: ConnectionBetweenVC.ship.representativePhone!, vesselCapacity: ConnectionBetweenVC.ship.vesselCapacity!, vesselName: ConnectionBetweenVC.ship.vesselName!, shipId: ConnectionBetweenVC.ship.shipId!, currentStatus: "Not Available")
-            updateShipStatusNotAvailable()
+            updateShipStatus()
         
         if ConnectionBetweenVC.trip.tripStatus == "Initialised" {
             // Initial hit
@@ -435,8 +440,6 @@ extension SailTripViewController2 {
             performLogicOnButtonTitle()
             
             ShowActionButtons()
-
-            
             updateTripStatus()
         }
         else if ConnectionBetweenVC.trip.tripStatus == "TripPaused" {
@@ -445,8 +448,6 @@ extension SailTripViewController2 {
             ConnectionBetweenVC.trip = Trip(amount: ConnectionBetweenVC.trip.amount!, cargo: ConnectionBetweenVC.trip.cargo!, from: ConnectionBetweenVC.trip.from!, to: ConnectionBetweenVC.trip.to!, tripStatus: "Sailing", vesselReferencePath: ConnectionBetweenVC.trip.vesselReferencePath!, tripId: ConnectionBetweenVC.trip.tripId!, fromDate: ConnectionBetweenVC.trip.fromDate!, toDate: ConnectionBetweenVC.trip.toDate!, vesselName: ConnectionBetweenVC.trip.vesselName!)
             performLogicOnButtonTitle()
             HideActionButtons()
-
-            
             updateTripStatus()
         }
     }
@@ -459,7 +460,7 @@ extension SailTripViewController2 {
     }
 
     
-    func updateShipStatusNotAvailable() {
+    func updateShipStatus() {
         
         let db = Firestore.firestore()
         let vesselDictionary: [String: Any?] = ["vesselName": ConnectionBetweenVC.ship.vesselName!, "vesselCapacity": ConnectionBetweenVC.ship.vesselCapacity!, "representativeName": ConnectionBetweenVC.ship.representativeName!, "representativePhone": ConnectionBetweenVC.ship.representativePhone!, "representativeEmail": ConnectionBetweenVC.ship.representativeName!, "currentStatus": ConnectionBetweenVC.ship.currentStatus!]
