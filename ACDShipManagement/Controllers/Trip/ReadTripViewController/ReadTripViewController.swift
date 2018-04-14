@@ -32,6 +32,9 @@ class ReadTripViewController: InteractiveViewController {
         self.backgroundLayer.frame = view.frame
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.prefersLargeTitles = false
+    }
 
     
     let contactsCollectionViewCellId = "contactsCollectionViewCellId"
@@ -232,17 +235,11 @@ extension ReadTripViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if self.arrayOfTrips![indexPath.row].tripStatus! == "Completed" {
             let vc = TripHistoryViewController()
             ConnectionBetweenVC.trip = self.arrayOfTrips![indexPath.row]
             ConnectionBetweenVC.ship = self.arrayOfShipNames[indexPath.row]
             self.navigationController?.pushViewController(vc, animated: true)
-        } else {
-            let vc = UINavigationController(rootViewController: SailTripViewController2())
-            ConnectionBetweenVC.trip = self.arrayOfTrips![indexPath.row]
-            ConnectionBetweenVC.ship = self.arrayOfShipNames[indexPath.row]
-            present(vc, animated: true, completion: nil)
-        }
+    
 
     }
     
