@@ -1,5 +1,5 @@
 //
-//  InitialisedViewController.swift
+//  SailingVesselViewController.swift
 //  ACDShipManagement
 //
 //  Created by Prato Das on 2018-04-13.
@@ -8,12 +8,10 @@
 
 import UIKit
 
-class LocationLogViewController: UIViewController {
+class StatusLogViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
 

@@ -236,7 +236,7 @@ extension ReadTripViewController: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             let vc = TripHistoryViewController()
-            ConnectionBetweenVC.trip = self.arrayOfTrips![indexPath.row]
+            vc.trip = self.arrayOfTrips![indexPath.row]
             ConnectionBetweenVC.ship = self.arrayOfShipNames[indexPath.row]
             self.navigationController?.pushViewController(vc, animated: true)
     

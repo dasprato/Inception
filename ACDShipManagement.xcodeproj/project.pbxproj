@@ -57,17 +57,17 @@
 		D2B437E7208223890018E75B /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B437E4208223850018E75B /* LoginController.swift */; };
 		D2B437E8208223890018E75B /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B437E5208223870018E75B /* SignUpController.swift */; };
 		D2B437E9208223890018E75B /* SignUpPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B437E6208223890018E75B /* SignUpPasswordViewController.swift */; };
-		D2B437EC208225870018E75B /* SignUpCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B437EB208225870018E75B /* SignUpCollectionViewCell.swift */; };
 		D2C000CE201A87710094138D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C000CD201A87710094138D /* AppDelegate.swift */; };
 		D2C000D0201A87710094138D /* ShipTrackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C000CF201A87710094138D /* ShipTrackViewController.swift */; };
 		D2C000D6201A87710094138D /* ACDShipManagement.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D2C000D4201A87710094138D /* ACDShipManagement.xcdatamodeld */; };
 		D2C000D8201A87710094138D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2C000D7201A87710094138D /* Assets.xcassets */; };
 		D2C000E6201A87710094138D /* ACDShipManagementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C000E5201A87710094138D /* ACDShipManagementTests.swift */; };
 		D2C000F1201A87710094138D /* ACDShipManagementUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C000F0201A87710094138D /* ACDShipManagementUITests.swift */; };
-		D2C975212080ECD1001FD285 /* SailingTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C975202080ECD1001FD285 /* SailingTripViewController.swift */; };
+		D2C975212080ECD1001FD285 /* StatusLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C975202080ECD1001FD285 /* StatusLogViewController.swift */; };
 		D2C975232080ED2A001FD285 /* ReadTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C975222080ED2A001FD285 /* ReadTripViewController.swift */; };
-		D2C975252080EE02001FD285 /* InitialisedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C975242080EE02001FD285 /* InitialisedViewController.swift */; };
+		D2C975252080EE02001FD285 /* LocationLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C975242080EE02001FD285 /* LocationLogViewController.swift */; };
 		D2C975282081808F001FD285 /* TripHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C975272081808F001FD285 /* TripHistoryViewController.swift */; };
+		D2F5E3682085D77500829633 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F5E3672085D77500829633 /* Location.swift */; };
 		D2FE0CEC20248449006C8BCE /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FE0CEB20248449006C8BCE /* MenuViewController.swift */; };
 		D2FE0CF32024886B006C8BCE /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FE0CF22024886B006C8BCE /* Menu.swift */; };
 		D2FE0CF52024C366006C8BCE /* MenuTitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FE0CF42024C366006C8BCE /* MenuTitleCollectionViewCell.swift */; };
@@ -147,7 +147,6 @@
 		D2B437E4208223850018E75B /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		D2B437E5208223870018E75B /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		D2B437E6208223890018E75B /* SignUpPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpPasswordViewController.swift; sourceTree = "<group>"; };
-		D2B437EB208225870018E75B /* SignUpCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpCollectionViewCell.swift; sourceTree = "<group>"; };
 		D2C000CA201A87710094138D /* ACDShipManagement.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ACDShipManagement.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C000CD201A87710094138D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2C000CF201A87710094138D /* ShipTrackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShipTrackViewController.swift; sourceTree = "<group>"; };
@@ -160,10 +159,11 @@
 		D2C000EC201A87710094138D /* ACDShipManagementUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ACDShipManagementUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C000F0201A87710094138D /* ACDShipManagementUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACDShipManagementUITests.swift; sourceTree = "<group>"; };
 		D2C000F2201A87710094138D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D2C975202080ECD1001FD285 /* SailingTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SailingTripViewController.swift; sourceTree = "<group>"; };
+		D2C975202080ECD1001FD285 /* StatusLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusLogViewController.swift; sourceTree = "<group>"; };
 		D2C975222080ED2A001FD285 /* ReadTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadTripViewController.swift; sourceTree = "<group>"; };
-		D2C975242080EE02001FD285 /* InitialisedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialisedViewController.swift; sourceTree = "<group>"; };
+		D2C975242080EE02001FD285 /* LocationLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationLogViewController.swift; sourceTree = "<group>"; };
 		D2C975272081808F001FD285 /* TripHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripHistoryViewController.swift; sourceTree = "<group>"; };
+		D2F5E3672085D77500829633 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		D2FE0CEB20248449006C8BCE /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		D2FE0CF22024886B006C8BCE /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		D2FE0CF42024C366006C8BCE /* MenuTitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTitleCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -384,7 +384,6 @@
 				D2B437E4208223850018E75B /* LoginController.swift */,
 				D2B437E5208223870018E75B /* SignUpController.swift */,
 				D2B437E6208223890018E75B /* SignUpPasswordViewController.swift */,
-				D2B437EB208225870018E75B /* SignUpCollectionViewCell.swift */,
 			);
 			path = LoginSignUp;
 			sourceTree = "<group>";
@@ -455,8 +454,8 @@
 			children = (
 				D2C975272081808F001FD285 /* TripHistoryViewController.swift */,
 				D2C975222080ED2A001FD285 /* ReadTripViewController.swift */,
-				D2C975202080ECD1001FD285 /* SailingTripViewController.swift */,
-				D2C975242080EE02001FD285 /* InitialisedViewController.swift */,
+				D2C975202080ECD1001FD285 /* StatusLogViewController.swift */,
+				D2C975242080EE02001FD285 /* LocationLogViewController.swift */,
 			);
 			path = ReadTripViewController;
 			sourceTree = "<group>";
@@ -485,6 +484,7 @@
 				D23EF2E92071888C00190B64 /* Company.swift */,
 				D23EF2EB2071889300190B64 /* Ship.swift */,
 				D207895F2074555A00B5509E /* Trip.swift */,
+				D2F5E3672085D77500829633 /* Location.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -898,7 +898,8 @@
 				D276CDD0202A5AE200CDAD18 /* Interactor.swift in Sources */,
 				D22EAA4B205E970800439F00 /* DeveloperInfoViewController.swift in Sources */,
 				D2FE0CEC20248449006C8BCE /* MenuViewController.swift in Sources */,
-				D2C975212080ECD1001FD285 /* SailingTripViewController.swift in Sources */,
+				D2F5E3682085D77500829633 /* Location.swift in Sources */,
+				D2C975212080ECD1001FD285 /* StatusLogViewController.swift in Sources */,
 				D276CDC22029313200CDAD18 /* DeleteCompanyViewController.swift in Sources */,
 				D284D55F206FBC2E00BCB1F5 /* ReadContactViewController.swift in Sources */,
 				D2B437E9208223890018E75B /* SignUpPasswordViewController.swift in Sources */,
@@ -913,7 +914,6 @@
 				D29F0ECB201D3AAA00D75A52 /* NotificationViewController.swift in Sources */,
 				D276CDD2202A5B0300CDAD18 /* DismissAnimator.swift in Sources */,
 				D2C000CE201A87710094138D /* AppDelegate.swift in Sources */,
-				D2B437EC208225870018E75B /* SignUpCollectionViewCell.swift in Sources */,
 				D276CDBA202928F100CDAD18 /* DeleteShipViewController.swift in Sources */,
 				D267ABD6207A7E8A00A118D7 /* ConnectionBetweenVC.swift in Sources */,
 				D207895E2073BFAC00B5509E /* SailTripViewController2.swift in Sources */,
@@ -936,7 +936,7 @@
 				D29F0EC5201D2A7200D75A52 /* CustomTabBarController.swift in Sources */,
 				D276CDC82029319700CDAD18 /* UpdateTripViewController.swift in Sources */,
 				D2C000D6201A87710094138D /* ACDShipManagement.xcdatamodeld in Sources */,
-				D2C975252080EE02001FD285 /* InitialisedViewController.swift in Sources */,
+				D2C975252080EE02001FD285 /* LocationLogViewController.swift in Sources */,
 				D23EF2F02071E7E500190B64 /* CreateTripViewController2.swift in Sources */,
 				D276CDCA202931A000CDAD18 /* DeleteTripViewController.swift in Sources */,
 				D2FE0CFC2024C811006C8BCE /* MenuCollectionViewCell.swift in Sources */,

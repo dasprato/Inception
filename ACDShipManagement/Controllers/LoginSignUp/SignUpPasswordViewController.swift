@@ -28,7 +28,7 @@ class SignUpPasswordViewController: UIViewController {
     
     var emailAddress: String? {
         didSet {
-            emailField.text = emailAddress
+            emailTextField.text = emailAddress
         }
     }
     
@@ -47,8 +47,8 @@ class SignUpPasswordViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         self.backgroundLayer.frame = view.frame
         signUpButton.addShadow()
-        emailField.addShadow()
-        passwordField.addShadow()
+        emailTextField.addShadow()
+        passwordTextField.addShadow()
     }
     
 
@@ -56,22 +56,23 @@ class SignUpPasswordViewController: UIViewController {
         super.viewDidLoad()
         
         refresh()
-        view.addSubview(emailField)
-        view.addSubview(passwordField)
+        view.addSubview(emailTextField)
+        view.addSubview(passwordTextField)
         view.addSubview(signUpButton)
+        view.addShadow()
         
         NSLayoutConstraint.activate([signUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor), signUpButton.centerYAnchor.constraint(equalTo: view.centerYAnchor), signUpButton.heightAnchor.constraint(equalToConstant: 40), signUpButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16), signUpButton.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16)])
         
-        NSLayoutConstraint.activate([passwordField.centerXAnchor.constraint(equalTo: view.centerXAnchor), passwordField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16), passwordField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16), passwordField.bottomAnchor.constraint(equalTo: signUpButton.topAnchor, constant: -8), passwordField.heightAnchor.constraint(equalToConstant: 40)])
+        NSLayoutConstraint.activate([passwordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor), passwordTextField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16), passwordTextField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16), passwordTextField.bottomAnchor.constraint(equalTo: signUpButton.topAnchor, constant: -8), passwordTextField.heightAnchor.constraint(equalToConstant: 40)])
         
-        NSLayoutConstraint.activate([emailField.centerXAnchor.constraint(equalTo: view.centerXAnchor), emailField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16), emailField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16), emailField.bottomAnchor.constraint(equalTo: passwordField.topAnchor, constant: -8), emailField.heightAnchor.constraint(equalToConstant: 40)])
+        NSLayoutConstraint.activate([emailTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor), emailTextField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16), emailTextField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16), emailTextField.bottomAnchor.constraint(equalTo: passwordTextField.topAnchor, constant: -8), emailTextField.heightAnchor.constraint(equalToConstant: 40)])
     }
     
-    var emailField: UITextField = {
+    var emailTextField: UITextField = {
         let ef = UITextField()
         ef.translatesAutoresizingMaskIntoConstraints = false
         ef.placeholder = "Your email"
-        ef.layer.cornerRadius = 5.0
+        ef.layer.cornerRadius = 10.0
         ef.backgroundColor = UIColor.white
         ef.textColor = .darkGray
         ef.contentMode = .center
@@ -80,8 +81,8 @@ class SignUpPasswordViewController: UIViewController {
     }()
 
     @objc func handleSignUp() {
-        guard let email = emailField.text else { return }
-        guard let password = passwordField.text else { return }
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
         var title = ""
         var message = ""
         Auth.auth().createUser(withEmail: email, password: password, completion: { (User, error) in
@@ -95,7 +96,7 @@ class SignUpPasswordViewController: UIViewController {
                 return
             }
 
-            let userDictionary: [String: Any] = ["emailAddress": email, "fieldOfStudy": "", "name": "Prato Das", "profilePictureStorageReference": ""]
+            let userDictionary: [String: Any] = ["emailAddress": email, "name": "", "profilePictureStorageReference": ""]
             let db = Firestore.firestore()
             db.collection("Users").document(User!.uid).setData(userDictionary)
             self.dismiss(animated: true, completion: nil)
@@ -114,15 +115,15 @@ class SignUpPasswordViewController: UIViewController {
         lb.backgroundColor = .green
         lb.setTitle("Sign Up", for: .normal)
         lb.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
-        lb.layer.cornerRadius = 5.0
+        lb.layer.cornerRadius = 10.0
         return lb
     }()
     
-    var passwordField: UITextField = {
+    var passwordTextField: UITextField = {
         let ef = UITextField()
         ef.translatesAutoresizingMaskIntoConstraints = false
         ef.placeholder = "Your password"
-        ef.layer.cornerRadius = 5.0
+        ef.layer.cornerRadius = 10.0
         ef.backgroundColor = UIColor.white
         ef.textColor = .darkGray
         ef.contentMode = .center

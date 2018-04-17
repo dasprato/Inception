@@ -10,7 +10,9 @@ import UIKit
 import Firebase
 
 class LoginController: UIViewController {
-
+    
+    
+    var override = true
     
     let colors = ColorForLogin()
     var backgroundLayer = CAGradientLayer()
@@ -22,32 +24,60 @@ class LoginController: UIViewController {
     }
     
     
+    var loginButtonConstraints = [NSLayoutConstraint]()
+    var signUpButtonConstraints = [NSLayoutConstraint]()
+    var passwordTextFieldConstraints = [NSLayoutConstraint]()
+    var emailTextFieldConstraints = [NSLayoutConstraint]()
     override func viewDidLayoutSubviews() {
         self.backgroundLayer.frame = view.frame
         loginButton.addShadow()
         signUpButton.addShadow()
-        emailField.addShadow()
-        passwordField.addShadow()
+        emailTextField.addShadow()
+        passwordTextField.addShadow()
+        
+        if override { 
+        self.emailTextField.center.x = self.view.frame.width * 2
+        self.passwordTextField.center.x = self.view.frame.width * -2
+        }
     }
-
     
+    
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        self.emailTextField.center.x = self.view.frame.width / 2
+        self.passwordTextField.center.x = self.view.frame.width / 2
+
+
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
         refresh()
         view.addSubview(loginButton)
         view.addSubview(signUpButton)
-        view.addSubview(emailField)
-        view.addSubview(passwordField)
+        view.addSubview(emailTextField)
+        view.addSubview(passwordTextField)
+        
+        
+        self.signUpButton.alpha = 0
+        self.loginButton.alpha = 0
 
-        NSLayoutConstraint.activate([loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor), loginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor), loginButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16), loginButton.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16), loginButton.heightAnchor.constraint(equalToConstant: 40)])
+
+        loginButtonConstraints = [loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor), loginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor), loginButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16), loginButton.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16), loginButton.heightAnchor.constraint(equalToConstant: 40)]
         
-        NSLayoutConstraint.activate([signUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor), signUpButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 8), signUpButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16), signUpButton.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16), signUpButton.heightAnchor.constraint(equalToConstant: 40)])
+        signUpButtonConstraints = [signUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor), signUpButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 8), signUpButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16), signUpButton.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16), signUpButton.heightAnchor.constraint(equalToConstant: 40)]
 
         
-        NSLayoutConstraint.activate([passwordField.centerXAnchor.constraint(equalTo: view.centerXAnchor), passwordField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16), passwordField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16), passwordField.bottomAnchor.constraint(equalTo: loginButton.topAnchor, constant: -8), passwordField.heightAnchor.constraint(equalToConstant: 40)])
+        passwordTextFieldConstraints = [passwordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor), passwordTextField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16), passwordTextField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16), passwordTextField.bottomAnchor.constraint(equalTo: loginButton.topAnchor, constant: -8), passwordTextField.heightAnchor.constraint(equalToConstant: 40)]
         
-        NSLayoutConstraint.activate([emailField.centerXAnchor.constraint(equalTo: view.centerXAnchor), emailField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16), emailField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16), emailField.bottomAnchor.constraint(equalTo: passwordField.topAnchor, constant: -8), emailField.heightAnchor.constraint(equalToConstant: 40)])
+        emailTextFieldConstraints = [emailTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor), emailTextField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16), emailTextField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16), emailTextField.bottomAnchor.constraint(equalTo: passwordTextField.topAnchor, constant: -8), emailTextField.heightAnchor.constraint(equalToConstant: 40)]
+        
+        loginButtonConstraints.forEach { (constraint) in constraint.isActive = true }
+        signUpButtonConstraints.forEach { (constraint) in constraint.isActive = true }
+        passwordTextFieldConstraints.forEach { (constraint) in constraint.isActive = true }
+        emailTextFieldConstraints.forEach { (constraint) in constraint.isActive = true }
+
+        
         navigationController?.navigationItem.title = ""
         navigationItem.title = ""
         // to completely get rid of the nav bar and status bar
@@ -58,8 +88,27 @@ class LoginController: UIViewController {
         
 
     }
+
+    
     override func viewDidAppear(_ animated: Bool) {
-        }
+
+        
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 25, initialSpringVelocity: 5, options: .curveEaseOut, animations: {
+            self.emailTextField.center.x = self.view.frame.width / 2
+            self.passwordTextField.center.x = self.view.frame.width / 2
+            self.override = false
+            self.signUpButton.alpha = 1
+            self.loginButton.alpha = 1
+        }, completion: nil)
+        
+
+    }
+    
+
+    override func viewWillAppear(_ animated: Bool) {
+        
+        override = true
+    }
     
     
     var loginButton: CustomUIButton = {
@@ -69,7 +118,7 @@ class LoginController: UIViewController {
         lb.backgroundColor = .green
         lb.setTitle("Login", for: .normal)
         lb.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
-        lb.layer.cornerRadius = 5.0
+        lb.layer.cornerRadius = 10.0
         return lb
     }()
     
@@ -87,16 +136,16 @@ class LoginController: UIViewController {
         lb.backgroundColor = .green
         lb.setTitle("Have not signed up? Sign up", for: .normal)
         lb.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
-        lb.layer.cornerRadius = 5.0
+        lb.layer.cornerRadius = 10.0
         return lb
     }()
     
     
-    var emailField: UITextField = {
+    var emailTextField: UITextField = {
         let ef = UITextField()
         ef.translatesAutoresizingMaskIntoConstraints = false
         ef.placeholder = "Your email"
-        ef.layer.cornerRadius = 5.0
+        ef.layer.cornerRadius = 10.0
         ef.backgroundColor = UIColor.white
         ef.textColor = .darkGray
         ef.contentMode = .center
@@ -105,11 +154,11 @@ class LoginController: UIViewController {
     }()
     
     
-    var passwordField: UITextField = {
+    var passwordTextField: UITextField = {
         let ef = UITextField()
         ef.translatesAutoresizingMaskIntoConstraints = false
         ef.placeholder = "Your password"
-        ef.layer.cornerRadius = 5.0
+        ef.layer.cornerRadius = 10.0
         ef.backgroundColor = UIColor.white
         ef.textColor = .darkGray
         ef.contentMode = .center
@@ -117,6 +166,8 @@ class LoginController: UIViewController {
         ef.isSecureTextEntry = true
         return ef
     }()
+    
+    
     
     @objc func handleSignUp() {
         
@@ -128,13 +179,10 @@ class LoginController: UIViewController {
         
         print("Trying to handle login")
         
-        guard let email = emailField.text else { return }
-        var password = ""
-        if passwordField.text != "" {
-            password = passwordField.text!
-        }
-        if email == "" {
-            self.createAlert(title: "Empty, Empty", message: "Looks like one of the text fields are empty")
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        if email == "" || password == ""{
+            self.createAlert(title: "Error", message: "Looks like one of the text fields are empty.")
             return
         }
         
@@ -142,20 +190,10 @@ class LoginController: UIViewController {
             var title = ""
             var message = ""
             if error != nil {
-                print(error ?? "")
-                if error.debugDescription.lowercased().range(of: "error_user_not_found") != nil {
-                    title = "User Not Found"
-                    message = "Looks like you never registered!"
-                }
-                else if error.debugDescription.lowercased().range(of: "error_wrong_password") != nil {
-                    title = "Wrong Password"
-                    message = "Please check your password and retry!"
-                    
-                }
-                else if error.debugDescription.lowercased().range(of: "error_invalid_email") != nil {
-                    title = "Invalid Email"
-                    message = "That email is not a real one!"
-                }
+
+                title = "Error"
+                message = (error?.localizedDescription)!
+                
                 self.createAlert(title: title, message: message)
                 return
             }

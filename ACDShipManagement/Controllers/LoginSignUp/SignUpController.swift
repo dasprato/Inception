@@ -23,8 +23,6 @@ class ColorForSignUp {
 }
 class SignUpController: UIViewController {
 
-
-
     let colors = ColorForSignUp()
     var backgroundLayer = CAGradientLayer()
     
@@ -44,8 +42,8 @@ class SignUpController: UIViewController {
             let viewControllerToPush = SignUpPasswordViewController()
             viewControllerToPush.emailAddress = userEmail
             if userEmail != "" {
-                viewControllerToPush.emailField.isUserInteractionEnabled = false
-                viewControllerToPush.emailField.backgroundColor = UIColor(red: 152/255, green: 204/255, blue: 232/255, alpha: 1)
+                viewControllerToPush.emailTextField.isUserInteractionEnabled = false
+                viewControllerToPush.emailTextField.backgroundColor = UIColor(red: 152/255, green: 204/255, blue: 232/255, alpha: 1)
             }
             self.navigationController?.pushViewController(viewControllerToPush, animated: true)
         }
@@ -59,25 +57,20 @@ class SignUpController: UIViewController {
         refresh()
 
         super.viewDidLoad()
-
         view.addSubview(signUpCollectionView)
-//        view.addSubview(googleSingnInButton)
+        [
+            signUpCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            signUpCollectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            signUpCollectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            signUpCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ].forEach { (constraint) in
+                constraint.isActive = true
+        }
+        
 
-        
-        
-        NSLayoutConstraint.activate([signUpCollectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor), signUpCollectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor), signUpCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor), signUpCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor)])
-//
-        
-        
-
-        
-//
-        
-        
         signUpCollectionView.delegate = self
         signUpCollectionView.dataSource = self
         signUpCollectionView.register(SignUpCollectionViewCell.self, forCellWithReuseIdentifier: signUpCollectionViewCellId)
-        // to completely get rid of the nav bar and status bar
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
@@ -123,7 +116,7 @@ extension SignUpController: UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width - 16, height: 40)
+        return CGSize(width: collectionView.frame.width - 32, height: 40)
     }
     
     
@@ -145,5 +138,49 @@ extension SignUpController {
         default:
             break
         }
+    }
+}
+
+
+
+class SignUpCollectionViewCell: UICollectionViewCell {
+    
+    var image: UIImage? {
+        didSet {
+            button.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+    }
+    
+    var title: String? {
+        didSet {
+            button.setTitle(title, for: .normal)
+        }
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = UIColor(red: 152/255, green: 204/255, blue: 232/255, alpha: 1)
+        layer.cornerRadius = 10.0
+        contentView.addSubview(button)
+        addShadow()
+        
+        NSLayoutConstraint.activate([button.centerXAnchor.constraint(equalTo: centerXAnchor), button.centerYAnchor.constraint(equalTo: centerYAnchor), button.widthAnchor.constraint(equalTo: widthAnchor), button.heightAnchor.constraint(equalTo: heightAnchor)])
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    lazy var button: UIButton = {
+        let lb = UIButton(type: .system)
+        lb.translatesAutoresizingMaskIntoConstraints = false
+        lb.tintColor = UIColor.white
+        lb.contentMode = .scaleAspectFit
+        lb.isUserInteractionEnabled = false
+        return lb
+    }()
+    
+    override func layoutSubviews() {
+        button.addShadow()
     }
 }

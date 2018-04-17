@@ -1,5 +1,5 @@
 //
-//  SailingVesselViewController.swift
+//  InitialisedViewController.swift
 //  ACDShipManagement
 //
 //  Created by Prato Das on 2018-04-13.
@@ -8,10 +8,12 @@
 
 import UIKit
 
-class SailingTripViewController: UIViewController {
+class InitialisedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
     }
 
 
