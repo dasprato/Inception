@@ -9,8 +9,9 @@
 import Foundation
 
 struct Location {
-    var latitude: Float!
-    var longitude: Float!
+    var latitude: Double!
+    var longitude: Double!
     var dateAndTime: Date!
     var timeStamp: String!
+    var address: String!
 }

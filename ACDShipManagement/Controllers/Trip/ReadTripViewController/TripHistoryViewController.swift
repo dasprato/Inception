@@ -9,14 +9,14 @@
 import UIKit
 import QRCode
 import Firebase
+import MapKit
 
-
+import AddressBookUI
+import Contacts
+import CoreLocation
 
 class TripHistoryViewController: UIViewController {
-    var imageAnchorsPortraitConstraints = [NSLayoutConstraint]()
-    var textFieldAnchorsPortraitConstraints = [NSLayoutConstraint]()
-    var imageAnchorsLandscapeConstraints = [NSLayoutConstraint]()
-    var textFieldAnchorsLandscapeConstraints = [NSLayoutConstraint]()
+
     var arrayOfLocations: [Location]? {
         didSet {
             self.tripsCollectionView.reloadData()
@@ -29,13 +29,18 @@ class TripHistoryViewController: UIViewController {
             
         }
     }
+    
+
+    override func viewWillAppear(_ animated: Bool) {
+        arrayOfLocations?.removeAll()
+        fetchLocationLog()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .clear
+        view.backgroundColor = .white
         arrayOfLocations = [Location]()
 
         fetchLocationLog()
-        fetchStatusLog()
         self.navigationItem.title = trip.tripStatus!
         
         self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -43,8 +48,6 @@ class TripHistoryViewController: UIViewController {
         
         
 
-        view.addSubview(image)
-        NSLayoutConstraint.activate([image.topAnchor.constraint(equalTo: view.topAnchor), image.bottomAnchor.constraint(equalTo: view.bottomAnchor), image.rightAnchor.constraint(equalTo: view.rightAnchor), image.leftAnchor.constraint(equalTo: view.leftAnchor)])
 //
         let rightBarButton = UIBarButtonItem(title: "Scroll To Bottom", style: .plain, target: self, action: #selector(scroll))
         self.navigationItem.setRightBarButton(rightBarButton, animated: true)
@@ -57,20 +60,28 @@ class TripHistoryViewController: UIViewController {
             self.tripsCollectionView.scrollToItem(at: IndexPath(row: arrayOfLocations!.count - 1, section: 0), at: .bottom, animated: true)
     }
     
-    func checkAndAdjustContraints() {
-            NSLayoutConstraint.activate(textFieldAnchorsLandscapeConstraints)
-            NSLayoutConstraint.activate(imageAnchorsLandscapeConstraints)
+    func serverToLocal(date:String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        let localDate = dateFormatter.date(from: date)
+        
+        return localDate
     }
+    
+    
+
     
     func setupCollectionView() {
         view.addSubview(tripsCollectionView)
-        tripsCollectionView.translatesAutoresizingMaskIntoConstraints = false 
-        NSLayoutConstraint.activate([
+        [
             tripsCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tripsCollectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             tripsCollectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             tripsCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            ])
+            ].forEach { (constraint) in
+                constraint.isActive = true
+        }
         
         tripsCollectionView.delegate = self
         tripsCollectionView.dataSource = self
@@ -95,6 +106,7 @@ class TripHistoryViewController: UIViewController {
         ccv.bounces = true
         ccv.alwaysBounceVertical = true
         ccv.backgroundColor = .clear
+        ccv.showsVerticalScrollIndicator = false
         return ccv
     }()
     
@@ -102,18 +114,11 @@ class TripHistoryViewController: UIViewController {
     
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        checkAndAdjustContraints()
+        
     }
     
     
-    var image: UIImageView = {
-        let img = UIImageView()
-        img.translatesAutoresizingMaskIntoConstraints = false
-        img.image = UIImage(named: "ship6")?.withRenderingMode(.alwaysOriginal)
-        img.contentMode = .scaleAspectFill
-        img.clipsToBounds = true
-        return img
-    }()
+
     
     func fetchLocationLog() {
         let db = Firestore.firestore()
@@ -127,28 +132,81 @@ class TripHistoryViewController: UIViewController {
             snapshot?.documentChanges.forEach({ (difference) in
                 if (difference.type == .added) {
                     
-                    guard let lat = difference.document.data()["lat"] as? Float else { return }
-                    guard let long = difference.document.data()["long"] as? Float else { return }
+                    guard let lat = difference.document.data()["lat"] as? Double else { return }
+                    guard let long = difference.document.data()["long"] as? Double else { return }
                     let dateAndTime = Date(timeIntervalSince1970: Double(difference.document.documentID)!)
                     
-                    self.arrayOfLocations!.append(Location(latitude: lat, longitude: long, dateAndTime: dateAndTime, timeStamp: difference.document.documentID))
-                    print("LocationAdded")
+                    let myTimeInterval = TimeInterval(difference.document.documentID)
+                    let time = NSDate(timeIntervalSince1970: TimeInterval(myTimeInterval!))
+                    var addressToAppend = ""
+                    
+                    self.geocode(latitude: lat, longitude: long) { placemark, error in
+                        guard let placemark = placemark, error == nil else { return }
+                        // you should always update your UI in the main thread
+                        DispatchQueue.main.async {
+                            var address1 = ""
+                            var address2 = ""
+                            var city = ""
+                            var state = ""
+                            var country = ""
+                            address1 = placemark.subThoroughfare!
+                            address2 = placemark.thoroughfare!
+                            city = placemark.locality!
+                            state = placemark.administrativeArea!
+                            country = placemark.country!
+                            
+                            addressToAppend = "\(address2) \(address1) \(city) \(state) \(country)"
+                            self.arrayOfLocations!.append(Location(latitude: lat, longitude: long, dateAndTime:  time as Date!, timeStamp: difference.document.documentID, address: addressToAppend))
+                        }
+                    }
+
+                    
+
+                    
                 }
                 
                 if (difference.type == .modified) {
                     for i in 0..<self.arrayOfLocations!.count {
                         if self.arrayOfLocations![i].timeStamp == difference.document.documentID {
-                            guard let lat = difference.document.data()["lat"] as? Float else { return }
-                            guard let long = difference.document.data()["long"] as? Float else { return }
+                            guard let lat = difference.document.data()["lat"] as? Double else { return }
+                            guard let long = difference.document.data()["long"] as? Double else { return }
                             let dateAndTime = Date(timeIntervalSince1970: Double(difference.document.documentID)!)
-                            self.arrayOfLocations![i] = Location(latitude: lat, longitude: long, dateAndTime: dateAndTime, timeStamp: difference.document.documentID)
+                            
+                            let myTimeInterval = TimeInterval(difference.document.documentID)
+                            let time = NSDate(timeIntervalSince1970: TimeInterval(myTimeInterval!))
+                            
+                            var addressToAppend = ""
+                            
+                            self.geocode(latitude: lat, longitude: long) { placemark, error in
+                                guard let placemark = placemark, error == nil else { return }
+                                // you should always update your UI in the main thread
+                                DispatchQueue.main.async {
+                                    //  update UI here
+                                    var address1 = ""
+                                    var address2 = ""
+                                    var city = ""
+                                    var state = ""
+                                    var country = ""
+                                    address1 = placemark.subThoroughfare!
+                                    address2 = placemark.thoroughfare!
+                                    city = placemark.locality!
+                                    state = placemark.administrativeArea!
+                                    country = placemark.country!
+                                    
+                                    addressToAppend = "\(address2) \(address1) \(city) \(state) \(country)"
+                                    self.arrayOfLocations![i] = Location(latitude: lat, longitude: long, dateAndTime: time as Date!, timeStamp: difference.document.documentID, address: addressToAppend)
+                                }
+                                
+                            }
+                            
+
                             return
                         }
                     }
                 }
                 if (difference.type == .removed) {
                     // TODO: Find an efficient solution
-                    print("Removed contact: \(difference.document.documentID)")
+
                     for i in 0..<self.arrayOfLocations!.count {
                         if self.arrayOfLocations![i].timeStamp == difference.document.documentID {
                             self.arrayOfLocations!.remove(at: i)
@@ -162,6 +220,10 @@ class TripHistoryViewController: UIViewController {
     
     func fetchStatusLog(){
         
+    }
+    
+    func geocode(latitude: Double, longitude: Double, completion: @escaping (CLPlacemark?, Error?) -> ())  {
+        CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: latitude, longitude: longitude)) { completion($0?.first, $1) }
     }
     
 
@@ -195,106 +257,65 @@ extension TripHistoryViewController: UICollectionViewDelegate, UICollectionViewD
 class LocationCell: UICollectionViewCell {
     var location: Location {
         didSet {
-            
+
             fromLabel.text =  String(describing: location.latitude!) + ", "
-            toLabel.text = String(describing: location.longitude!)
-            vesselNameLabel.text = String(describing: location.dateAndTime!)
+            toLabel.text = String(describing: location.longitude!) + " = " + location.address
+            vesselNameLabel.text = DateFormatter.localizedString(from: location.dateAndTime, dateStyle: .medium, timeStyle: .medium)
         }
     }
     
     
     override init(frame: CGRect) {
-        self.location = Location(latitude: 0.0, longitude: 0.0, dateAndTime: Date(), timeStamp: "")
+        self.location = Location(latitude: 0.0, longitude: 0.0, dateAndTime: Date(), timeStamp: "", address: "")
         super.init(frame: frame)
-        translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(vesselNameLabel)
         contentView.addSubview(fromLabel)
         contentView.addSubview(toLabel)
-        contentView.addSubview(fromDateLabel)
-        contentView.addSubview(toDateLabel)
         
         NSLayoutConstraint.activate([vesselNameLabel.topAnchor.constraint(equalTo: topAnchor), vesselNameLabel.leftAnchor.constraint(equalTo: leftAnchor)])
         NSLayoutConstraint.activate([fromLabel.topAnchor.constraint(equalTo: vesselNameLabel.bottomAnchor), fromLabel.leftAnchor.constraint(equalTo: leftAnchor)])
         NSLayoutConstraint.activate([toLabel.topAnchor.constraint(equalTo: vesselNameLabel.bottomAnchor), toLabel.leftAnchor.constraint(equalTo: fromLabel.rightAnchor)])
-        
-        NSLayoutConstraint.activate([fromDateLabel.topAnchor.constraint(equalTo: fromLabel.bottomAnchor), fromDateLabel.leftAnchor.constraint(equalTo: fromLabel.leftAnchor)])
-        NSLayoutConstraint.activate([toDateLabel.topAnchor.constraint(equalTo: toLabel.bottomAnchor), toDateLabel.leftAnchor.constraint(equalTo: fromDateLabel.rightAnchor)])
     }
     
     
     // Text fields
     private var fromLabel: UILabel = {
         let cntf = UILabel()
-        cntf.translatesAutoresizingMaskIntoConstraints = false
         cntf.textColor = .gray
         cntf.font = UIFont.boldSystemFont(ofSize: cntf.font.pointSize + 2)
+        cntf.translatesAutoresizingMaskIntoConstraints = false
         return cntf
     }()
     
     
     private var toLabel: UILabel = {
         let cntf = UILabel()
-        cntf.translatesAutoresizingMaskIntoConstraints = false
         cntf.textColor = .gray
         cntf.font = UIFont.boldSystemFont(ofSize: cntf.font.pointSize + 2)
-        return cntf
-    }()
-    
-    
-    private var fromDateLabel: UILabel = {
-        let cntf = UILabel()
         cntf.translatesAutoresizingMaskIntoConstraints = false
-        cntf.textColor = .white
-        return cntf
-    }()
-    
-    private var toDateLabel: UILabel = {
-        let cntf = UILabel()
-        cntf.translatesAutoresizingMaskIntoConstraints = false
-        cntf.textColor = .white
-        return cntf
-    }()
-    
-    
-    private var statusViewCircle: UIView = {
-        let cntf = UIView()
-        cntf.translatesAutoresizingMaskIntoConstraints = false
-        cntf.layer.cornerRadius = 5.0
-        return cntf
-    }()
-    
-    private var statusLabel: UILabel = {
-        let cntf = UILabel()
-        cntf.translatesAutoresizingMaskIntoConstraints = false
-        cntf.textColor = .white
+        
         return cntf
     }()
     
     private var vesselNameLabel: UILabel = {
         let cntf = UILabel()
-        cntf.translatesAutoresizingMaskIntoConstraints = false
         cntf.textColor = .darkGray
         cntf.backgroundColor = UIColor.white.withAlphaComponent(0.6)
         cntf.layer.cornerRadius = 10.0
         cntf.font = UIFont.boldSystemFont(ofSize: cntf.font.pointSize + 2)
+        cntf.translatesAutoresizingMaskIntoConstraints = false
         return cntf
     }()
 
-    
-    
-    private var QRCodeImageViewBackground: UIView = {
-        let civb = UIView()
-        civb.translatesAutoresizingMaskIntoConstraints = false
-        civb.isUserInteractionEnabled = false
-        civb.backgroundColor = .white
-        civb.layer.cornerRadius = 5.0
-        return civb
-    }()
+
     
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
 }
+
 
 
