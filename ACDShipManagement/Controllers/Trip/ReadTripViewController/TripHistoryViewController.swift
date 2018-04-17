@@ -17,7 +17,12 @@ class TripHistoryViewController: UIViewController {
     var textFieldAnchorsPortraitConstraints = [NSLayoutConstraint]()
     var imageAnchorsLandscapeConstraints = [NSLayoutConstraint]()
     var textFieldAnchorsLandscapeConstraints = [NSLayoutConstraint]()
-    var arrayOfLocations = [Location]()
+    var arrayOfLocations: [Location]? {
+        didSet {
+            self.tripsCollectionView.reloadData()
+
+        }
+    }
     let tripLocationLogCellId = "tripLocationLogCellId"
     var trip: Trip! {
         didSet {
@@ -26,28 +31,31 @@ class TripHistoryViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-//        view.addSubview(image)
+        view.backgroundColor = .clear
+        arrayOfLocations = [Location]()
 
         fetchLocationLog()
         fetchStatusLog()
-        self.navigationItem.title = ConnectionBetweenVC.trip.tripStatus!
+        self.navigationItem.title = trip.tripStatus!
         
         self.navigationController?.navigationBar.prefersLargeTitles = true
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black]
-
-//
-//        imageAnchorsPortraitConstraints = [image.topAnchor.constraint(equalTo: view.topAnchor), image.bottomAnchor.constraint(equalTo: view.bottomAnchor), image.rightAnchor.constraint(equalTo: view.rightAnchor), image.leftAnchor.constraint(equalTo: view.leftAnchor)]
-//
-//
-//
-//        imageAnchorsLandscapeConstraints = [image.topAnchor.constraint(equalTo: view.topAnchor), image.bottomAnchor.constraint(equalTo: view.bottomAnchor), image.rightAnchor.constraint(equalTo: view.rightAnchor), image.leftAnchor.constraint(equalTo: view.leftAnchor)]
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         
+        
+
+        view.addSubview(image)
+        NSLayoutConstraint.activate([image.topAnchor.constraint(equalTo: view.topAnchor), image.bottomAnchor.constraint(equalTo: view.bottomAnchor), image.rightAnchor.constraint(equalTo: view.rightAnchor), image.leftAnchor.constraint(equalTo: view.leftAnchor)])
+//
+        let rightBarButton = UIBarButtonItem(title: "Scroll To Bottom", style: .plain, target: self, action: #selector(scroll))
+        self.navigationItem.setRightBarButton(rightBarButton, animated: true)
         
         setupCollectionView()
 //        checkAndAdjustContraints()
     }
 
+    @objc func scroll() {
+            self.tripsCollectionView.scrollToItem(at: IndexPath(row: arrayOfLocations!.count - 1, section: 0), at: .bottom, animated: true)
+    }
     
     func checkAndAdjustContraints() {
             NSLayoutConstraint.activate(textFieldAnchorsLandscapeConstraints)
@@ -56,6 +64,7 @@ class TripHistoryViewController: UIViewController {
     
     func setupCollectionView() {
         view.addSubview(tripsCollectionView)
+        tripsCollectionView.translatesAutoresizingMaskIntoConstraints = false 
         NSLayoutConstraint.activate([
             tripsCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tripsCollectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
@@ -67,7 +76,7 @@ class TripHistoryViewController: UIViewController {
         tripsCollectionView.dataSource = self
         
         tripsCollectionView.register(LocationCell.self, forCellWithReuseIdentifier: tripLocationLogCellId)
-        
+
         
     }
     
@@ -85,7 +94,7 @@ class TripHistoryViewController: UIViewController {
         ccv.isScrollEnabled = true
         ccv.bounces = true
         ccv.alwaysBounceVertical = true
-        ccv.backgroundColor = .blue
+        ccv.backgroundColor = .clear
         return ccv
     }()
     
@@ -118,21 +127,21 @@ class TripHistoryViewController: UIViewController {
             snapshot?.documentChanges.forEach({ (difference) in
                 if (difference.type == .added) {
                     
-                    guard let lat = difference.document.data()["lat"] as? String else { return }
-                    guard let long = difference.document.data()["long"] as? String else { return }
-                    let dateAndTime = difference.document.documentID
-
-                    self.arrayOfLocations.append(Location(latitude: lat, longitude: long, dateAndTime: dateAndTime))
+                    guard let lat = difference.document.data()["lat"] as? Float else { return }
+                    guard let long = difference.document.data()["long"] as? Float else { return }
+                    let dateAndTime = Date(timeIntervalSince1970: Double(difference.document.documentID)!)
+                    
+                    self.arrayOfLocations!.append(Location(latitude: lat, longitude: long, dateAndTime: dateAndTime, timeStamp: difference.document.documentID))
                     print("LocationAdded")
                 }
                 
                 if (difference.type == .modified) {
-                    for i in 0..<self.arrayOfLocations.count {
-                        if self.arrayOfLocations[i].dateAndTime == difference.document.documentID {
-                            guard let lat = difference.document.data()["lat"] as? String else { return }
-                            guard let long = difference.document.data()["long"] as? String else { return }
-                            let dateAndTime = difference.document.documentID
-                            self.arrayOfLocations[i] = Location(latitude: lat, longitude: long, dateAndTime: dateAndTime)
+                    for i in 0..<self.arrayOfLocations!.count {
+                        if self.arrayOfLocations![i].timeStamp == difference.document.documentID {
+                            guard let lat = difference.document.data()["lat"] as? Float else { return }
+                            guard let long = difference.document.data()["long"] as? Float else { return }
+                            let dateAndTime = Date(timeIntervalSince1970: Double(difference.document.documentID)!)
+                            self.arrayOfLocations![i] = Location(latitude: lat, longitude: long, dateAndTime: dateAndTime, timeStamp: difference.document.documentID)
                             return
                         }
                     }
@@ -140,9 +149,9 @@ class TripHistoryViewController: UIViewController {
                 if (difference.type == .removed) {
                     // TODO: Find an efficient solution
                     print("Removed contact: \(difference.document.documentID)")
-                    for i in 0..<self.arrayOfLocations.count {
-                        if self.arrayOfLocations[i].dateAndTime == difference.document.documentID {
-                            self.arrayOfLocations.remove(at: i)
+                    for i in 0..<self.arrayOfLocations!.count {
+                        if self.arrayOfLocations![i].timeStamp == difference.document.documentID {
+                            self.arrayOfLocations!.remove(at: i)
                             return
                         }
                     }
@@ -161,19 +170,24 @@ class TripHistoryViewController: UIViewController {
 
 extension TripHistoryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.arrayOfLocations.count
+        if let _ = arrayOfLocations {
+            return arrayOfLocations!.count
+        } else {
+            return 0
+        }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = tripsCollectionView.dequeueReusableCell(withReuseIdentifier: tripLocationLogCellId, for: indexPath) as! LocationCell
-        cell.location = self.arrayOfLocations[indexPath.row]
-        cell.backgroundColor = .red
+        cell.location = self.arrayOfLocations![indexPath.row]
+        
+
         return cell
     }
     
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width - 32, height: 64)
+        return CGSize(width: collectionView.frame.width - 32, height: 40)
     }
 }
 
@@ -181,26 +195,23 @@ extension TripHistoryViewController: UICollectionViewDelegate, UICollectionViewD
 class LocationCell: UICollectionViewCell {
     var location: Location {
         didSet {
-            fromLabel.text = location.longitude + " || "
-            toLabel.text = location.latitude
-            vesselNameLabel.text = String(describing: Date(timeIntervalSince1970: Double(location.dateAndTime)!))
+            
+            fromLabel.text =  String(describing: location.latitude!) + ", "
+            toLabel.text = String(describing: location.longitude!)
+            vesselNameLabel.text = String(describing: location.dateAndTime!)
         }
     }
     
     
     override init(frame: CGRect) {
-        self.location = Location(latitude: "", longitude: "", dateAndTime: "")
-        //        self.ship = Ship(representativeEmail: "", representativeName: "", representativePhone: "", vesselCapacity: "", vesselName: "", shipId: "", currentStatus: "")
+        self.location = Location(latitude: 0.0, longitude: 0.0, dateAndTime: Date(), timeStamp: "")
         super.init(frame: frame)
-        
+        translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(vesselNameLabel)
         contentView.addSubview(fromLabel)
         contentView.addSubview(toLabel)
         contentView.addSubview(fromDateLabel)
         contentView.addSubview(toDateLabel)
-        contentView.addSubview(QRCodeImageViewBackground)
-        contentView.addSubview(QRCodeImageView)
-        
         
         NSLayoutConstraint.activate([vesselNameLabel.topAnchor.constraint(equalTo: topAnchor), vesselNameLabel.leftAnchor.constraint(equalTo: leftAnchor)])
         NSLayoutConstraint.activate([fromLabel.topAnchor.constraint(equalTo: vesselNameLabel.bottomAnchor), fromLabel.leftAnchor.constraint(equalTo: leftAnchor)])
@@ -208,16 +219,6 @@ class LocationCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([fromDateLabel.topAnchor.constraint(equalTo: fromLabel.bottomAnchor), fromDateLabel.leftAnchor.constraint(equalTo: fromLabel.leftAnchor)])
         NSLayoutConstraint.activate([toDateLabel.topAnchor.constraint(equalTo: toLabel.bottomAnchor), toDateLabel.leftAnchor.constraint(equalTo: fromDateLabel.rightAnchor)])
-        
-        
-        
-        NSLayoutConstraint.activate([QRCodeImageViewBackground.topAnchor.constraint(equalTo: topAnchor), QRCodeImageViewBackground.bottomAnchor.constraint(equalTo: bottomAnchor), QRCodeImageViewBackground.rightAnchor.constraint(equalTo: rightAnchor), QRCodeImageViewBackground.widthAnchor.constraint(equalTo: heightAnchor)])
-        
-        NSLayoutConstraint.activate([QRCodeImageView.topAnchor.constraint(equalTo: topAnchor), QRCodeImageView.bottomAnchor.constraint(equalTo: bottomAnchor), QRCodeImageView.rightAnchor.constraint(equalTo: rightAnchor), QRCodeImageView.widthAnchor.constraint(equalTo: heightAnchor)])
-        
-        
-        QRCodeImageViewBackground.addShadow()
-        
     }
     
     
@@ -225,7 +226,7 @@ class LocationCell: UICollectionViewCell {
     private var fromLabel: UILabel = {
         let cntf = UILabel()
         cntf.translatesAutoresizingMaskIntoConstraints = false
-        cntf.textColor = .black
+        cntf.textColor = .gray
         cntf.font = UIFont.boldSystemFont(ofSize: cntf.font.pointSize + 2)
         return cntf
     }()
@@ -234,7 +235,7 @@ class LocationCell: UICollectionViewCell {
     private var toLabel: UILabel = {
         let cntf = UILabel()
         cntf.translatesAutoresizingMaskIntoConstraints = false
-        cntf.textColor = .black
+        cntf.textColor = .gray
         cntf.font = UIFont.boldSystemFont(ofSize: cntf.font.pointSize + 2)
         return cntf
     }()
@@ -272,25 +273,13 @@ class LocationCell: UICollectionViewCell {
     private var vesselNameLabel: UILabel = {
         let cntf = UILabel()
         cntf.translatesAutoresizingMaskIntoConstraints = false
-        cntf.textColor = .black
+        cntf.textColor = .darkGray
+        cntf.backgroundColor = UIColor.white.withAlphaComponent(0.6)
+        cntf.layer.cornerRadius = 10.0
         cntf.font = UIFont.boldSystemFont(ofSize: cntf.font.pointSize + 2)
         return cntf
     }()
-    
-    
-    // QRCode image
-    
-    var QRCodeImageView: UIImageView = {
-        let civ = UIImageView()
-        civ.image = UIImage(named: "contact")
-        civ.translatesAutoresizingMaskIntoConstraints = false
-        civ.clipsToBounds = true
-        civ.backgroundColor = .white
-        civ.isUserInteractionEnabled = true
-        civ.contentMode = .scaleAspectFit
-        civ.layer.cornerRadius = 5.0
-        return civ
-    }()
+
     
     
     private var QRCodeImageViewBackground: UIView = {
