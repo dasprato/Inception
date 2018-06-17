@@ -15,8 +15,6 @@ class CreateContactViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         self.navigationController?.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.barTintColor = .gray
         self.navigationController?.navigationBar.addShadow()
@@ -48,7 +46,6 @@ class CreateContactViewController: UIViewController {
     
         NSLayoutConstraint.activate([contactImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8), contactImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor), contactImageView.widthAnchor.constraint(equalToConstant: 80), contactImageView.heightAnchor.constraint(equalToConstant: 80)])
         
-        
         NSLayoutConstraint.activate([contactImageViewBackground.topAnchor.constraint(equalTo: contactImageView.topAnchor), contactImageViewBackground.centerXAnchor.constraint(equalTo: view.centerXAnchor), contactImageViewBackground.widthAnchor.constraint(equalToConstant: 80), contactImageViewBackground.heightAnchor.constraint(equalToConstant: 80)])
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(onProfileImageTapped))
@@ -68,13 +65,8 @@ class CreateContactViewController: UIViewController {
         saveButton.addSubview(saveProgressView)
         NSLayoutConstraint.activate([
             saveProgressView.bottomAnchor.constraint(equalTo: saveButton.bottomAnchor), saveProgressView.rightAnchor.constraint(equalTo: saveButton.rightAnchor, constant: -10), saveProgressView.leftAnchor.constraint(equalTo: saveButton.leftAnchor, constant: 10), saveProgressView.heightAnchor.constraint(equalToConstant: 5)])
-        
-        
     }
-    
-    
-    
-    
+
     // Close button to dismiss the menu
     var closeButton: UIButton = {
         let cb = UIButton(type: .system)
@@ -217,15 +209,8 @@ extension CreateContactViewController {
             saveButton.isUserInteractionEnabled = true
             contactNameTextField.becomeFirstResponder()
         }
-            
-            
-            
-        }
-        
-        
     }
-    
-
+}
 
 extension CreateContactViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     

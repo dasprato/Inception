@@ -10,6 +10,7 @@ import UIKit
 import Mapbox
 import QRCode
 
+
 class QRCodeViewController: UIViewController {
     
     var id: String? {
@@ -52,10 +53,6 @@ class QRCodeViewController: UIViewController {
         cb.addTarget(self, action: #selector(openShareController), for: .touchUpInside)
         return cb
     }()
-    
-
-    
-
     
     var closeButton: CustomUIButton = {
         let cb = CustomUIButton(type: .system)

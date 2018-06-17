@@ -9,34 +9,8 @@
 import UIKit
 import Firebase
 
-class ColorForSignUp {
-    var gl:CAGradientLayer!
-    
-    init() {
-        let colorTop = UIColor(red: (CGFloat(arc4random_uniform(255)))/255, green: (CGFloat(arc4random_uniform(255)))/255, blue: (CGFloat(arc4random_uniform(255)))/255, alpha: 1.0).cgColor
-        let colorBottom = UIColor(red: (CGFloat(arc4random_uniform(255)))/255, green: (CGFloat(arc4random_uniform(255)))/255, blue: (CGFloat(arc4random_uniform(255)))/255, alpha: 1.0).cgColor
-        
-        self.gl = CAGradientLayer()
-        self.gl.colors = [colorTop, colorBottom]
-        self.gl.locations = [0.0, 0.5]
-    }
-}
 class SignUpController: UIViewController {
 
-    let colors = ColorForSignUp()
-    var backgroundLayer = CAGradientLayer()
-    
-    func refresh() {
-        view.backgroundColor = UIColor.clear
-        backgroundLayer = colors.gl
-        view.layer.insertSublayer(backgroundLayer, at: 0)
-    }
-    
-    
-    override func viewDidLayoutSubviews() {
-        self.backgroundLayer.frame = view.frame
-    }
-    
     var userEmail: String? {
         didSet {
             let viewControllerToPush = SignUpPasswordViewController()
@@ -53,19 +27,26 @@ class SignUpController: UIViewController {
     let arrayOfMediaNames = ["Email"]
     let signUpCollectionViewCellId = "signUpCollectionViewCellId"
     
+    var animatedBackgroundView: AnimatedBackgroundView = {
+        let animatedBackgroundView = AnimatedBackgroundView()
+        return animatedBackgroundView
+    }()
+    
+    
     override func viewDidLoad() {
-        refresh()
-
         super.viewDidLoad()
+        view.addSubview(animatedBackgroundView)
         view.addSubview(signUpCollectionView)
-        [
+        
+        NSLayoutConstraint.activate([animatedBackgroundView.topAnchor.constraint(equalTo: view.topAnchor), animatedBackgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor), animatedBackgroundView.rightAnchor.constraint(equalTo: view.rightAnchor), animatedBackgroundView.leftAnchor.constraint(equalTo: view.leftAnchor)])
+        
+        
+        NSLayoutConstraint.activate([
             signUpCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
             signUpCollectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             signUpCollectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             signUpCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            ].forEach { (constraint) in
-                constraint.isActive = true
-        }
+            ])
         
 
         signUpCollectionView.delegate = self

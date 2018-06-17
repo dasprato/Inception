@@ -16,7 +16,6 @@ import Contacts
 import CoreLocation
 
 class TripHistoryViewController: UIViewController {
-
     var arrayOfLocations: [Location]? {
         didSet {
             self.tripsCollectionView.reloadData()
@@ -31,10 +30,7 @@ class TripHistoryViewController: UIViewController {
     }
     
 
-    override func viewWillAppear(_ animated: Bool) {
-        arrayOfLocations?.removeAll()
-        fetchLocationLog()
-    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -46,18 +42,20 @@ class TripHistoryViewController: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
             navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         
+    
+        let leftBarButton = UIBarButtonItem(title: "Auto Scroll On", style: .plain, target: self, action: #selector(scrollOn))
         
-
-//
         let rightBarButton = UIBarButtonItem(title: "Scroll To Bottom", style: .plain, target: self, action: #selector(scroll))
-        self.navigationItem.setRightBarButton(rightBarButton, animated: true)
+        self.navigationItem.setRightBarButtonItems([leftBarButton, rightBarButton], animated: true)
         
         setupCollectionView()
-//        checkAndAdjustContraints()
     }
 
     @objc func scroll() {
             self.tripsCollectionView.scrollToItem(at: IndexPath(row: arrayOfLocations!.count - 1, section: 0), at: .bottom, animated: true)
+    }
+    @objc func scrollOn() {
+        print("Auto Scroll True")
     }
     
     func serverToLocal(date:String) -> Date? {
@@ -114,7 +112,7 @@ class TripHistoryViewController: UIViewController {
     
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        
+        self.tripsCollectionView.reloadData()
     }
     
     
@@ -135,34 +133,12 @@ class TripHistoryViewController: UIViewController {
                     guard let lat = difference.document.data()["lat"] as? Double else { return }
                     guard let long = difference.document.data()["long"] as? Double else { return }
                     let dateAndTime = Date(timeIntervalSince1970: Double(difference.document.documentID)!)
-                    
-                    let myTimeInterval = TimeInterval(difference.document.documentID)
-                    let time = NSDate(timeIntervalSince1970: TimeInterval(myTimeInterval!))
+  
                     var addressToAppend = ""
                     
-                    self.geocode(latitude: lat, longitude: long) { placemark, error in
-                        guard let placemark = placemark, error == nil else { return }
-                        // you should always update your UI in the main thread
-                        DispatchQueue.main.async {
-                            var address1 = ""
-                            var address2 = ""
-                            var city = ""
-                            var state = ""
-                            var country = ""
-                            address1 = placemark.subThoroughfare!
-                            address2 = placemark.thoroughfare!
-                            city = placemark.locality!
-                            state = placemark.administrativeArea!
-                            country = placemark.country!
                             
-                            addressToAppend = "\(address2) \(address1) \(city) \(state) \(country)"
-                            self.arrayOfLocations!.append(Location(latitude: lat, longitude: long, dateAndTime:  time as Date!, timeStamp: difference.document.documentID, address: addressToAppend))
-                        }
-                    }
-
-                    
-
-                    
+//                addressToAppend = "\(address1) \(address2), \(city), \(state), \(country)"
+                self.arrayOfLocations!.append(Location(latitude: lat, longitude: long, dateAndTime: dateAndTime, timeStamp: difference.document.documentID, address: addressToAppend))
                 }
                 
                 if (difference.type == .modified) {
@@ -177,29 +153,7 @@ class TripHistoryViewController: UIViewController {
                             
                             var addressToAppend = ""
                             
-                            self.geocode(latitude: lat, longitude: long) { placemark, error in
-                                guard let placemark = placemark, error == nil else { return }
-                                // you should always update your UI in the main thread
-                                DispatchQueue.main.async {
-                                    //  update UI here
-                                    var address1 = ""
-                                    var address2 = ""
-                                    var city = ""
-                                    var state = ""
-                                    var country = ""
-                                    address1 = placemark.subThoroughfare!
-                                    address2 = placemark.thoroughfare!
-                                    city = placemark.locality!
-                                    state = placemark.administrativeArea!
-                                    country = placemark.country!
-                                    
-                                    addressToAppend = "\(address2) \(address1) \(city) \(state) \(country)"
                                     self.arrayOfLocations![i] = Location(latitude: lat, longitude: long, dateAndTime: time as Date!, timeStamp: difference.document.documentID, address: addressToAppend)
-                                }
-                                
-                            }
-                            
-
                             return
                         }
                     }
@@ -216,6 +170,8 @@ class TripHistoryViewController: UIViewController {
                 }
             })
         }
+        
+        
     }
     
     func fetchStatusLog(){
@@ -241,13 +197,10 @@ extension TripHistoryViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = tripsCollectionView.dequeueReusableCell(withReuseIdentifier: tripLocationLogCellId, for: indexPath) as! LocationCell
         cell.location = self.arrayOfLocations![indexPath.row]
-        
-
         return cell
     }
     
-    
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width - 32, height: 40)
     }
@@ -258,8 +211,8 @@ class LocationCell: UICollectionViewCell {
     var location: Location {
         didSet {
 
-            fromLabel.text =  String(describing: location.latitude!) + ", "
-            toLabel.text = String(describing: location.longitude!) + " = " + location.address
+            fromLabel.text =  ""
+            toLabel.text = "" + String(location.latitude) + ", " + String(location.longitude)
             vesselNameLabel.text = DateFormatter.localizedString(from: location.dateAndTime, dateStyle: .medium, timeStyle: .medium)
         }
     }
@@ -268,13 +221,15 @@ class LocationCell: UICollectionViewCell {
     override init(frame: CGRect) {
         self.location = Location(latitude: 0.0, longitude: 0.0, dateAndTime: Date(), timeStamp: "", address: "")
         super.init(frame: frame)
+        translatesAutoresizingMaskIntoConstraints = false
+    
         contentView.addSubview(vesselNameLabel)
         contentView.addSubview(fromLabel)
         contentView.addSubview(toLabel)
         
         NSLayoutConstraint.activate([vesselNameLabel.topAnchor.constraint(equalTo: topAnchor), vesselNameLabel.leftAnchor.constraint(equalTo: leftAnchor)])
-        NSLayoutConstraint.activate([fromLabel.topAnchor.constraint(equalTo: vesselNameLabel.bottomAnchor), fromLabel.leftAnchor.constraint(equalTo: leftAnchor)])
-        NSLayoutConstraint.activate([toLabel.topAnchor.constraint(equalTo: vesselNameLabel.bottomAnchor), toLabel.leftAnchor.constraint(equalTo: fromLabel.rightAnchor)])
+        NSLayoutConstraint.activate([fromLabel.topAnchor.constraint(equalTo: vesselNameLabel.bottomAnchor, constant: 4), fromLabel.leftAnchor.constraint(equalTo: leftAnchor)])
+        NSLayoutConstraint.activate([toLabel.topAnchor.constraint(equalTo: vesselNameLabel.bottomAnchor, constant: 4), toLabel.leftAnchor.constraint(equalTo: fromLabel.rightAnchor)])
     }
     
     
@@ -282,7 +237,7 @@ class LocationCell: UICollectionViewCell {
     private var fromLabel: UILabel = {
         let cntf = UILabel()
         cntf.textColor = .gray
-        cntf.font = UIFont.boldSystemFont(ofSize: cntf.font.pointSize + 2)
+        cntf.font = UIFont(name: "DINCondensed-Bold", size: 24)
         cntf.translatesAutoresizingMaskIntoConstraints = false
         return cntf
     }()
@@ -291,7 +246,7 @@ class LocationCell: UICollectionViewCell {
     private var toLabel: UILabel = {
         let cntf = UILabel()
         cntf.textColor = .gray
-        cntf.font = UIFont.boldSystemFont(ofSize: cntf.font.pointSize + 2)
+        cntf.font = UIFont(name: "DINCondensed-Bold", size: 24)
         cntf.translatesAutoresizingMaskIntoConstraints = false
         
         return cntf
@@ -302,7 +257,7 @@ class LocationCell: UICollectionViewCell {
         cntf.textColor = .darkGray
         cntf.backgroundColor = UIColor.white.withAlphaComponent(0.6)
         cntf.layer.cornerRadius = 10.0
-        cntf.font = UIFont.boldSystemFont(ofSize: cntf.font.pointSize + 2)
+        cntf.font = UIFont(name: "DINCondensed-Bold", size: 14)
         cntf.translatesAutoresizingMaskIntoConstraints = false
         return cntf
     }()

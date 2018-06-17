@@ -10,14 +10,14 @@ import UIKit
 import Firebase
 import FirebaseMessaging
 
-class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
+class AppTabBarController: UITabBarController, UITabBarControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         checkIfUserIsLoggedIn()
         
-        let shipViewController = UINavigationController(rootViewController: ShipTrackViewController())
+        let shipViewController = UINavigationController(rootViewController: ShipViewController())
         shipViewController.title = "Ship"
         shipViewController.tabBarItem.image = UIImage(named: "ship")
         
@@ -28,7 +28,6 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
         
         let notificationViewController = UINavigationController(rootViewController: NotificationViewController())
         notificationViewController.title = "Notification"
-        
         notificationViewController.tabBarItem.image = UIImage(named: "notification")
         
         
@@ -36,14 +35,9 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
         menuViewController.title = "Menu"
         menuViewController.tabBarItem.image = UIImage(named: "menu")
         
-        
-        
-        
-    
         viewControllers = [menuViewController, shipViewController, notificationViewController, accountViewController]
         tabBar.backgroundColor = .gray
         tabBar.backgroundImage = UIImage()
-        
         tabBar.unselectedItemTintColor = .white
         
         

@@ -9,7 +9,6 @@
 import Foundation
 import SystemConfiguration
 import UIKit
-
 import NotificationBannerSwift
 
 class Reachability {

@@ -49,53 +49,17 @@ class MenuCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         setupHorizontalCollectionView()
         clipsToBounds = true
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(horizontalCollectionView)
-        
-        NSLayoutConstraint.activate([contentView.leftAnchor.constraint(equalTo: leftAnchor), contentView.rightAnchor.constraint(equalTo: rightAnchor), contentView.topAnchor.constraint(equalTo: topAnchor), contentView.bottomAnchor.constraint(equalTo: bottomAnchor)])
-        NSLayoutConstraint.activate([horizontalCollectionView.leftAnchor.constraint(equalTo: contentView.leftAnchor), horizontalCollectionView.rightAnchor.constraint(equalTo: contentView.rightAnchor), horizontalCollectionView.topAnchor.constraint(equalTo: contentView.topAnchor), horizontalCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)])
-        
-            NotificationCenter.default.addObserver(self, selector: #selector(changeMenuOrientationToPortrait), name: NSNotification.Name.init("ChangedMenuOrientationToPortrait"), object: nil)
-        
-                    NotificationCenter.default.addObserver(self, selector: #selector(changeMenuOrientationToLandscape), name: NSNotification.Name.init("ChangedMenuOrientationToLandscape"), object: nil)
-        
-        
-        setupObservers()
+        translatesAutoresizingMaskIntoConstraints = false
+        addSubview(horizontalCollectionView)
+
+        NSLayoutConstraint.activate([horizontalCollectionView.leftAnchor.constraint(equalTo: leftAnchor), horizontalCollectionView.rightAnchor.constraint(equalTo: rightAnchor), horizontalCollectionView.topAnchor.constraint(equalTo: topAnchor), horizontalCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor)])
         
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(scrollHorizontalCollectionViewUsingLogic)))
-    }
-    
-    
-    
-    
-    
-    @objc func changeMenuOrientationToPortrait() {
-//        horizontalCollectionView.reloadData()
-//        layoutSublayers(of: contentView.layer)
-        contentView.layoutMarginsDidChange()
-        horizontalCollectionView.layoutMarginsDidChange()
-//        horizontalCollectionView.reloadData()
-//        horizontalCollectionView.scrollToItem(at: IndexPath(row: 1, section: 0), at: .centeredHorizontally, animated: false)
-    }
-    
-    
-    @objc func changeMenuOrientationToLandscape() {
-//        horizontalCollectionView.reloadData()
-        contentView.layoutMarginsDidChange()
-        horizontalCollectionView.layoutMarginsDidChange()
-//        horizontalCollectionView.reloadData()
-//        horizontalCollectionView.scrollToItem(at: IndexPath(row: 1, section: 0), at: .centeredHorizontally, animated: false)
-
-        
-        
     }
     
     @objc func scrollHorizontalCollectionViewUsingLogic() {
         if !isSubMenuVisible { horizontalCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .left, animated: true); isSubMenuVisible = !isSubMenuVisible }
         else if isSubMenuVisible { horizontalCollectionView.scrollToItem(at: IndexPath(row: 1, section: 0), at: .left, animated: true); isSubMenuVisible = !isSubMenuVisible }
-    }
-    func setupObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(scrollCollectionViewToAppropriatePosition), name: NSNotification.Name.init("theMenuHasAppeared"), object: nil)
     }
     
     @objc func scrollCollectionViewToAppropriatePosition() {
@@ -107,7 +71,6 @@ class MenuCollectionViewCell: UICollectionViewCell {
         horizontalCollectionView.dataSource = self
         horizontalCollectionView.register(SubMenuCollectionViewCell.self, forCellWithReuseIdentifier: subMenuCollectionViewCellId)
         horizontalCollectionView.register(MenuTitleCollectionViewCell.self, forCellWithReuseIdentifier: menuTitleCollectionViewCellId)
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -155,8 +118,6 @@ class MenuCollectionViewCell: UICollectionViewCell {
 
 
 extension MenuCollectionViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2
@@ -168,7 +129,6 @@ extension MenuCollectionViewCell: UICollectionViewDelegate, UICollectionViewData
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: menuTitleCollectionViewCellId, for: indexPath) as! MenuTitleCollectionViewCell
             cell.titleForCellText = titleForCellText
             cell.backgroundColor = .clear
-
             return cell
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: subMenuCollectionViewCellId, for: indexPath) as! SubMenuCollectionViewCell
@@ -176,8 +136,6 @@ extension MenuCollectionViewCell: UICollectionViewDelegate, UICollectionViewData
             cell.arrayOfButtons = self.arrayOfButtons
             cell.backgroundColor = .clear
             return cell
-            
-            
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: subMenuCollectionViewCellId, for: indexPath) as! SubMenuCollectionViewCell
             cell.backgroundColor = .darkGray
@@ -191,6 +149,5 @@ extension MenuCollectionViewCell: UICollectionViewDelegate, UICollectionViewData
             if indexPath.row == 1 { return CGSize(width: collectionView.frame.width - 5, height: collectionView.frame.height) }
             else { return CGSize(width: collectionView.frame.height * CGFloat(arrayOfButtons.count), height: collectionView.frame.height) }
     }
-    
 }
 

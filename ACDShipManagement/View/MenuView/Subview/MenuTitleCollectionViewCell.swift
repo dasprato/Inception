@@ -22,8 +22,6 @@ class MenuTitleCollectionViewCell: UICollectionViewCell {
         clipsToBounds = true
         contentView.addSubview(titleForCell)
         NSLayoutConstraint.activate([titleForCell.leftAnchor.constraint(equalTo: leftAnchor, constant: 16), titleForCell.centerYAnchor.constraint(equalTo: centerYAnchor)])
-
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -39,7 +37,4 @@ class MenuTitleCollectionViewCell: UICollectionViewCell {
         tfc.textAlignment = .left
         return tfc
     }()
-    
-    
-    
 }

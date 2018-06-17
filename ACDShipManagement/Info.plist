@@ -23,7 +23,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MGLMapboxAccessToken</key>
-	<string>sk.eyJ1Ijoid2V2ZXJ0ZWNoIiwiYSI6ImNqY3A2NnRzazJlY3gyeW85d2Zka2Zlb3MifQ.3FubK-ViEIUQsCeJKwYivg</string>
+	<string>pk.eyJ1IjoiZGFzcHJhdG8iLCJhIjoiY2o5d3Z5aWw2N3ZnbTMyczQ5aGE2dXVrOCJ9.BWx1DdsIjx1uZg1HbPftUg</string>
 	<key>NSCameraUsageDescription</key>
 	<string>The camera is required to scan QR Codes</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>

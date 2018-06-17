@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         // Basics of the UI Declared here including the intitial launch View Controller
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        window?.rootViewController = CustomTabBarController()
+        window?.rootViewController = AppTabBarController()
         UINavigationBar.appearance().barTintColor = .gray
         UINavigationBar.appearance().tintColor = .white
         UINavigationBar.appearance().barStyle = .black

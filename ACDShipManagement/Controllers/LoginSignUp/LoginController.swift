@@ -10,26 +10,13 @@ import UIKit
 import Firebase
 
 class LoginController: UIViewController {
-    
-    
     var override = true
-    
-    let colors = ColorForLogin()
-    var backgroundLayer = CAGradientLayer()
-    
-    func refresh() {
-        view.backgroundColor = UIColor.clear
-        backgroundLayer = colors.gl
-        view.layer.insertSublayer(backgroundLayer, at: 0)
-    }
-    
     
     var loginButtonConstraints = [NSLayoutConstraint]()
     var signUpButtonConstraints = [NSLayoutConstraint]()
     var passwordTextFieldConstraints = [NSLayoutConstraint]()
     var emailTextFieldConstraints = [NSLayoutConstraint]()
     override func viewDidLayoutSubviews() {
-        self.backgroundLayer.frame = view.frame
         loginButton.addShadow()
         signUpButton.addShadow()
         emailTextField.addShadow()
@@ -46,13 +33,16 @@ class LoginController: UIViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         self.emailTextField.center.x = self.view.frame.width / 2
         self.passwordTextField.center.x = self.view.frame.width / 2
-
-
     }
+
+    var animatedBackgroundView: AnimatedBackgroundView = {
+        let animatedBackgroundView = AnimatedBackgroundView()
+        return animatedBackgroundView
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(animatedBackgroundView)
         
-        refresh()
         view.addSubview(loginButton)
         view.addSubview(signUpButton)
         view.addSubview(emailTextField)
@@ -61,7 +51,9 @@ class LoginController: UIViewController {
         
         self.signUpButton.alpha = 0
         self.loginButton.alpha = 0
-
+        
+        NSLayoutConstraint.activate([animatedBackgroundView.topAnchor.constraint(equalTo: view.topAnchor), animatedBackgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor), animatedBackgroundView.rightAnchor.constraint(equalTo: view.rightAnchor), animatedBackgroundView.leftAnchor.constraint(equalTo: view.leftAnchor)])
+        
 
         loginButtonConstraints = [loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor), loginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor), loginButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16), loginButton.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16), loginButton.heightAnchor.constraint(equalToConstant: 40)]
         
@@ -91,8 +83,6 @@ class LoginController: UIViewController {
 
     
     override func viewDidAppear(_ animated: Bool) {
-
-        
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 25, initialSpringVelocity: 5, options: .curveEaseOut, animations: {
             self.emailTextField.center.x = self.view.frame.width / 2
             self.passwordTextField.center.x = self.view.frame.width / 2
@@ -100,16 +90,12 @@ class LoginController: UIViewController {
             self.signUpButton.alpha = 1
             self.loginButton.alpha = 1
         }, completion: nil)
-        
-
     }
     
 
     override func viewWillAppear(_ animated: Bool) {
-        
         override = true
     }
-    
     
     var loginButton: CustomUIButton = {
         let lb = CustomUIButton(type: .system)
@@ -121,13 +107,6 @@ class LoginController: UIViewController {
         lb.layer.cornerRadius = 10.0
         return lb
     }()
-    
-    
-
-    
-
-    
-    
     
     var signUpButton: UIButton = {
         let lb = CustomUIButton(type: .system)
@@ -217,18 +196,4 @@ class LoginController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
 
-}
-
-
-class ColorForLogin {
-    var gl:CAGradientLayer!
-    
-    init() {
-        let colorTop = UIColor(red: (CGFloat(arc4random_uniform(255)))/255, green: (CGFloat(arc4random_uniform(255)))/255, blue: (CGFloat(arc4random_uniform(255)))/255, alpha: 1.0).cgColor
-        let colorBottom = UIColor(red: (CGFloat(arc4random_uniform(255)))/255, green: (CGFloat(arc4random_uniform(255)))/255, blue: (CGFloat(arc4random_uniform(255)))/255, alpha: 1.0).cgColor
-        
-        self.gl = CAGradientLayer()
-        self.gl.colors = [colorTop, colorBottom]
-        self.gl.locations = [0.0, 0.5]
-    }
 }

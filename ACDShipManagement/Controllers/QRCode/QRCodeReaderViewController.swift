@@ -10,6 +10,40 @@
 import UIKit
 import AVFoundation
 
+
+
+class customQRCodeReaderView: UIView, AVCaptureMetadataOutputObjectsDelegate {
+    
+    var video = AVCaptureVideoPreviewLayer()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        let session = AVCaptureSession()
+        let captureDevice = AVCaptureDevice.default(for: .video)
+        do {
+            if let captureDeviceUnwrapped = captureDevice {
+                let input = try AVCaptureDeviceInput(device: captureDeviceUnwrapped)
+                session.addInput(input)
+            }
+        }
+        catch {
+            print("Camera access not allowed")
+        }
+        let output = AVCaptureMetadataOutput()
+        session.addOutput(output)
+        output.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+        output.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
+        video = AVCaptureVideoPreviewLayer(session: session)
+//        video.frame = view.layer.bounds
+//        self.addSublayer(video)
+        session.startRunning()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 class QRCodeReaderViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
 
     
@@ -26,28 +60,20 @@ class QRCodeReaderViewController: UIViewController, AVCaptureMetadataOutputObjec
         self.navigationItem.setLeftBarButton(barButtonClose, animated: true)
         
         let session = AVCaptureSession()
-        
         let captureDevice = AVCaptureDevice.default(for: .video)
-        
-        
         do {
             if let captureDeviceUnwrapped = captureDevice {
             let input = try AVCaptureDeviceInput(device: captureDeviceUnwrapped)
             session.addInput(input)
             }
-
         }
         catch {
             print("Camera access not allowed")
         }
-        
         let output = AVCaptureMetadataOutput()
         session.addOutput(output)
-        
         output.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-        
         output.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
-        
         video = AVCaptureVideoPreviewLayer(session: session)
         video.frame = view.layer.bounds
         view.layer.addSublayer(video)

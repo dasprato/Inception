@@ -75,7 +75,6 @@ class AccountViewController: UIViewController {
         init() {
             let colorTop = UIColor.blue.cgColor
             let colorBottom = UIColor.gray.cgColor
-            
             self.gl = CAGradientLayer()
             self.gl.colors = [colorTop, colorBottom]
             self.gl.locations = [0.0, 0.5]

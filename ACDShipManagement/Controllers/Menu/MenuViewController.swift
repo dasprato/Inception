@@ -40,11 +40,7 @@ let mainCollectionViewCellId = "mainCollectionViewCellId"
         updateUserInterface()
         setupObservers()
     }
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
-    }
-    
+
     
     
     func setupMainCollectionView() {
@@ -109,18 +105,10 @@ let mainCollectionViewCellId = "mainCollectionViewCellId"
         rcv.alwaysBounceVertical = true
         return rcv
     }()
-    
-    override func viewWillAppear(_ animated: Bool) {
-//        print("The view appeared; do something about it now; thanks")
-        
-        
-        // To let the cells know that the view will appear
-//        NotificationCenter.default.post(name: NSNotification.Name.init("theMenuHasAppeared"), object: self, userInfo: nil)
-    }
 }
 
 
-extension MenuViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
+extension MenuViewController: UICollectionViewDelegate, UICollectionViewDataSource   {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return arrayOfMenus.count
     }
@@ -138,138 +126,22 @@ extension MenuViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return cell
     }
     
-    
-    @objc func open() {
-    }
-    
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.currentCellIndex = indexPath.row
     }
-    
+}
+
+
+extension MenuViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (collectionView.frame.width), height: ((collectionView.frame.width / 2) - 10) / 3)
-    }
-
-    
-    override var shouldAutorotate: Bool {
-        return false
+        return CGSize(width: (collectionView.frame.width), height: 48)
     }
     
-    
-
-}
-
-
-// extension for oppenning the other view controllers
-extension MenuViewController {
-    @objc func createShip() {
-        self.present(UINavigationController(rootViewController: CreateShipViewController()), animated: true, completion: nil)
-    }
-    @objc func readShip() {
-        self.present(UINavigationController(rootViewController: ReadShipViewController()), animated: true, completion: nil)
-    }
-    @objc func updateShip() {
-        UpdateShipViewController().showInteractive()
-    }
-
-    @objc func deleteShip() {
-        DeleteShipViewController().showInteractive()
-    }
-    
-    
-    @objc func createCompany() {
-        self.present(UINavigationController(rootViewController: CreateCompanyViewController()), animated: true, completion: nil)
-    }
-    @objc func readCompany() {
-        self.present(UINavigationController(rootViewController: ReadCompanyViewController()), animated: true, completion: nil)
-    }
-    @objc func updateCompany() {
-        UpdateCompanyViewController().showInteractive()
-    }
-    
-    @objc func deleteCompany() {
-        DeleteCompanyViewController().showInteractive()
-    }
-    
-    @objc func createTrip() {
-        let vc = CreateTripViewController1()
-        vc.modalTransitionStyle = .crossDissolve
-        self.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
-    }
-    
-    @objc func sailTrip() {
-        let vc = SailTripViewController1()
-        vc.modalTransitionStyle = .crossDissolve
-        self.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
-    }
-    
-    @objc func readTrip() {
-        let vc = ReadTripViewController()
-        vc.modalTransitionStyle = .crossDissolve
-        self.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
-    }
-    @objc func updateTrip() {
-        UpdateTripViewController().showInteractive()
-    }
-    
-    @objc func deleteTrip() {
-        DeleteTripViewController().showInteractive()
-    }
-    
-    @objc func createContact() {
-        
-        self.present(UINavigationController(rootViewController: CreateContactViewController()), animated: true, completion: nil)
-        
-    }
-    @objc func readQRCode() {
-        self.present(UINavigationController(rootViewController: QRCodeReaderViewController()), animated: true, completion: nil)
-    }
-    @objc func readContact() {
-        self.present(UINavigationController(rootViewController: ReadContactViewController()), animated: true, completion: nil)
-    }
-
-    @objc func openPratoInfo() {
-        
-        let developerInfoViewController = DeveloperInfoViewController()
-        developerInfoViewController.developerName = "Prato Das"
-        developerInfoViewController.developerImage = UIImage(named: "prato")
-        developerInfoViewController.showInteractive()
-    }
-    
-    @objc func openShubranilInfo() {
-        
-        let developerInfoViewController = DeveloperInfoViewController()
-        developerInfoViewController.developerName = "Shubranil Sengupta"
-        developerInfoViewController.developerImage = UIImage(named: "shubranil")
-        developerInfoViewController.showInteractive()
-    }
-    
-    @objc func openSumitInfo() {
-        
-        let developerInfoViewController = DeveloperInfoViewController()
-        developerInfoViewController.developerName = "Sumit Somani"
-        developerInfoViewController.developerImage = UIImage(named: "sumit")
-        developerInfoViewController.showInteractive()
-        
-        
-    }
-    
-    
-    
-}
-
-extension MenuViewController: UIViewControllerTransitioningDelegate {
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return DismissAnimator()
-    }
-    func interactionControllerForDismissal(animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return interactor.hasStarted ? interactor : nil
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        self.menuCollectionView.collectionViewLayout.invalidateLayout()
     }
 }
-    
-    
-    
     
     
     
