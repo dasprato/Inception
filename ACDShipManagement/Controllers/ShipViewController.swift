@@ -21,22 +21,10 @@ class ShipViewController: UIViewController {
         }
     }
     
-    
-    
     var directionsRoute: Route?
     var firstTimeFlag = true
     
     let locationManager = CLLocationManager()
-    
-    fileprivate func plotShipsOnMap() {
-        // Create four new point annotations with specified coordinates and titles.
-        //        interactiveBackgroundMap.removeAnnotations(interactiveBackgroundMap.annotations)
-//        addPoint(withTitle: "MV SS Helencha 7", andLocationCooridinate: CLLocationCoordinate2D(latitude: 23.597159, longitude: 90.573151))
-//        addPoint(withTitle: "MV SS Helencha 2", andLocationCooridinate: CLLocationCoordinate2D(latitude: 23.597159, longitude: 89))
-//        addPoint(withTitle: "MV SS Helencha 1", andLocationCooridinate:  CLLocationCoordinate2D(latitude: 21.676898, longitude: 91.778931))
-//        addPoint(withTitle: "MV Al Jihad", andLocationCooridinate: CLLocationCoordinate2D(latitude: 20.95284782222657, longitude: 91.69104026967057))
-//        addPoint(withTitle: "MV Banglar Drishti", andLocationCooridinate: CLLocationCoordinate2D(latitude: 21.893741, longitude: 87.955689))
-    }
     
     func addPoint(withTitle title: String, andLocationCooridinate coordinate: CLLocationCoordinate2D) {
         let point = MyCustomPointAnnotation()
@@ -44,9 +32,16 @@ class ShipViewController: UIViewController {
         point.coordinate = coordinate
         interactiveBackgroundMap.addAnnotation(point)
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        fetchShips()
+    }
     
     func fetchShips() {
+        
+        arrayOfShips.removeAll()
+        if let annotations = interactiveBackgroundMap.annotations {
+            interactiveBackgroundMap.removeAnnotations(annotations)
+        }
         let db = Firestore.firestore()
         db.collection("Ships").addSnapshotListener { (snapshot, error) in
             guard let _ = snapshot?.documents else {
@@ -95,25 +90,30 @@ class ShipViewController: UIViewController {
     
     
     @objc func updateShipsOnMap() {
-        for i in 0..<interactiveBackgroundMap.annotations!.count {
-            if let annotation = self.interactiveBackgroundMap.annotations![i] as? MyCustomPointAnnotation {
+        
+        guard let annotations = interactiveBackgroundMap.annotations else { return }
+        for i in 0..<annotations.count {
+            if let annotation = annotations[i] as? MyCustomPointAnnotation {
                 annotation.coordinate = CLLocationCoordinate2D(latitude: annotation.coordinate.latitude - 0.001, longitude: annotation.coordinate.longitude - 0.001)
             }
-            
-            //            interactiveBackgroundMap.annotations!.remove(at: i)
-            
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    
+    func setupBar() {
         self.navigationController?.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.barTintColor = .gray
         self.navigationController?.navigationBar.topItem?.title = "Ship"
         navigationController?.hidesBarsOnSwipe = true
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.isHidden = true
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+
+        setupBar()
+        fetchShips()
         
         // Ask for Authorisation from the User.
         self.locationManager.requestAlwaysAuthorization()
@@ -135,20 +135,10 @@ class ShipViewController: UIViewController {
         
         interactiveBackgroundMap.delegate = self
         
-        // Method to plot ships on the graph
-        plotShipsOnMap()
-        
-        
         Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateShipsOnMap), userInfo: nil, repeats: true)
         
-        fetchShips()
+
     }
-    
-    
-    
-    
-    
-    
     
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -267,8 +257,6 @@ extension ShipViewController: CLLocationManagerDelegate {
         interactiveBackgroundMap.setCenter(locValue, animated: true)
         print(locValue.latitude)
         print(locValue.longitude)
-        
-        
         let locationId = String(describing: Date().timeIntervalSince1970)
         let db = Firestore.firestore()
         let locationDictionary: [String: Any?] = ["latitude": locValue.latitude, "longitude": locValue.longitude]
@@ -280,10 +268,23 @@ extension ShipViewController: MGLMapViewDelegate {
     // Present the navigation view controller when the callout is selected
     func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
         
-        let navigationViewController = NavigationViewController(for: directionsRoute!, styles: [CustomStyle()])
-        self.present(navigationViewController, animated: true, completion: nil)
+//        let navigationViewController = NavigationViewController(for: directionsRoute!, styles: [CustomStyle()])
+//        self.present(navigationViewController, animated: true, completion: nil)
+        
+        
+        for i in 0..<arrayOfShips.count {
+            let shipToCheck = arrayOfShips[i]
+            guard let vesselNameToCheck = shipToCheck.vesselName else { return }
+            if vesselNameToCheck == annotation.title {
+                let vc = EditShipViewController()
+                vc.ship = shipToCheck
+                navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+
     }
 }
+
 
 class CustomStyle: NightStyle {
     required init() {
@@ -295,9 +296,6 @@ class CustomStyle: NightStyle {
         super.apply()
     }
 }
-
-
-
 
 // MGLPointAnnotation subclass
 class MyCustomPointAnnotation: MGLPointAnnotation {

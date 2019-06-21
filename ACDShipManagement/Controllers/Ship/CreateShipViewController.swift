@@ -28,13 +28,10 @@ class CreateShipViewController: UIViewController {
     
     func setupBarButtons() {
         view.backgroundColor = .darkGray
-        
 
         let barButtonClose = UIBarButtonItem(image: UIImage(named: "arrow")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(closeView(_:)))
         barButtonClose.tintColor = .white
         self.navigationItem.setLeftBarButton(barButtonClose, animated: true)
-        
-        
     }
     
     

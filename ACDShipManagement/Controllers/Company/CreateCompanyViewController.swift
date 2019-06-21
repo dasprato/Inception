@@ -15,16 +15,16 @@ class CreateCompanyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupBar()
+        setupBarButtons()
+        setupTextFieldsAndButtons()
+    }
+    
+    func setupBar() {
         self.navigationController?.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.barTintColor = .gray
         self.navigationController?.navigationBar.addShadow()
         view.backgroundColor = .darkGray
-        
-        setupBarButtons()
-        setupTextFieldsAndButtons()
-
-        
-
     }
 
     func setupBarButtons() {

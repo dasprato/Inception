@@ -53,15 +53,10 @@ class EditContactViewController: UIViewController {
     
     var contact: Contact? {
         didSet {
-            
-            print(contact)
-            
-            
             contactImageView.image = UIImage(data: (contact?.imageData)!)
             contactNameTextField.text = contact?.name
             contactEmailTextField.text  = contact?.email
             contactPhoneTextField.text = contact?.phone
-            //            self.contactsCollectionView.reloadData()
         }
     }
     
@@ -73,8 +68,7 @@ class EditContactViewController: UIViewController {
     }
     
     func setupBarButtons() {
-                view.backgroundColor = .darkGray
-        
+        view.backgroundColor = .darkGray
         let barButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(handleEdit))
         barButton.tintColor = .white
         self.navigationItem.setRightBarButton(barButton, animated: true)
@@ -83,6 +77,7 @@ class EditContactViewController: UIViewController {
     @objc func handleEdit() {
         
     }
+    
     func setupTextFieldsAndButtons() {
         view.addSubview(contactImageViewBackground)
         view.addSubview(contactImageView)
@@ -116,17 +111,6 @@ class EditContactViewController: UIViewController {
         NSLayoutConstraint.activate([
             saveProgressView.bottomAnchor.constraint(equalTo: updateButton.bottomAnchor), saveProgressView.rightAnchor.constraint(equalTo: updateButton.rightAnchor, constant: -10), saveProgressView.leftAnchor.constraint(equalTo: updateButton.leftAnchor, constant: 10), saveProgressView.heightAnchor.constraint(equalToConstant: 5)])
     }
-    
-    // Close button to dismiss the menu
-    var closeButton: UIButton = {
-        let cb = UIButton(type: .system)
-        cb.setImage(UIImage(named: "arrow")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        cb.translatesAutoresizingMaskIntoConstraints = false
-        cb.addTarget(self, action: #selector(closeView(_:)), for: .touchUpInside)
-        cb.tintColor = .white
-        cb.contentMode = .scaleAspectFit
-        return cb
-    }()
     
     
     // Text fields
@@ -225,9 +209,6 @@ extension EditContactViewController {
     
     @objc func handleDelete() {
         guard let contactId = contact?.contactId else { return }
-        
-        
-        
         // Check if fields are emtpy
         print("Attempting to save contact to firebase")
         if contactNameTextField.text == "" || contactEmailTextField.text == "" || contactPhoneTextField.text == "" {
@@ -236,7 +217,6 @@ extension EditContactViewController {
         }
         saveProgressView.alpha = 1
         makeViewDisabled()
-        
         Firestore.firestore().collection("Contacts").document(contactId).delete { (err) in
             if let err = err {
                 print ("Error removing document")
@@ -282,10 +262,10 @@ extension EditContactViewController {
             // First just setting a name
             guard let contactId = contact?.contactId else { return }
             var imageData = Data()
-        if image != nil {
-            imageData = UIImageJPEGRepresentation(image!, 0)!
-            
-        }
+            if image != nil {
+                imageData = UIImageJPEGRepresentation(image!, 0)!
+                
+            }
             
             let db = Firestore.firestore()
             let contactDictionary: [String: Any?] = ["name": name, "email": email, "phone": phone, "imageData": imageData]
@@ -300,7 +280,6 @@ extension EditContactViewController {
             contactPhoneTextField.isUserInteractionEnabled = true
             updateButton.isUserInteractionEnabled = true
             deleteButton.isUserInteractionEnabled = true
-        
     }
 }
 

@@ -143,17 +143,14 @@ extension ReadShipViewController: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         searchBar.resignFirstResponder()
-        let vc = QRCodeViewController()
-        vc.modalTransitionStyle = .crossDissolve
-        vc.modalPresentationStyle = .overCurrentContext
-        vc.id = "Ship Id: " + self.arrayOfShips![indexPath.row].shipId!
-        present(vc, animated: true, completion: nil)
+        let vc = EditShipViewController()
+        vc.ship = self.arrayOfShips?[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = shipsCollectionView.dequeueReusableCell(withReuseIdentifier: shipsCollectionViewCellId, for: indexPath) as! ReadShipCollectionViewCell
         cell.ship = self.arrayOfShips![indexPath.row]
-        
         return cell
     }
     

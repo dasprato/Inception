@@ -32,12 +32,8 @@
 		D267ABD6207A7E8A00A118D7 /* ConnectionBetweenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D267ABD5207A7E8A00A118D7 /* ConnectionBetweenVC.swift */; };
 		D276CDB4202928C700CDAD18 /* ReadShipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276CDB3202928C700CDAD18 /* ReadShipViewController.swift */; };
 		D276CDB6202928D700CDAD18 /* CreateShipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276CDB5202928D700CDAD18 /* CreateShipViewController.swift */; };
-		D276CDB8202928E600CDAD18 /* UpdateShipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276CDB7202928E600CDAD18 /* UpdateShipViewController.swift */; };
-		D276CDBA202928F100CDAD18 /* DeleteShipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276CDB9202928F100CDAD18 /* DeleteShipViewController.swift */; };
 		D276CDBC2029311300CDAD18 /* ReadCompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276CDBB2029311300CDAD18 /* ReadCompanyViewController.swift */; };
 		D276CDBE2029311D00CDAD18 /* CreateCompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276CDBD2029311D00CDAD18 /* CreateCompanyViewController.swift */; };
-		D276CDC02029312800CDAD18 /* UpdateCompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276CDBF2029312800CDAD18 /* UpdateCompanyViewController.swift */; };
-		D276CDC22029313200CDAD18 /* DeleteCompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276CDC12029313200CDAD18 /* DeleteCompanyViewController.swift */; };
 		D276CDC62029318C00CDAD18 /* CreateTripViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276CDC52029318C00CDAD18 /* CreateTripViewController1.swift */; };
 		D276CDC82029319700CDAD18 /* UpdateTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276CDC72029319700CDAD18 /* UpdateTripViewController.swift */; };
 		D276CDCA202931A000CDAD18 /* DeleteTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276CDC9202931A000CDAD18 /* DeleteTripViewController.swift */; };
@@ -126,12 +122,8 @@
 		D267ABD5207A7E8A00A118D7 /* ConnectionBetweenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionBetweenVC.swift; sourceTree = "<group>"; };
 		D276CDB3202928C700CDAD18 /* ReadShipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadShipViewController.swift; sourceTree = "<group>"; };
 		D276CDB5202928D700CDAD18 /* CreateShipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShipViewController.swift; sourceTree = "<group>"; };
-		D276CDB7202928E600CDAD18 /* UpdateShipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateShipViewController.swift; sourceTree = "<group>"; };
-		D276CDB9202928F100CDAD18 /* DeleteShipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteShipViewController.swift; sourceTree = "<group>"; };
 		D276CDBB2029311300CDAD18 /* ReadCompanyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadCompanyViewController.swift; sourceTree = "<group>"; };
 		D276CDBD2029311D00CDAD18 /* CreateCompanyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCompanyViewController.swift; sourceTree = "<group>"; };
-		D276CDBF2029312800CDAD18 /* UpdateCompanyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCompanyViewController.swift; sourceTree = "<group>"; };
-		D276CDC12029313200CDAD18 /* DeleteCompanyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCompanyViewController.swift; sourceTree = "<group>"; };
 		D276CDC52029318C00CDAD18 /* CreateTripViewController1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTripViewController1.swift; sourceTree = "<group>"; };
 		D276CDC72029319700CDAD18 /* UpdateTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTripViewController.swift; sourceTree = "<group>"; };
 		D276CDC9202931A000CDAD18 /* DeleteTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTripViewController.swift; sourceTree = "<group>"; };
@@ -270,8 +262,6 @@
 			children = (
 				D276CDB5202928D700CDAD18 /* CreateShipViewController.swift */,
 				D276CDB3202928C700CDAD18 /* ReadShipViewController.swift */,
-				D276CDB7202928E600CDAD18 /* UpdateShipViewController.swift */,
-				D276CDB9202928F100CDAD18 /* DeleteShipViewController.swift */,
 				D2F73E1222BCE2EF0069D924 /* EditShipViewController.swift */,
 			);
 			path = Ship;
@@ -282,8 +272,6 @@
 			children = (
 				D276CDBD2029311D00CDAD18 /* CreateCompanyViewController.swift */,
 				D276CDBB2029311300CDAD18 /* ReadCompanyViewController.swift */,
-				D276CDBF2029312800CDAD18 /* UpdateCompanyViewController.swift */,
-				D276CDC12029313200CDAD18 /* DeleteCompanyViewController.swift */,
 				D2F73E1422BCE3050069D924 /* EditCompanyViewController.swift */,
 			);
 			path = Company;
@@ -846,11 +834,9 @@
 				D2FE0CEC20248449006C8BCE /* MenuViewController.swift in Sources */,
 				D2F5E3682085D77500829633 /* Location.swift in Sources */,
 				D2C975212080ECD1001FD285 /* StatusLogViewController.swift in Sources */,
-				D276CDC22029313200CDAD18 /* DeleteCompanyViewController.swift in Sources */,
 				D284D55F206FBC2E00BCB1F5 /* ReadContactViewController.swift in Sources */,
 				D2B437E9208223890018E75B /* SignUpPasswordViewController.swift in Sources */,
 				D2B437E8208223890018E75B /* SignUpController.swift in Sources */,
-				D276CDC02029312800CDAD18 /* UpdateCompanyViewController.swift in Sources */,
 				D276CDBC2029311300CDAD18 /* ReadCompanyViewController.swift in Sources */,
 				D249AA6620233B3D00A3C908 /* NotificationDetailViewController.swift in Sources */,
 				D23EF2E6207127D900190B64 /* QRCodeViewController.swift in Sources */,
@@ -861,12 +847,10 @@
 				D29F0ECB201D3AAA00D75A52 /* NotificationViewController.swift in Sources */,
 				D276CDD2202A5B0300CDAD18 /* DismissAnimator.swift in Sources */,
 				D2C000CE201A87710094138D /* AppDelegate.swift in Sources */,
-				D276CDBA202928F100CDAD18 /* DeleteShipViewController.swift in Sources */,
 				D267ABD6207A7E8A00A118D7 /* ConnectionBetweenVC.swift in Sources */,
 				D207895E2073BFAC00B5509E /* SailTripViewController2.swift in Sources */,
 				D2C975232080ED2A001FD285 /* ReadTripViewController.swift in Sources */,
 				D2B437E7208223890018E75B /* LoginController.swift in Sources */,
-				D276CDB8202928E600CDAD18 /* UpdateShipViewController.swift in Sources */,
 				D276CDB4202928C700CDAD18 /* ReadShipViewController.swift in Sources */,
 				D276CDC62029318C00CDAD18 /* CreateTripViewController1.swift in Sources */,
 				D22F4AA322BC6FBF00A6C8B2 /* AnimatedBackgroundView.swift in Sources */,

@@ -25,17 +25,13 @@ class ReadCompanyViewController: UIViewController {
         arrayOfCompanies = [Company]()
         fetchCompanies()
         setupCollectionView()
-        
         self.navigationController?.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.barTintColor = .gray
         self.navigationController?.navigationBar.addShadow()
         view.backgroundColor = .darkGray
-        
         let barButtonClose = UIBarButtonItem(image: UIImage(named: "arrow")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(closeView(_:)))
         barButtonClose.tintColor = .white
         self.navigationItem.setLeftBarButton(barButtonClose, animated: true)
-        
-        
         searchBar.placeholder = "Search"
         navigationItem.titleView = searchBar
         searchBar.becomeFirstResponder()
@@ -141,17 +137,15 @@ extension ReadCompanyViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         searchBar.resignFirstResponder()
-        let vc = QRCodeViewController()
-        vc.modalTransitionStyle = .crossDissolve
-        vc.modalPresentationStyle = .overCurrentContext
-        vc.id = "Company Id: " + self.arrayOfCompanies![indexPath.row].companyId!
-        present(vc, animated: true, completion: nil)
+        let vc = EditCompanyViewController()
+        vc.company = self.arrayOfCompanies?[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        searchBar.resignFirstResponder()
         let cell = companiesCollectionView.dequeueReusableCell(withReuseIdentifier: contactsCollectionViewCellId, for: indexPath) as! ReadCompanyCollectionViewCell
         cell.company = self.arrayOfCompanies![indexPath.row]
-        
         return cell
     }
     
