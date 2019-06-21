@@ -43,6 +43,8 @@ class MenuCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    
+    
 
     
     override init(frame: CGRect) {
@@ -54,18 +56,20 @@ class MenuCollectionViewCell: UICollectionViewCell {
 
         NSLayoutConstraint.activate([horizontalCollectionView.leftAnchor.constraint(equalTo: leftAnchor), horizontalCollectionView.rightAnchor.constraint(equalTo: rightAnchor), horizontalCollectionView.topAnchor.constraint(equalTo: topAnchor), horizontalCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor)])
         
-        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(scrollHorizontalCollectionViewUsingLogic)))
+        
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(scrollHorizontalCollectionViewUsingLogic), name: NSNotification.Name.init("Menu Appeared"), object: nil)
+//        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(scrollHorizontalCollectionViewUsingLogic)))
     }
+    
+
     
     @objc func scrollHorizontalCollectionViewUsingLogic() {
-        if !isSubMenuVisible { horizontalCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .left, animated: true); isSubMenuVisible = !isSubMenuVisible }
-        else if isSubMenuVisible { horizontalCollectionView.scrollToItem(at: IndexPath(row: 1, section: 0), at: .left, animated: true); isSubMenuVisible = !isSubMenuVisible }
+        horizontalCollectionView.scrollToItem(at: IndexPath(row: 1, section: 0), at: .centeredHorizontally, animated: true)
     }
     
-    @objc func scrollCollectionViewToAppropriatePosition() {
-        horizontalCollectionView.scrollToItem(at: IndexPath(row: 1, section: 0), at: .left, animated: true)
-        self.isSubMenuVisible = false
-    }
+    
     func setupHorizontalCollectionView() {
         horizontalCollectionView.delegate = self
         horizontalCollectionView.dataSource = self
@@ -112,7 +116,11 @@ class MenuCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
         horizontalCollectionView.scrollToItem(at: IndexPath(row: 1, section: 0), at: .centeredHorizontally, animated: true)
         isSubMenuVisible = false
+
     }
+    
+    
+    
     
 }
 

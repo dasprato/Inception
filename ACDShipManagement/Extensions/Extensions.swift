@@ -192,10 +192,8 @@ extension UIViewController {
     @objc func openShareController(_ viewController: UIViewController) {
         print("Showing")
         let activityItem: [AnyObject] = [QRCodeViewController.qrCodeImageView.image as! AnyObject]
-        
         let avc = UIActivityViewController(activityItems: activityItem as [AnyObject], applicationActivities: nil)
         avc.modalTransitionStyle = .crossDissolve
-        dismiss(animated: true, completion: nil)
         present(avc, animated: true, completion: nil)
     }
     

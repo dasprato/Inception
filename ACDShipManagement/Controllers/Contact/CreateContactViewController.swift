@@ -162,9 +162,7 @@ class CreateContactViewController: UIViewController {
 
 extension CreateContactViewController {
     @objc func save() {
-        print("Attempting to save contact to firebase")
         if contactNameTextField.text == "" || contactEmailTextField.text == "" || contactPhoneTextField.text == "" {
-            print("ERROR")
             return
         }
         saveProgressView.alpha = 1
@@ -193,7 +191,6 @@ extension CreateContactViewController {
             let db = Firestore.firestore()
             let contactDictionary: [String: Any?] = ["name": name, "email": email, "phone": phone, "imageData": imageData]
             db.collection("Contacts").document(contactId).setData(contactDictionary)
-            
             let banner = StatusBarNotificationBanner(title: "Saved", style: .success)
             banner.show()
             banner.duration = 0.5

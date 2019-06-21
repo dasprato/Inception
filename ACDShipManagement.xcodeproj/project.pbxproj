@@ -69,6 +69,8 @@
 		D2C975252080EE02001FD285 /* LocationLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C975242080EE02001FD285 /* LocationLogViewController.swift */; };
 		D2C975282081808F001FD285 /* TripHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C975272081808F001FD285 /* TripHistoryViewController.swift */; };
 		D2F5E3682085D77500829633 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F5E3672085D77500829633 /* Location.swift */; };
+		D2F73E1322BCE2EF0069D924 /* EditShipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F73E1222BCE2EF0069D924 /* EditShipViewController.swift */; };
+		D2F73E1522BCE3050069D924 /* EditCompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F73E1422BCE3050069D924 /* EditCompanyViewController.swift */; };
 		D2FE0CEC20248449006C8BCE /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FE0CEB20248449006C8BCE /* MenuViewController.swift */; };
 		D2FE0CF32024886B006C8BCE /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FE0CF22024886B006C8BCE /* Menu.swift */; };
 		D2FE0CF52024C366006C8BCE /* MenuTitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FE0CF42024C366006C8BCE /* MenuTitleCollectionViewCell.swift */; };
@@ -142,7 +144,7 @@
 		D284D55C206FBA6300BCB1F5 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		D284D55E206FBC2E00BCB1F5 /* ReadContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadContactViewController.swift; sourceTree = "<group>"; };
 		D29F0EC6201D2C8700D75A52 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
-		D29F0EC8201D2C9B00D75A52 /* ShipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShipViewController.swift; sourceTree = "<group>"; };
+		D29F0EC8201D2C9B00D75A52 /* ShipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShipViewController.swift; path = ../ShipViewController.swift; sourceTree = "<group>"; };
 		D29F0ECA201D3AAA00D75A52 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		D29F0ECE201F2E0200D75A52 /* NotificationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCollectionViewCell.swift; sourceTree = "<group>"; };
 		D29F0ED020214B0500D75A52 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -166,6 +168,8 @@
 		D2C975242080EE02001FD285 /* LocationLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationLogViewController.swift; sourceTree = "<group>"; };
 		D2C975272081808F001FD285 /* TripHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripHistoryViewController.swift; sourceTree = "<group>"; };
 		D2F5E3672085D77500829633 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		D2F73E1222BCE2EF0069D924 /* EditShipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditShipViewController.swift; sourceTree = "<group>"; };
+		D2F73E1422BCE3050069D924 /* EditCompanyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCompanyViewController.swift; sourceTree = "<group>"; };
 		D2FE0CEB20248449006C8BCE /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		D2FE0CF22024886B006C8BCE /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		D2FE0CF42024C366006C8BCE /* MenuTitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTitleCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -268,6 +272,7 @@
 				D276CDB3202928C700CDAD18 /* ReadShipViewController.swift */,
 				D276CDB7202928E600CDAD18 /* UpdateShipViewController.swift */,
 				D276CDB9202928F100CDAD18 /* DeleteShipViewController.swift */,
+				D2F73E1222BCE2EF0069D924 /* EditShipViewController.swift */,
 			);
 			path = Ship;
 			sourceTree = "<group>";
@@ -279,6 +284,7 @@
 				D276CDBB2029311300CDAD18 /* ReadCompanyViewController.swift */,
 				D276CDBF2029312800CDAD18 /* UpdateCompanyViewController.swift */,
 				D276CDC12029313200CDAD18 /* DeleteCompanyViewController.swift */,
+				D2F73E1422BCE3050069D924 /* EditCompanyViewController.swift */,
 			);
 			path = Company;
 			sourceTree = "<group>";
@@ -329,6 +335,7 @@
 		D24B8E94206AB6E0003C477F /* ShipTrack */ = {
 			isa = PBXGroup;
 			children = (
+				D29F0EC8201D2C9B00D75A52 /* ShipViewController.swift */,
 				D2C000CF201A87710094138D /* ShipTrackViewController.swift */,
 			);
 			path = ShipTrack;
@@ -373,7 +380,6 @@
 				D24B8E8F206AB532003C477F /* Company */,
 				D24B8E8E206AB52C003C477F /* Ship */,
 				D29F0EC6201D2C8700D75A52 /* AccountViewController.swift */,
-				D29F0EC8201D2C9B00D75A52 /* ShipViewController.swift */,
 				D24B8E8A206A43E6003C477F /* Launch Screen.storyboard */,
 				D229D324207AAE270081AA87 /* DeviceModelExtension.swift */,
 				D22F4AA022BC09EE00A6C8B2 /* AppTabBarController.swift */,
@@ -832,6 +838,7 @@
 				D20789602074555A00B5509E /* Trip.swift in Sources */,
 				D29F0ED120214B0500D75A52 /* Extensions.swift in Sources */,
 				D2C000D0201A87710094138D /* ShipTrackViewController.swift in Sources */,
+				D2F73E1322BCE2EF0069D924 /* EditShipViewController.swift in Sources */,
 				D23EF2E820715CA600190B64 /* QRCodeReaderViewController.swift in Sources */,
 				D29F0EC7201D2C8700D75A52 /* AccountViewController.swift in Sources */,
 				D276CDD0202A5AE200CDAD18 /* Interactor.swift in Sources */,
@@ -864,6 +871,7 @@
 				D276CDC62029318C00CDAD18 /* CreateTripViewController1.swift in Sources */,
 				D22F4AA322BC6FBF00A6C8B2 /* AnimatedBackgroundView.swift in Sources */,
 				D2FE0CF72024C372006C8BCE /* SubMenuCollectionViewCell.swift in Sources */,
+				D2F73E1522BCE3050069D924 /* EditCompanyViewController.swift in Sources */,
 				D284D55D206FBA6300BCB1F5 /* Contact.swift in Sources */,
 				D24B8E8D206AB518003C477F /* CreateContactViewController.swift in Sources */,
 				D2FE0CF32024886B006C8BCE /* Menu.swift in Sources */,

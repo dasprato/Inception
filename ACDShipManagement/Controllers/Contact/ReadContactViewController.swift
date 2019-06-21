@@ -33,8 +33,6 @@ class ReadContactViewController: UIViewController {
         self.navigationController?.navigationBar.addShadow()
         view.backgroundColor = .darkGray
         
-        print("The width is:")
-        print(view.frame.width)
         
         
         let barButtonClose = UIBarButtonItem(image: UIImage(named: "arrow")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(closeView(_:)))
@@ -111,21 +109,19 @@ class ReadContactViewController: UIViewController {
                     guard let email = difference.document.data()["email"] as? String else { return }
                     
                     self.arrayOfContacts?.append(Contact(email: email, imageData: imageData, name: name, phone: phone, contactId: difference.document.documentID))
-                    print((difference.document.data()["name"]! as! String) + " has been added")
                 }
                 
                 if (difference.type == .modified) {
                     for i in 0..<self.arrayOfContacts!.count {
                         if self.arrayOfContacts![i].contactId == difference.document.documentID {
                             self.arrayOfContacts![i] = Contact(email: difference.document.data()["email"]! as? String, imageData: difference.document.data()["imageData"]! as? Data, name: (difference.document.data()["name"]! as! String), phone: difference.document.data()["phone"]! as? String, contactId: difference.document.documentID)
-                        print(self.arrayOfContacts![i].name! + " has been updated")
+                        
                             return
                         }
                     }
                 }
                 if (difference.type == .removed) {
                     // TODO: Find an efficient solution
-                    print("Removed contact: \(difference.document.documentID)")
                     for i in 0..<self.arrayOfContacts!.count {
                         if self.arrayOfContacts![i].contactId == difference.document.documentID {
                             self.arrayOfContacts?.remove(at: i)
@@ -156,8 +152,13 @@ extension ReadContactViewController: UICollectionViewDelegate, UICollectionViewD
 //        present(vc, animated: true, completion: nil)
 //
         
+        searchBar.resignFirstResponder()
         
-         navigationController?.pushViewController(EditContactViewController(), animated: true)
+        
+        let vc = EditContactViewController()
+//        vc.contact = self
+        vc.contact = arrayOfContacts![indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
         
 //        let vc = QRCodeViewController()
 //        vc.modalTransitionStyle = .crossDissolve

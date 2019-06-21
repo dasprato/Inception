@@ -140,6 +140,7 @@ extension ReadCompanyViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        searchBar.resignFirstResponder()
         let vc = QRCodeViewController()
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overCurrentContext
@@ -175,21 +176,17 @@ class ReadCompanyCollectionViewCell: UICollectionViewCell {
         self.company = Company(companyAddress: "", companyName: "", representativeEmail: "", representativeName: "", representativePhone: "", companyId: "")
         super.init(frame: frame)
         
-        contentView.addSubview(contactImageViewBackground)
-        contentView.addSubview(contactImageView)
+
         contentView.addSubview(companyRepresentativeNameTextField)
         contentView.addSubview(companyRepresentativePhoneTextField)
         contentView.addSubview(companyNameTextField)
         contentView.addSubview(QRCodeImageViewBackground)
         contentView.addSubview(QRCodeImageView)
         
-        NSLayoutConstraint.activate([contactImageView.topAnchor.constraint(equalTo: topAnchor), contactImageView.bottomAnchor.constraint(equalTo: bottomAnchor), contactImageView.leftAnchor.constraint(equalTo: leftAnchor), contactImageView.widthAnchor.constraint(equalTo: heightAnchor)])
-        
-        NSLayoutConstraint.activate([contactImageViewBackground.topAnchor.constraint(equalTo: topAnchor), contactImageViewBackground.bottomAnchor.constraint(equalTo: bottomAnchor), contactImageViewBackground.leftAnchor.constraint(equalTo: leftAnchor), contactImageViewBackground.widthAnchor.constraint(equalTo: heightAnchor)])
-        contactImageViewBackground.addShadow()
+
         
         
-        NSLayoutConstraint.activate([companyNameTextField.topAnchor.constraint(equalTo: contactImageView.topAnchor), companyNameTextField.leftAnchor.constraint(equalTo: contactImageView.rightAnchor, constant: 8)])
+        NSLayoutConstraint.activate([companyNameTextField.topAnchor.constraint(equalTo: topAnchor), companyNameTextField.leftAnchor.constraint(equalTo: leftAnchor)])
         
         NSLayoutConstraint.activate([companyRepresentativeNameTextField.topAnchor.constraint(equalTo: companyNameTextField.bottomAnchor), companyRepresentativeNameTextField.leftAnchor.constraint(equalTo: companyNameTextField.leftAnchor)])
         
@@ -227,30 +224,7 @@ class ReadCompanyCollectionViewCell: UICollectionViewCell {
         return cntf
     }()
     
-    // Contact image
-    
-    private var contactImageView: UIImageView = {
-        let civ = UIImageView()
-        civ.image = UIImage(named: "contact")
-        civ.translatesAutoresizingMaskIntoConstraints = false
-        civ.clipsToBounds = true
-        civ.backgroundColor = .white
-        civ.isUserInteractionEnabled = true
-        civ.contentMode = .scaleAspectFill
-        civ.layer.cornerRadius = 10.0
-        return civ
-    }()
-    
-    
-    private var contactImageViewBackground: UIView = {
-        let civb = UIView()
-        civb.translatesAutoresizingMaskIntoConstraints = false
-        civb.isUserInteractionEnabled = false
-        civb.backgroundColor = .white
-        civb.layer.cornerRadius = 10.0
-        return civb
-    }()
-    
+
     
     // QRCode image
     

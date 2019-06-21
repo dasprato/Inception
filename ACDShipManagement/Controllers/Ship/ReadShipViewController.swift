@@ -19,7 +19,7 @@ class ReadShipViewController: UIViewController {
         }
     }
     
-    let contactsCollectionViewCellId = "contactsCollectionViewCellId"
+    let shipsCollectionViewCellId = "shipsCollectionViewCellId"
     override func viewDidLoad() {
         super.viewDidLoad()
         arrayOfShips = [Ship]()
@@ -56,7 +56,7 @@ class ReadShipViewController: UIViewController {
         shipsCollectionView.delegate = self
         shipsCollectionView.dataSource = self
         
-        shipsCollectionView.register(ReadShipCollectionViewCell.self, forCellWithReuseIdentifier: contactsCollectionViewCellId)
+        shipsCollectionView.register(ReadShipCollectionViewCell.self, forCellWithReuseIdentifier: shipsCollectionViewCellId)
     }
     
     var shipsCollectionView: UICollectionView = {
@@ -103,7 +103,6 @@ class ReadShipViewController: UIViewController {
                     guard let representativeName = difference.document.data()["representativeName"] as? String else { return }
                     guard let representativePhone = difference.document.data()["representativePhone"] as? String else { return }
                     guard let vesselCapacity = difference.document.data()["vesselCapacity"] as? String else { return }
-                    
                     guard let currentStatus = difference.document.data()["currentStatus"] as? String else { return }
                     guard let vesselName = difference.document.data()["vesselName"] as? String else { return }
                     self.arrayOfShips?.append(Ship(representativeEmail: representativeEmail, representativeName: representativeName, representativePhone: representativePhone, vesselCapacity: vesselCapacity, vesselName: vesselName, shipId: difference.document.documentID, currentStatus: currentStatus))
@@ -143,6 +142,7 @@ extension ReadShipViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        searchBar.resignFirstResponder()
         let vc = QRCodeViewController()
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overCurrentContext
@@ -151,7 +151,7 @@ extension ReadShipViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = shipsCollectionView.dequeueReusableCell(withReuseIdentifier: contactsCollectionViewCellId, for: indexPath) as! ReadShipCollectionViewCell
+        let cell = shipsCollectionView.dequeueReusableCell(withReuseIdentifier: shipsCollectionViewCellId, for: indexPath) as! ReadShipCollectionViewCell
         cell.ship = self.arrayOfShips![indexPath.row]
         
         return cell
@@ -184,8 +184,7 @@ class ReadShipCollectionViewCell: UICollectionViewCell {
         self.ship = Ship(representativeEmail: "", representativeName: "", representativePhone: "", vesselCapacity: "", vesselName: "", shipId: "", currentStatus: "")
         super.init(frame: frame)
         
-        contentView.addSubview(contactImageViewBackground)
-        contentView.addSubview(contactImageView)
+
         contentView.addSubview(vesselRepresentativeNameTextField)
         contentView.addSubview(vesselCapacityTextField)
         contentView.addSubview(vesselNameTextField)
@@ -194,13 +193,8 @@ class ReadShipCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(statusViewCircle)
         contentView.addSubview(currentStatusTextField)
         
-        NSLayoutConstraint.activate([contactImageView.topAnchor.constraint(equalTo: topAnchor), contactImageView.bottomAnchor.constraint(equalTo: bottomAnchor), contactImageView.leftAnchor.constraint(equalTo: leftAnchor), contactImageView.widthAnchor.constraint(equalTo: heightAnchor)])
-        
-        NSLayoutConstraint.activate([contactImageViewBackground.topAnchor.constraint(equalTo: topAnchor), contactImageViewBackground.bottomAnchor.constraint(equalTo: bottomAnchor), contactImageViewBackground.leftAnchor.constraint(equalTo: leftAnchor), contactImageViewBackground.widthAnchor.constraint(equalTo: heightAnchor)])
-        contactImageViewBackground.addShadow()
-        
-        
-        NSLayoutConstraint.activate([vesselNameTextField.topAnchor.constraint(equalTo: contactImageView.topAnchor), vesselNameTextField.leftAnchor.constraint(equalTo: contactImageView.rightAnchor, constant: 8)])
+
+        NSLayoutConstraint.activate([vesselNameTextField.topAnchor.constraint(equalTo: topAnchor), vesselNameTextField.leftAnchor.constraint(equalTo: leftAnchor, constant: 8)])
         
         NSLayoutConstraint.activate([vesselRepresentativeNameTextField.topAnchor.constraint(equalTo: vesselNameTextField.bottomAnchor), vesselRepresentativeNameTextField.leftAnchor.constraint(equalTo: vesselNameTextField.leftAnchor)])
         
@@ -259,29 +253,7 @@ class ReadShipCollectionViewCell: UICollectionViewCell {
         return cntf
     }()
     
-    // Contact image
-    
-    private var contactImageView: UIImageView = {
-        let civ = UIImageView()
-        civ.image = UIImage(named: "contact")
-        civ.translatesAutoresizingMaskIntoConstraints = false
-        civ.clipsToBounds = true
-        civ.backgroundColor = .white
-        civ.isUserInteractionEnabled = true
-        civ.contentMode = .scaleAspectFill
-        civ.layer.cornerRadius = 10.0
-        return civ
-    }()
-    
-    
-    private var contactImageViewBackground: UIView = {
-        let civb = UIView()
-        civb.translatesAutoresizingMaskIntoConstraints = false
-        civb.isUserInteractionEnabled = false
-        civb.backgroundColor = .white
-        civb.layer.cornerRadius = 10.0
-        return civb
-    }()
+
     
     
     // QRCode image

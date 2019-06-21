@@ -15,6 +15,14 @@ import Firebase
 
 class ShipViewController: UIViewController {
     
+    var arrayOfShips: [Ship] = [Ship]()  {
+        didSet {
+            print(arrayOfShips)
+        }
+    }
+    
+    
+    
     var directionsRoute: Route?
     var firstTimeFlag = true
     
@@ -22,15 +30,12 @@ class ShipViewController: UIViewController {
     
     fileprivate func plotShipsOnMap() {
         // Create four new point annotations with specified coordinates and titles.
-        
-        print(interactiveBackgroundMap.annotations?.count)
         //        interactiveBackgroundMap.removeAnnotations(interactiveBackgroundMap.annotations)
-        addPoint(withTitle: "MV SS Helencha 7", andLocationCooridinate: CLLocationCoordinate2D(latitude: 23.597159, longitude: 90.573151))
-        addPoint(withTitle: "MV SS Helencha 2", andLocationCooridinate: CLLocationCoordinate2D(latitude: 23.597159, longitude: 89))
-        addPoint(withTitle: "MV SS Helencha 1", andLocationCooridinate:  CLLocationCoordinate2D(latitude: 21.676898, longitude: 91.778931))
-        addPoint(withTitle: "MV Al Jihad", andLocationCooridinate: CLLocationCoordinate2D(latitude: 20.95284782222657, longitude: 91.69104026967057))
-        addPoint(withTitle: "MV Banglar Drishti", andLocationCooridinate: CLLocationCoordinate2D(latitude: 21.893741, longitude: 87.955689))
-        print(interactiveBackgroundMap.annotations?.count)
+//        addPoint(withTitle: "MV SS Helencha 7", andLocationCooridinate: CLLocationCoordinate2D(latitude: 23.597159, longitude: 90.573151))
+//        addPoint(withTitle: "MV SS Helencha 2", andLocationCooridinate: CLLocationCoordinate2D(latitude: 23.597159, longitude: 89))
+//        addPoint(withTitle: "MV SS Helencha 1", andLocationCooridinate:  CLLocationCoordinate2D(latitude: 21.676898, longitude: 91.778931))
+//        addPoint(withTitle: "MV Al Jihad", andLocationCooridinate: CLLocationCoordinate2D(latitude: 20.95284782222657, longitude: 91.69104026967057))
+//        addPoint(withTitle: "MV Banglar Drishti", andLocationCooridinate: CLLocationCoordinate2D(latitude: 21.893741, longitude: 87.955689))
     }
     
     func addPoint(withTitle title: String, andLocationCooridinate coordinate: CLLocationCoordinate2D) {
@@ -40,8 +45,56 @@ class ShipViewController: UIViewController {
         interactiveBackgroundMap.addAnnotation(point)
     }
     
+    
+    func fetchShips() {
+        let db = Firestore.firestore()
+        db.collection("Ships").addSnapshotListener { (snapshot, error) in
+            guard let _ = snapshot?.documents else {
+                print("Error fetching documents: \(error!)")
+                return
+            }
+            snapshot?.documentChanges.forEach({ (difference) in
+                if (difference.type == .added) {
+                    
+                    guard let representativeEmail = difference.document.data()["representativeEmail"] as? String else { return }
+                    guard let representativeName = difference.document.data()["representativeName"] as? String else { return }
+                    guard let representativePhone = difference.document.data()["representativePhone"] as? String else { return }
+                    guard let vesselCapacity = difference.document.data()["vesselCapacity"] as? String else { return }
+                    guard let currentStatus = difference.document.data()["currentStatus"] as? String else { return }
+                    guard let vesselName = difference.document.data()["vesselName"] as? String else { return }
+                    self.arrayOfShips.append(Ship(representativeEmail: representativeEmail, representativeName: representativeName, representativePhone: representativePhone, vesselCapacity: vesselCapacity, vesselName: vesselName, shipId: difference.document.documentID, currentStatus: currentStatus))
+                    print(vesselName)
+                    
+                    let latitude = arc4random_uniform(90)
+                    let longitude = arc4random_uniform(180)
+                    
+                    self.addPoint(withTitle: vesselName, andLocationCooridinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude)))
+                }
+                
+                if (difference.type == .modified) {
+                    for i in 0..<self.arrayOfShips.count {
+                        if self.arrayOfShips[i].shipId == difference.document.documentID {
+                            self.arrayOfShips[i] = (Ship(representativeEmail: difference.document.data()["representativeEmail"]! as? String, representativeName: difference.document.data()["representativeName"]! as? String, representativePhone: difference.document.data()["representativePhone"]! as? String, vesselCapacity: difference.document.data()["vesselCapacity"]! as? String, vesselName: difference.document.data()["vesselName"]! as? String, shipId: difference.document.documentID, currentStatus: difference.document.data()["currentStatus"]! as? String))
+                            return
+                        }
+                    }
+                }
+                if (difference.type == .removed) {
+                    // TODO: Find an efficient solution
+                    print("Removed contact: \(difference.document.documentID)")
+                    for i in 0..<self.arrayOfShips.count {
+                        if self.arrayOfShips[i].shipId == difference.document.documentID {
+                            self.arrayOfShips.remove(at: i)
+                            return
+                        }
+                    }
+                }
+            })
+        }
+    }
+    
+    
     @objc func updateShipsOnMap() {
-        print("Lets check")
         for i in 0..<interactiveBackgroundMap.annotations!.count {
             if let annotation = self.interactiveBackgroundMap.annotations![i] as? MyCustomPointAnnotation {
                 annotation.coordinate = CLLocationCoordinate2D(latitude: annotation.coordinate.latitude - 0.001, longitude: annotation.coordinate.longitude - 0.001)
@@ -87,6 +140,8 @@ class ShipViewController: UIViewController {
         
         
         Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateShipsOnMap), userInfo: nil, repeats: true)
+        
+        fetchShips()
     }
     
     
@@ -139,7 +194,7 @@ class ShipViewController: UIViewController {
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier)
         
         
-        let textLabel: UILabel = {
+        let shipNameLabel: UILabel = {
             let tl = UILabel()
             tl.translatesAutoresizingMaskIntoConstraints = false
             tl.text = "Ship"

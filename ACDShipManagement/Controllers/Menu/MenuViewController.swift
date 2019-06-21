@@ -62,21 +62,14 @@ let mainCollectionViewCellId = "mainCollectionViewCellId"
     @objc func readShip() {
          present(UINavigationController(rootViewController: ReadShipViewController()), animated: true, completion: nil)
     }
-    
-    @objc func updateShip() {
-        
-    }
-    
-    @objc func deleteShip() {
-        
-    }
+
     
     @objc func createCompany() {
-        
+        present(UINavigationController(rootViewController: CreateCompanyViewController()), animated: true, completion: nil)
     }
     
     @objc func readCompany() {
-        
+        present(UINavigationController(rootViewController: ReadCompanyViewController()), animated: true, completion: nil)
     }
     
     @objc func createTrip() {
@@ -100,10 +93,11 @@ let mainCollectionViewCellId = "mainCollectionViewCellId"
     }
     
 
-
     
-    
-    
+    override func viewWillAppear(_ animated: Bool) {
+        print("willAppear")
+        NotificationCenter.default.post(name: NSNotification.Name.init("Menu Appeared"), object: self, userInfo: nil)
+    }
     func setupObservers() {
 
         NotificationCenter.default.addObserver(self, selector: #selector(createShip), name: NSNotification.Name.init("create Ship"), object: nil)

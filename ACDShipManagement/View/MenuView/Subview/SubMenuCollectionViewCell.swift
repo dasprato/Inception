@@ -46,35 +46,13 @@ class SubMenuCollectionViewCell: UICollectionViewCell {
         
                 NSLayoutConstraint.activate([whiteBackgroundView.topAnchor.constraint(equalTo: horizontalCollectionView.topAnchor), whiteBackgroundView.bottomAnchor.constraint(equalTo: horizontalCollectionView.bottomAnchor), whiteBackgroundView.rightAnchor.constraint(equalTo: horizontalCollectionView.rightAnchor, constant: -20), whiteBackgroundView.leftAnchor.constraint(equalTo: horizontalCollectionView.leftAnchor)])
         
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(changeMenuOrientationToPortrait), name: NSNotification.Name.init("ChangedMenuOrientationToPortrait"), object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(changeMenuOrientationToLandscape), name: NSNotification.Name.init("ChangedMenuOrientationToLandscape"), object: nil)
+
         
         
         setupHorizontalCollectionView()
     }
     
-    
-    @objc func changeMenuOrientationToPortrait() {
-        //        horizontalCollectionView.reloadData()
-        //        layoutSublayers(of: contentView.layer)
-        contentView.layoutMarginsDidChange()
-        horizontalCollectionView.layoutMarginsDidChange()
-        supportWhiteBackgroundView.layoutMarginsDidChange()
-        whiteBackgroundView.layoutMarginsDidChange()
-    }
-    
-    
-    @objc func changeMenuOrientationToLandscape() {
-        //        horizontalCollectionView.reloadData()
-        contentView.layoutMarginsDidChange()
-        horizontalCollectionView.layoutMarginsDidChange()
-        supportWhiteBackgroundView.layoutMarginsDidChange()
-        whiteBackgroundView.layoutMarginsDidChange()
-        
-        
-    }
+
     
     
     func setupHorizontalCollectionView() {
