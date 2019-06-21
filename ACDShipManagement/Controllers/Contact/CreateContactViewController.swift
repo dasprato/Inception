@@ -90,7 +90,7 @@ class CreateContactViewController: UIViewController {
     var contactPhoneTextField: CustomUITextField = {
         let cntf = CustomUITextField()
         cntf.placeholder = "Phone"
-        cntf.keyboardType = .decimalPad
+        cntf.keyboardType = .phonePad
         return cntf
     }()
     
@@ -129,7 +129,7 @@ class CreateContactViewController: UIViewController {
     var saveButton: CustomUIButton = {
         let cb = CustomUIButton(type: .system)
         cb.setTitle("Save", for: .normal)
-        cb.addTarget(self, action: #selector(save), for: .touchUpInside)
+        cb.addTarget(self, action: #selector(handleSave), for: .touchUpInside)
         cb.backgroundColor = .green
         cb.layer.cornerRadius = 10.0
         cb.clipsToBounds = true
@@ -161,7 +161,7 @@ class CreateContactViewController: UIViewController {
 
 
 extension CreateContactViewController {
-    @objc func save() {
+    @objc func handleSave() {
         if contactNameTextField.text == "" || contactEmailTextField.text == "" || contactPhoneTextField.text == "" {
             return
         }

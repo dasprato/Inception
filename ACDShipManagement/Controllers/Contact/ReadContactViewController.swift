@@ -25,19 +25,10 @@ class ReadContactViewController: UIViewController {
         arrayOfContacts = [Contact]()
         fetchContacts()
         setupCollectionView()
+//        setupBar()
+        setupBarWithBaiscStyling(self)
+        
 
-
-        
-        self.navigationController?.navigationBar.tintColor = .white
-        self.navigationController?.navigationBar.barTintColor = .gray
-        self.navigationController?.navigationBar.addShadow()
-        view.backgroundColor = .darkGray
-        
-        
-        
-        let barButtonClose = UIBarButtonItem(image: UIImage(named: "arrow")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(closeView(_:)))
-        barButtonClose.tintColor = .white
-        self.navigationItem.setLeftBarButton(barButtonClose, animated: true)
         
         
         searchBar.placeholder = "Search"
@@ -45,6 +36,7 @@ class ReadContactViewController: UIViewController {
         searchBar.becomeFirstResponder()
 
     }
+
     
     func setupCollectionView() {
         view.addSubview(contactsCollectionView)

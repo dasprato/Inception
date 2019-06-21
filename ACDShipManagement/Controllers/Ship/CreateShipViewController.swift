@@ -118,7 +118,7 @@ class CreateShipViewController: UIViewController {
     var saveButton: CustomUIButton = {
         let cb = CustomUIButton(type: .system)
         cb.setTitle("Save", for: .normal)
-        cb.addTarget(self, action: #selector(save), for: .touchUpInside)
+        cb.addTarget(self, action: #selector(handleSave), for: .touchUpInside)
         cb.backgroundColor = .green
         cb.layer.cornerRadius = 10.0
         return cb
@@ -139,7 +139,7 @@ class CreateShipViewController: UIViewController {
 
 
 extension CreateShipViewController {
-    @objc func save() {
+    @objc func handleSave() {
         print("Attempting to save contact to firebase")
         if vesselNameTextField.text == "" || vesselCapacityTextField.text == "" || representativeNameTextField.text == "" || representativePhoneTextField.text == "" || representativeEmailTextField.text == ""   {
             print("ERROR")

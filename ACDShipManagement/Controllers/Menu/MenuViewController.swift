@@ -55,6 +55,19 @@ let mainCollectionViewCellId = "mainCollectionViewCellId"
     }
     
     
+    @objc func createTrip() {
+        present(UINavigationController(rootViewController: CreateTripViewController1()), animated: true, completion: nil)
+    }
+    
+    @objc func readTrip() {
+        
+        present(UINavigationController(rootViewController: ReadTripViewController()), animated: true, completion: nil)
+    }
+    
+    @objc func sailTrip() {
+        present(UINavigationController(rootViewController: SailTripViewController1()), animated: true, completion: nil)
+    }
+    
     @objc func createShip() {
         present(UINavigationController(rootViewController: CreateShipViewController()), animated: true, completion: nil)
     }
@@ -72,18 +85,7 @@ let mainCollectionViewCellId = "mainCollectionViewCellId"
         present(UINavigationController(rootViewController: ReadCompanyViewController()), animated: true, completion: nil)
     }
     
-    @objc func createTrip() {
-        
-    }
-    
-    @objc func readTrip() {
-        
-    }
-    
-    @objc func updateTrip() {
-        
-    }
-    
+
     @objc func createContact() {
         present(UINavigationController(rootViewController: CreateContactViewController()), animated: true, completion: nil)
     }
@@ -113,7 +115,7 @@ let mainCollectionViewCellId = "mainCollectionViewCellId"
         
         NotificationCenter.default.addObserver(self, selector: #selector(createTrip), name: NSNotification.Name.init("create Trip"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(readTrip), name: NSNotification.Name.init("read Trip"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateTrip), name: NSNotification.Name.init("update Trip"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(sailTrip), name: NSNotification.Name.init("sail Trip"), object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(deleteTrip), name: NSNotification.Name.init("delete Trip"), object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(sailTrip), name: NSNotification.Name.init("sail Trip"), object: nil)
         

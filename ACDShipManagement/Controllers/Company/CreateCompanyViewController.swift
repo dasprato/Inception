@@ -112,7 +112,7 @@ class CreateCompanyViewController: UIViewController {
     var saveButton: CustomUIButton = {
         let cb = CustomUIButton(type: .system)
         cb.setTitle("Save", for: .normal)
-        cb.addTarget(self, action: #selector(save), for: .touchUpInside)
+        cb.addTarget(self, action: #selector(handleSave), for: .touchUpInside)
         cb.backgroundColor = .green
         cb.layer.cornerRadius = 10.0
         
@@ -134,22 +134,19 @@ class CreateCompanyViewController: UIViewController {
 
 
 extension CreateCompanyViewController {
-    @objc func save() {
+    @objc func handleSave() {
         print("Attempting to save contact to firebase")
         if companyNameTextField.text == "" || companyAddressTextField.text == "" || representativeNameTextField.text == "" || representativePhoneTextField.text == "" || representativeEmailTextField.text == ""   {
             print("ERROR")
             return
         }
-        
-        
         self.companyNameTextField.isUserInteractionEnabled = false
         self.companyAddressTextField.isUserInteractionEnabled = false
         self.representativeNameTextField.isUserInteractionEnabled = false
         self.representativePhoneTextField.isUserInteractionEnabled = false
         self.representativeEmailTextField.isUserInteractionEnabled = false
         self.saveButton.isUserInteractionEnabled = false
-
-    
+        
         let companyName = companyNameTextField.text
         let companyAddress = companyAddressTextField.text
         let representativeName = representativeNameTextField.text
@@ -159,13 +156,11 @@ extension CreateCompanyViewController {
         let db = Firestore.firestore()
         let companyDictionary: [String: Any?] = ["companyName": companyName, "companyAddress": companyAddress, "representativeName": representativeName, "representativePhone": representativePhone, "representativeEmail": representativeEmail]
         db.collection("Companies").document(companyId).setData(companyDictionary)
-
         self.companyNameTextField.text = ""
         self.companyAddressTextField.text = ""
         self.representativeNameTextField.text = ""
         self.representativePhoneTextField.text = ""
         self.representativeEmailTextField.text = ""
-        
         self.companyNameTextField.isUserInteractionEnabled = true
         self.companyAddressTextField.isUserInteractionEnabled = true
         self.representativeNameTextField.isUserInteractionEnabled = true

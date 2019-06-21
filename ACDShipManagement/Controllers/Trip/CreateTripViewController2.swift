@@ -192,7 +192,7 @@ class CreateTripViewController2: UIViewController {
     var createTripButton: CustomUIButton = {
         let cb = CustomUIButton()
         cb.setImage(UIImage(named: "greenCheck")?.withRenderingMode(.alwaysOriginal), for: .normal)
-        cb.addTarget(self, action: #selector(save), for: .touchUpInside)
+        cb.addTarget(self, action: #selector(handleTripCreation), for: .touchUpInside)
         cb.backgroundColor = .clear
         return cb
     }()
@@ -230,7 +230,7 @@ class CreateTripViewController2: UIViewController {
 }
 
 extension CreateTripViewController2 {
-    @objc func save() {
+    @objc func handleTripCreation() {
         if fromTextField.text == "" || toTextField.text == "" || cargoTextField.text == "" || cargoAmountTextField.text == "" || fromDateTextField.text == "" || toDateTextField.text == "" {
             print("ERROR")
             return

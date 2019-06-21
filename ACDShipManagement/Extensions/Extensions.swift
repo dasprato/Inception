@@ -197,9 +197,16 @@ extension UIViewController {
         present(avc, animated: true, completion: nil)
     }
     
-
-    
-
+    func setupBarWithBaiscStyling(_ viewController: UIViewController) {
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.barTintColor = .gray
+        navigationController?.navigationBar.addShadow()
+        view.backgroundColor = .darkGray
+        
+        let barButtonClose = UIBarButtonItem(image: UIImage(named: "arrow")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(closeView(_:)))
+        barButtonClose.tintColor = .white
+        navigationItem.setLeftBarButton(barButtonClose, animated: true)
+    }
 }
 
 extension UIView {

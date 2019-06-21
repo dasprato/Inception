@@ -44,22 +44,8 @@ class ReadTripViewController: InteractiveViewController {
         fetchTrips()
         setupCollectionView()
         
-        self.navigationController?.navigationBar.tintColor = .white
-        self.navigationController?.navigationBar.barTintColor = .gray
-        self.navigationController?.navigationBar.addShadow()
-        self.navigationController?.title = ""
-        self.navigationController?.navigationBar.topItem?.title = ""
-        view.backgroundColor = .darkGray
-        
-        self.navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.darkGray]
-        self.navigationController?.navigationBar.barTintColor = .darkGray
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        
-        let barButtonClose = UIBarButtonItem(image: UIImage(named: "arrow")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(closeView(_:)))
-        barButtonClose.tintColor = .white
-        self.navigationItem.setLeftBarButton(barButtonClose, animated: true)
+        // Method in extension
+        setupBarWithBaiscStyling(self)
         
         searchBar.placeholder = "Search"
         navigationItem.titleView = searchBar
@@ -235,9 +221,9 @@ extension ReadTripViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            searchBar.resignFirstResponder()
             let vc = TripHistoryViewController()
             vc.trip = self.arrayOfTrips![indexPath.row]
-//            ConnectionBetweenVC.ship = self.arrayOfShipNames[indexPath.row]
             self.navigationController?.pushViewController(vc, animated: true)
     
 

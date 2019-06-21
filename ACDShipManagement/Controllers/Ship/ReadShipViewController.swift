@@ -26,14 +26,8 @@ class ReadShipViewController: UIViewController {
         fetchShips()
         setupCollectionView()
 
-        self.navigationController?.navigationBar.tintColor = .white
-        self.navigationController?.navigationBar.barTintColor = .gray
-        self.navigationController?.navigationBar.addShadow()
-        view.backgroundColor = .darkGray
-        
-        let barButtonClose = UIBarButtonItem(image: UIImage(named: "arrow")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(closeView(_:)))
-        barButtonClose.tintColor = .white
-        self.navigationItem.setLeftBarButton(barButtonClose, animated: true)
+        // Method in extension
+        setupBarWithBaiscStyling(self)
         
         
         searchBar.placeholder = "Search"
