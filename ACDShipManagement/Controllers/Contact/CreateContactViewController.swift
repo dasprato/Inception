@@ -15,21 +15,21 @@ class CreateContactViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.tintColor = .white
-        self.navigationController?.navigationBar.barTintColor = .gray
-        self.navigationController?.navigationBar.addShadow()
-        view.backgroundColor = .darkGray
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(statusManager), name: .flagsChanged, object: Network.reachability)
 
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(statusManager), name: .flagsChanged, object: Network.reachability)
+    
         setupBarButtons()
         setupTextFieldsAndButtons()
         
     }
     
     func setupBarButtons() {
-
+        self.navigationController?.navigationBar.tintColor = .white
+        self.navigationController?.navigationBar.barTintColor = .gray
+        self.navigationController?.navigationBar.addShadow()
+        view.backgroundColor = .darkGray
+        
+        
         let barButtonClose = UIBarButtonItem(image: UIImage(named: "arrow")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(closeView(_:)))
         barButtonClose.tintColor = .white
         self.navigationItem.setLeftBarButton(barButtonClose, animated: true)

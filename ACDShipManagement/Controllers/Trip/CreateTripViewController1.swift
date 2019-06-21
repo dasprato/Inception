@@ -33,17 +33,7 @@ class CreateTripViewController1: UIViewController, CreateTripViewController2DidC
         arrayOfShips = [Ship]()
         fetchShips()
         setupCollectionView()
-        
-        self.navigationController?.navigationBar.tintColor = .white
-        self.navigationController?.navigationBar.barTintColor = .gray
-        self.navigationController?.navigationBar.addShadow()
-        self.navigationController?.navigationBar.topItem?.title = ""
-        self.navigationController?.title = ""
-        view.backgroundColor = .darkGray
-        
-        let barButtonClose = UIBarButtonItem(image: UIImage(named: "arrow")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(closeView(_:)))
-        barButtonClose.tintColor = .white
-        self.navigationItem.setLeftBarButton(barButtonClose, animated: true)
+        setupBarButtons()
         
         
         searchBar.placeholder = "Search"
@@ -53,6 +43,19 @@ class CreateTripViewController1: UIViewController, CreateTripViewController2DidC
         
         
     }
+    
+    func setupBarButtons() {
+        self.navigationController?.navigationBar.tintColor = .white
+        self.navigationController?.navigationBar.barTintColor = .gray
+        self.navigationController?.navigationBar.addShadow()
+        view.backgroundColor = .darkGray
+        
+        
+        let barButtonClose = UIBarButtonItem(image: UIImage(named: "arrow")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(closeView(_:)))
+        barButtonClose.tintColor = .white
+        self.navigationItem.setLeftBarButton(barButtonClose, animated: true)
+    }
+    
     
     func setupCollectionView() {
         view.addSubview(shipsCollectionView)

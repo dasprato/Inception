@@ -17,6 +17,8 @@
 		D2153E342024D03400B3D2A2 /* QuickActionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2153E332024D03400B3D2A2 /* QuickActionCollectionViewCell.swift */; };
 		D229D325207AAE270081AA87 /* DeviceModelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D229D324207AAE270081AA87 /* DeviceModelExtension.swift */; };
 		D22EAA4B205E970800439F00 /* DeveloperInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22EAA4A205E970800439F00 /* DeveloperInfoViewController.swift */; };
+		D22F4AA122BC09EE00A6C8B2 /* AppTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22F4AA022BC09EE00A6C8B2 /* AppTabBarController.swift */; };
+		D22F4AA322BC6FBF00A6C8B2 /* AnimatedBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22F4AA222BC6FBF00A6C8B2 /* AnimatedBackgroundView.swift */; };
 		D23EF2E6207127D900190B64 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23EF2E5207127D900190B64 /* QRCodeViewController.swift */; };
 		D23EF2E820715CA600190B64 /* QRCodeReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23EF2E720715CA600190B64 /* QRCodeReaderViewController.swift */; };
 		D23EF2EA2071888C00190B64 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23EF2E92071888C00190B64 /* Company.swift */; };
@@ -45,10 +47,9 @@
 		D284D556206C858500BCB1F5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D284D555206C858500BCB1F5 /* GoogleService-Info.plist */; };
 		D284D557206C858500BCB1F5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D284D555206C858500BCB1F5 /* GoogleService-Info.plist */; };
 		D284D558206C858500BCB1F5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D284D555206C858500BCB1F5 /* GoogleService-Info.plist */; };
-		D284D55B206E648400BCB1F5 /* SelectContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D284D55A206E648400BCB1F5 /* SelectContactViewController.swift */; };
+		D284D55B206E648400BCB1F5 /* EditContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D284D55A206E648400BCB1F5 /* EditContactViewController.swift */; };
 		D284D55D206FBA6300BCB1F5 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = D284D55C206FBA6300BCB1F5 /* Contact.swift */; };
 		D284D55F206FBC2E00BCB1F5 /* ReadContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D284D55E206FBC2E00BCB1F5 /* ReadContactViewController.swift */; };
-		D29F0EC5201D2A7200D75A52 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F0EC4201D2A7200D75A52 /* CustomTabBarController.swift */; };
 		D29F0EC7201D2C8700D75A52 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F0EC6201D2C8700D75A52 /* AccountViewController.swift */; };
 		D29F0EC9201D2C9B00D75A52 /* ShipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F0EC8201D2C9B00D75A52 /* ShipViewController.swift */; };
 		D29F0ECB201D3AAA00D75A52 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F0ECA201D3AAA00D75A52 /* NotificationViewController.swift */; };
@@ -108,6 +109,8 @@
 		D2153E332024D03400B3D2A2 /* QuickActionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickActionCollectionViewCell.swift; sourceTree = "<group>"; };
 		D229D324207AAE270081AA87 /* DeviceModelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModelExtension.swift; sourceTree = "<group>"; };
 		D22EAA4A205E970800439F00 /* DeveloperInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperInfoViewController.swift; sourceTree = "<group>"; };
+		D22F4AA022BC09EE00A6C8B2 /* AppTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabBarController.swift; sourceTree = "<group>"; };
+		D22F4AA222BC6FBF00A6C8B2 /* AnimatedBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedBackgroundView.swift; sourceTree = "<group>"; };
 		D23EF2E5207127D900190B64 /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		D23EF2E720715CA600190B64 /* QRCodeReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeReaderViewController.swift; sourceTree = "<group>"; };
 		D23EF2E92071888C00190B64 /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
@@ -135,10 +138,9 @@
 		D276CDD3202A5E5500CDAD18 /* Interactive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactive.swift; sourceTree = "<group>"; };
 		D284D555206C858500BCB1F5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D284D559206CA24000BCB1F5 /* ACDShipManagement.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ACDShipManagement.entitlements; sourceTree = "<group>"; };
-		D284D55A206E648400BCB1F5 /* SelectContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectContactViewController.swift; sourceTree = "<group>"; };
+		D284D55A206E648400BCB1F5 /* EditContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditContactViewController.swift; sourceTree = "<group>"; };
 		D284D55C206FBA6300BCB1F5 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		D284D55E206FBC2E00BCB1F5 /* ReadContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadContactViewController.swift; sourceTree = "<group>"; };
-		D29F0EC4201D2A7200D75A52 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		D29F0EC6201D2C8700D75A52 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		D29F0EC8201D2C9B00D75A52 /* ShipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShipViewController.swift; sourceTree = "<group>"; };
 		D29F0ECA201D3AAA00D75A52 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				D29F0ED020214B0500D75A52 /* Extensions.swift */,
 				D24B8E8620696EE3003C477F /* Reachability.swift */,
 				D24B8E88206973AF003C477F /* NoReachabilityViewController.swift */,
+				D22F4AA222BC6FBF00A6C8B2 /* AnimatedBackgroundView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -300,7 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				D24B8E8C206AB518003C477F /* CreateContactViewController.swift */,
-				D284D55A206E648400BCB1F5 /* SelectContactViewController.swift */,
+				D284D55A206E648400BCB1F5 /* EditContactViewController.swift */,
 				D284D55E206FBC2E00BCB1F5 /* ReadContactViewController.swift */,
 			);
 			path = Contact;
@@ -369,11 +372,11 @@
 				D24B8E90206AB538003C477F /* Trip */,
 				D24B8E8F206AB532003C477F /* Company */,
 				D24B8E8E206AB52C003C477F /* Ship */,
-				D29F0EC4201D2A7200D75A52 /* CustomTabBarController.swift */,
 				D29F0EC6201D2C8700D75A52 /* AccountViewController.swift */,
 				D29F0EC8201D2C9B00D75A52 /* ShipViewController.swift */,
 				D24B8E8A206A43E6003C477F /* Launch Screen.storyboard */,
 				D229D324207AAE270081AA87 /* DeviceModelExtension.swift */,
+				D22F4AA022BC09EE00A6C8B2 /* AppTabBarController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -539,8 +542,6 @@
 				D2C000DD201A87710094138D /* Sources */,
 				D2C000DE201A87710094138D /* Frameworks */,
 				D2C000DF201A87710094138D /* Resources */,
-				E72362E5989A27F4A81A4AB3 /* [CP] Embed Pods Frameworks */,
-				2D92169F7945C36D9B5B3C49 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -560,8 +561,6 @@
 				D2C000E8201A87710094138D /* Sources */,
 				D2C000E9201A87710094138D /* Frameworks */,
 				D2C000EA201A87710094138D /* Resources */,
-				FB7C818F9DFE71C46E0AA8E7 /* [CP] Embed Pods Frameworks */,
-				FBEE72D0C55A5B906D830891 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -588,10 +587,10 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.Push = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -691,21 +690,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2D92169F7945C36D9B5B3C49 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ACDShipManagementTests/Pods-ACDShipManagementTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7FFF3316B40F7C72863BF773 /* [CP] Check Pods Manifest.lock */ = {
@@ -827,56 +811,11 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ACDShipManagement/Pods-ACDShipManagement-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E72362E5989A27F4A81A4AB3 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ACDShipManagementTests/Pods-ACDShipManagementTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FB7C818F9DFE71C46E0AA8E7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ACDShipManagementUITests/Pods-ACDShipManagementUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FBEE72D0C55A5B906D830891 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ACDShipManagementUITests/Pods-ACDShipManagementUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -887,7 +826,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D276CDB6202928D700CDAD18 /* CreateShipViewController.swift in Sources */,
-				D284D55B206E648400BCB1F5 /* SelectContactViewController.swift in Sources */,
+				D284D55B206E648400BCB1F5 /* EditContactViewController.swift in Sources */,
 				D2153E342024D03400B3D2A2 /* QuickActionCollectionViewCell.swift in Sources */,
 				D29F0EC9201D2C9B00D75A52 /* ShipViewController.swift in Sources */,
 				D20789602074555A00B5509E /* Trip.swift in Sources */,
@@ -909,6 +848,7 @@
 				D249AA6620233B3D00A3C908 /* NotificationDetailViewController.swift in Sources */,
 				D23EF2E6207127D900190B64 /* QRCodeViewController.swift in Sources */,
 				D276CDD4202A5E5500CDAD18 /* Interactive.swift in Sources */,
+				D22F4AA122BC09EE00A6C8B2 /* AppTabBarController.swift in Sources */,
 				D23EF2EA2071888C00190B64 /* Company.swift in Sources */,
 				D23EF2EC2071889300190B64 /* Ship.swift in Sources */,
 				D29F0ECB201D3AAA00D75A52 /* NotificationViewController.swift in Sources */,
@@ -922,6 +862,7 @@
 				D276CDB8202928E600CDAD18 /* UpdateShipViewController.swift in Sources */,
 				D276CDB4202928C700CDAD18 /* ReadShipViewController.swift in Sources */,
 				D276CDC62029318C00CDAD18 /* CreateTripViewController1.swift in Sources */,
+				D22F4AA322BC6FBF00A6C8B2 /* AnimatedBackgroundView.swift in Sources */,
 				D2FE0CF72024C372006C8BCE /* SubMenuCollectionViewCell.swift in Sources */,
 				D284D55D206FBA6300BCB1F5 /* Contact.swift in Sources */,
 				D24B8E8D206AB518003C477F /* CreateContactViewController.swift in Sources */,
@@ -933,7 +874,6 @@
 				D24B8E89206973AF003C477F /* NoReachabilityViewController.swift in Sources */,
 				D29F0ECF201F2E0200D75A52 /* NotificationCollectionViewCell.swift in Sources */,
 				D207895C2073B98E00B5509E /* SailTripViewController1.swift in Sources */,
-				D29F0EC5201D2A7200D75A52 /* CustomTabBarController.swift in Sources */,
 				D276CDC82029319700CDAD18 /* UpdateTripViewController.swift in Sources */,
 				D2C000D6201A87710094138D /* ACDShipManagement.xcdatamodeld in Sources */,
 				D2C975252080EE02001FD285 /* LocationLogViewController.swift in Sources */,
@@ -1088,14 +1028,15 @@
 			baseConfigurationReference = 42A14D47C59E4994DEC68E4C /* Pods-ACDShipManagement.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = ACDShipManagement/ACDShipManagement.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B4K37TQC3B;
+				DEVELOPMENT_TEAM = LQD4PRHBSM;
 				INFOPLIST_FILE = ACDShipManagement/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ca.dasprato.ACDShipManagement;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.dasprato.SpringBoard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1106,14 +1047,15 @@
 			baseConfigurationReference = 86FDA20B30D44C59C9908601 /* Pods-ACDShipManagement.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = ACDShipManagement/ACDShipManagement.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B4K37TQC3B;
+				DEVELOPMENT_TEAM = LQD4PRHBSM;
 				INFOPLIST_FILE = ACDShipManagement/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ca.dasprato.ACDShipManagement;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.dasprato.SpringBoard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1126,6 +1068,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LQD4PRHBSM;
 				INFOPLIST_FILE = ACDShipManagementTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ca.dasprato.ACDShipManagementTests;
@@ -1143,6 +1086,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LQD4PRHBSM;
 				INFOPLIST_FILE = ACDShipManagementTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ca.dasprato.ACDShipManagementTests;
@@ -1159,6 +1103,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LQD4PRHBSM;
 				INFOPLIST_FILE = ACDShipManagementUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ca.dasprato.ACDShipManagementUITests;
@@ -1175,6 +1120,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LQD4PRHBSM;
 				INFOPLIST_FILE = ACDShipManagementUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ca.dasprato.ACDShipManagementUITests;

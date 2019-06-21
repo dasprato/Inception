@@ -54,24 +54,74 @@ let mainCollectionViewCellId = "mainCollectionViewCellId"
         
     }
     
+    
+    @objc func createShip() {
+        present(UINavigationController(rootViewController: CreateShipViewController()), animated: true, completion: nil)
+    }
+    
+    @objc func readShip() {
+         present(UINavigationController(rootViewController: ReadShipViewController()), animated: true, completion: nil)
+    }
+    
+    @objc func updateShip() {
+        
+    }
+    
+    @objc func deleteShip() {
+        
+    }
+    
+    @objc func createCompany() {
+        
+    }
+    
+    @objc func readCompany() {
+        
+    }
+    
+    @objc func createTrip() {
+        
+    }
+    
+    @objc func readTrip() {
+        
+    }
+    
+    @objc func updateTrip() {
+        
+    }
+    
+    @objc func createContact() {
+        present(UINavigationController(rootViewController: CreateContactViewController()), animated: true, completion: nil)
+    }
+    
+    @objc func readContact() {
+        present(UINavigationController(rootViewController: ReadContactViewController()), animated: true, completion: nil)
+    }
+    
+
+
+    
+    
+    
     func setupObservers() {
 
         NotificationCenter.default.addObserver(self, selector: #selector(createShip), name: NSNotification.Name.init("create Ship"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(readShip), name: NSNotification.Name.init("read Ship"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateShip), name: NSNotification.Name.init("update Ship"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(deleteShip), name: NSNotification.Name.init("delete Ship"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(updateShip), name: NSNotification.Name.init("update Ship"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(deleteShip), name: NSNotification.Name.init("delete Ship"), object: nil)
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(createCompany), name: NSNotification.Name.init("create Company"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(readCompany), name: NSNotification.Name.init("read Company"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateCompany), name: NSNotification.Name.init("update Company"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(deleteCompany), name: NSNotification.Name.init("delete Company"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(updateCompany), name: NSNotification.Name.init("update Company"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(deleteCompany), name: NSNotification.Name.init("delete Company"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(createTrip), name: NSNotification.Name.init("create Trip"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(readTrip), name: NSNotification.Name.init("read Trip"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateTrip), name: NSNotification.Name.init("update Trip"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(deleteTrip), name: NSNotification.Name.init("delete Trip"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(sailTrip), name: NSNotification.Name.init("sail Trip"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(deleteTrip), name: NSNotification.Name.init("delete Trip"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(sailTrip), name: NSNotification.Name.init("sail Trip"), object: nil)
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(createContact), name: NSNotification.Name.init("create Contact"), object: nil)
@@ -80,7 +130,7 @@ let mainCollectionViewCellId = "mainCollectionViewCellId"
 //        NotificationCenter.default.addObserver(self, selector: #selector(deleteContact), name: NSNotification.Name.init("delete Contact"), object: nil)
         
         
-        NotificationCenter.default.addObserver(self, selector: #selector(readQRCode), name: NSNotification.Name.init("read QR Code"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(readQRCode), name: NSNotification.Name.init("read QR Code"), object: nil)
         
 //
 //        NotificationCenter.default.addObserver(self, selector: #selector(openShubranilInfo), name: NSNotification.Name.init("shubranil"), object: nil)

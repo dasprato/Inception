@@ -11,40 +11,43 @@ import Firebase
 
 class AccountViewController: UIViewController {
 
-    
-    let colors = ColorForAccount()
-    var backgroundLayer = CAGradientLayer()
-    
-    
-    func refresh() {
-        view.backgroundColor = UIColor.clear
-        backgroundLayer = colors.gl
-        view.layer.insertSublayer(backgroundLayer, at: 0)
-    }
-    
+
     
     override func viewDidLayoutSubviews() {
-        self.backgroundLayer.frame = view.frame
         logout.addShadow()
     }
     
+    var animatedBackgroundView: AnimatedBackgroundView = {
+        let animatedBackgroundView = AnimatedBackgroundView()
+        return animatedBackgroundView
+    }()
+    
+    
+    
+    fileprivate func setupView() {
+        view.addSubview(animatedBackgroundView)
+        view.addSubview(logout)
+        
+        NSLayoutConstraint.activate([animatedBackgroundView.topAnchor.constraint(equalTo: view.topAnchor), animatedBackgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor), animatedBackgroundView.rightAnchor.constraint(equalTo: view.rightAnchor), animatedBackgroundView.leftAnchor.constraint(equalTo: view.leftAnchor)])
+        
+        NSLayoutConstraint.activate([logout.centerXAnchor.constraint(equalTo: view.centerXAnchor), logout.centerYAnchor.constraint(equalTo: view.centerYAnchor), logout.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16), logout.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16), logout.heightAnchor.constraint(equalToConstant: 32)])
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupBar()
         
-        refresh()
-        self.navigationController?.navigationBar.tintColor = .white
-        self.navigationController?.navigationBar.barTintColor = .gray
-        self.navigationController?.navigationBar.topItem?.title = "Account"
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationController?.navigationBar.isHidden = true
+        setupView()
         
-        
-        view.addSubview(logout)
-        
-        NSLayoutConstraint.activate([logout.centerXAnchor.constraint(equalTo: view.centerXAnchor), logout.centerYAnchor.constraint(equalTo: view.centerYAnchor), logout.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16), logout.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16), logout.heightAnchor.constraint(equalToConstant: 32)])
-        
+    }
+    
+    func setupBar() {
+    self.navigationController?.navigationBar.tintColor = .white
+    self.navigationController?.navigationBar.barTintColor = .gray
+    self.navigationController?.navigationBar.topItem?.title = "Account"
+    self.navigationController?.navigationBar.prefersLargeTitles = true
+    self.navigationController?.navigationBar.isHidden = true
     }
 
     var logout: CustomUIButton = {
@@ -67,17 +70,5 @@ class AccountViewController: UIViewController {
         let viewControllerToPresent = LoginController()
         
         self.present(UINavigationController(rootViewController: viewControllerToPresent), animated: true, completion: nil)
-    }
-    
-    class ColorForAccount {
-        var gl:CAGradientLayer!
-        
-        init() {
-            let colorTop = UIColor.blue.cgColor
-            let colorBottom = UIColor.gray.cgColor
-            self.gl = CAGradientLayer()
-            self.gl.colors = [colorTop, colorBottom]
-            self.gl.locations = [0.0, 0.5]
-        }
     }
 }

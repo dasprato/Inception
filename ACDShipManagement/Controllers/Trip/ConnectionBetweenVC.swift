@@ -9,5 +9,4 @@
 class ConnectionBetweenVC {
     static var trip: Trip = Trip(amount: "", cargo: "", from: "", to: "", tripStatus: "", vesselReferencePath: "", tripId: "", fromDate: "", toDate: "", vesselName: "")
     static var ship: Ship = Ship()
-    
 }

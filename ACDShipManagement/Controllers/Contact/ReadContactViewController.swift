@@ -149,18 +149,26 @@ extension ReadContactViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = QRCodeViewController()
-        vc.modalTransitionStyle = .crossDissolve
-        vc.modalPresentationStyle = .overCurrentContext
-        vc.id = "Contact Id: " + self.arrayOfContacts![indexPath.row].contactId!
+//        let vc = QRCodeViewController()
+//        vc.modalTransitionStyle = .crossDissolve
+//        vc.modalPresentationStyle = .overCurrentContext
+//        vc.id = "Contact Id: " + self.arrayOfContacts![indexPath.row].contactId!
+//        present(vc, animated: true, completion: nil)
+//
         
-        present(vc, animated: true, completion: nil)
+        
+         navigationController?.pushViewController(EditContactViewController(), animated: true)
+        
+//        let vc = QRCodeViewController()
+//        vc.modalTransitionStyle = .crossDissolve
+//        vc.modalPresentationStyle = .overCurrentContext
+//        vc.id = "Ship Id: " + self.arrayOfShips![indexPath.row].shipId!
+//        present(vc, animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = contactsCollectionView.dequeueReusableCell(withReuseIdentifier: contactsCollectionViewCellId, for: indexPath) as! ReadContactCollectionViewCell
         cell.contact = self.arrayOfContacts![indexPath.row]
-        
         return cell
     }
     

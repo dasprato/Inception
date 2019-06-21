@@ -5,13 +5,12 @@
 //  Created by Prato Das on 2018-01-27.
 //  Copyright © 2018 Prato Das. All rights reserved.
 //
-
 import UIKit
 import Firebase
 import FirebaseMessaging
 
 class AppTabBarController: UITabBarController, UITabBarControllerDelegate {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,11 +57,11 @@ class AppTabBarController: UITabBarController, UITabBarControllerDelegate {
         
         
         
-    
+        
     }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-
+        
         NotificationCenter.default.post(name: NSNotification.Name.init("didSelectADifferentTab"), object: self, userInfo: nil)
     }
     
@@ -82,12 +81,11 @@ class AppTabBarController: UITabBarController, UITabBarControllerDelegate {
         self.present(UINavigationController(rootViewController: viewControllerToPresent), animated: true, completion: nil)
     }
     
-
-
     
     
-
     
-
+    
+    
+    
+    
 }
-

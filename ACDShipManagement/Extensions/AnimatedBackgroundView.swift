@@ -6,7 +6,6 @@
 //  Copyright © 2018 Prato Das. All rights reserved.
 //
 
-
 import UIKit
 
 class AnimatedBackgroundView: UIView {
@@ -56,7 +55,7 @@ class AnimatedBackgroundView: UIView {
         gradientChangeAnimation.delegate = self
         gradientLayer.add(gradientChangeAnimation, forKey: "colorChange")
     }
-
+    
     // change the frame when the view lays out
     override func layoutSubviews() {
         self.gradientLayer.frame = frame

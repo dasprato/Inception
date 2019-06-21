@@ -8,7 +8,7 @@
 
 import UIKit
 import Firebase
-class SelectContactViewController: UIViewController {
+class EditContactViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchContacts()
@@ -28,4 +28,9 @@ class SelectContactViewController: UIViewController {
             }
         }
     }
+    
+    
+    
+    
+    
 }

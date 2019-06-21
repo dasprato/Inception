@@ -195,7 +195,7 @@ extension UIViewController {
         
         let avc = UIActivityViewController(activityItems: activityItem as [AnyObject], applicationActivities: nil)
         avc.modalTransitionStyle = .crossDissolve
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
         present(avc, animated: true, completion: nil)
     }
     
