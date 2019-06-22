@@ -18,19 +18,6 @@ class ReadTripViewController: InteractiveViewController {
             self.tripsCollectionView.reloadData()
         }
     }
-    let colors = Colors()
-    var backgroundLayer = CAGradientLayer()
-    
-    func refresh() {
-        view.backgroundColor = UIColor.clear
-        backgroundLayer = colors.gl
-        view.layer.insertSublayer(backgroundLayer, at: 0)
-    }
-
-    
-    override func viewDidLayoutSubviews() {
-        self.backgroundLayer.frame = view.frame
-    }
 
     override func viewDidAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.prefersLargeTitles = false
@@ -51,7 +38,6 @@ class ReadTripViewController: InteractiveViewController {
         navigationItem.titleView = searchBar
         
         searchBar.becomeFirstResponder()
-        refresh()
     }
     
     func setupCollectionView() {
@@ -73,9 +59,7 @@ class ReadTripViewController: InteractiveViewController {
 
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        refresh()
-    }
+
     var tripsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -137,12 +121,14 @@ class ReadTripViewController: InteractiveViewController {
                     let docRef = db.collection("Ships").document(vesselReferencePath)
                     docRef.getDocument { (document, error) in
                         if let document = document {
-                            vesselName = document.data()!["vesselName"] as! String
-                            representativeEmail = document.data()!["representativeEmail"] as! String
-                            representativeName = document.data()!["representativeName"] as! String
-                            representativePhone = document.data()!["representativePhone"] as! String
-                            vesselCapacity = document.data()!["vesselCapacity"] as! String
-                            currentStatus = document.data()!["currentStatus"] as! String
+                            
+                            guard let unwrappedData = document.data() else { return }
+                            vesselName = unwrappedData["vesselName"] as! String
+                            representativeEmail = unwrappedData["representativeEmail"] as! String
+                            representativeName = unwrappedData["representativeName"] as! String
+                            representativePhone = unwrappedData["representativePhone"] as! String
+                            vesselCapacity = unwrappedData["vesselCapacity"] as! String
+                            currentStatus = unwrappedData["currentStatus"] as! String
                             shipId = document.documentID
                             
                             self.arrayOfShipNames.append(Ship(representativeEmail: representativeEmail, representativeName: representativeName, representativePhone: representativePhone, vesselCapacity: vesselCapacity, vesselName: vesselName, shipId: shipId, currentStatus: currentStatus))

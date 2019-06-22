@@ -17,7 +17,7 @@ import MapboxNavigation
 import QRCode
 
 
-class SailTripViewController2: UIViewController, CLLocationManagerDelegate {
+class SailTripViewController2: UIViewController {
 
     let locationManager = CLLocationManager()
     var currentLong = CLLocationDegrees()
@@ -55,9 +55,6 @@ class SailTripViewController2: UIViewController, CLLocationManagerDelegate {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
         setupBarButtonItems()
-        //        let modelName = UIDevice.current.modelName
-        
-        
         
         // Ask for Authorisation from the User.
         self.locationManager.requestAlwaysAuthorization()
@@ -358,9 +355,40 @@ class SailTripViewController2: UIViewController, CLLocationManagerDelegate {
     }()
     
     
+    
+    
+}
+
+extension SailTripViewController2: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // This runs only when device location is updated
+        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+        // let locationCoorindate = CLLocationCoordinate2DMake(locValue.latitude, locValue.longitude)
+        interactiveBackgroundMap.setCenter(locValue, animated: true)
+        currentLong = locValue.longitude
+        currentLat = locValue.latitude
+        if ConnectionBetweenVC.trip.tripStatus! == "Initialised" {
+            self.navigationItem.title = "Initialised: (" + String(locValue.latitude) + ", " + String(locValue.longitude) + ")"
+        }
+            
+        else if ConnectionBetweenVC.trip.tripStatus! == "Sailing" {
+            self.navigationItem.title = "Sailing: (" + String(locValue.latitude) + ", " + String(locValue.longitude) + ")"
+        }
+            
+        else if ConnectionBetweenVC.trip.tripStatus! == "TripPaused" {
+            self.navigationItem.title = "Trip Paused: (" + String(locValue.latitude) + ", " + String(locValue.longitude) + ")"
+    
+        }
+    }
+    
+}
+
+
+// View Controller Handlers
+extension SailTripViewController2 {
+    
     @objc func onCompleteButtonTapped() {
-       
-        
         ConnectionBetweenVC.ship = Ship(representativeEmail: ConnectionBetweenVC.ship.representativeEmail!, representativeName: ConnectionBetweenVC.ship.representativeName!, representativePhone: ConnectionBetweenVC.ship.representativePhone!, vesselCapacity: ConnectionBetweenVC.ship.vesselCapacity!, vesselName: ConnectionBetweenVC.ship.vesselName!, shipId: ConnectionBetweenVC.ship.shipId!, currentStatus: "Available")
         updateShipStatus()
         
@@ -372,6 +400,7 @@ class SailTripViewController2: UIViewController, CLLocationManagerDelegate {
         let db = Firestore.firestore()
         let tripStatusDictionary: [String: Any?] = ["Completed": timeStamp]
         db.collection("Trips").document(ConnectionBetweenVC.trip.tripId!).collection("TripStatusLog").document(timeStamp).setData(tripStatusDictionary)
+        showInfoBanner(withTitle: "Completed")
     }
     
     @objc func onLoadingTapped() {
@@ -379,6 +408,7 @@ class SailTripViewController2: UIViewController, CLLocationManagerDelegate {
         let db = Firestore.firestore()
         let tripStatusDictionary: [String: Any?] = ["Loading": timeStamp]
         db.collection("Trips").document(ConnectionBetweenVC.trip.tripId!).collection("TripStatusLog").document(timeStamp).setData(tripStatusDictionary)
+        showInfoBanner(withTitle: "Loading")
     }
     
     @objc func onUnloadingTapped() {
@@ -386,6 +416,7 @@ class SailTripViewController2: UIViewController, CLLocationManagerDelegate {
         let db = Firestore.firestore()
         let tripStatusDictionary: [String: Any?] = ["Unloading": timeStamp]
         db.collection("Trips").document(ConnectionBetweenVC.trip.tripId!).collection("TripStatusLog").document(timeStamp).setData(tripStatusDictionary)
+        showInfoBanner(withTitle: "Unloading")
     }
     
     @objc func onLoadingWaitingTapped() {
@@ -393,6 +424,7 @@ class SailTripViewController2: UIViewController, CLLocationManagerDelegate {
         let db = Firestore.firestore()
         let tripStatusDictionary: [String: Any?] = ["LoadingWaiting": timeStamp]
         db.collection("Trips").document(ConnectionBetweenVC.trip.tripId!).collection("TripStatusLog").document(timeStamp).setData(tripStatusDictionary)
+        showInfoBanner(withTitle: "LoadingWaiting")
     }
     
     @objc func onUnloadingWaitingTapped() {
@@ -400,6 +432,7 @@ class SailTripViewController2: UIViewController, CLLocationManagerDelegate {
         let db = Firestore.firestore()
         let tripStatusDictionary: [String: Any?] = ["UnloadingWaiting": timeStamp]
         db.collection("Trips").document(ConnectionBetweenVC.trip.tripId!).collection("TripStatusLog").document(timeStamp).setData(tripStatusDictionary)
+        showInfoBanner(withTitle: "UnloadingWaiting")
     }
     
     @objc func onOtherButton() {
@@ -407,21 +440,14 @@ class SailTripViewController2: UIViewController, CLLocationManagerDelegate {
         let db = Firestore.firestore()
         let tripStatusDictionary: [String: Any?] = ["Other": timeStamp]
         db.collection("Trips").document(ConnectionBetweenVC.trip.tripId!).collection("TripStatusLog").document(timeStamp).setData(tripStatusDictionary)
+        showInfoBanner(withTitle: "TripStatusLog")
     }
-    
-    
-}
-
-extension SailTripViewController2 {
-    
     
     
     @objc func onActionButtonTapped() {
         
-        
-        
         ConnectionBetweenVC.ship = Ship(representativeEmail: ConnectionBetweenVC.ship.representativeEmail!, representativeName: ConnectionBetweenVC.ship.representativeName!, representativePhone: ConnectionBetweenVC.ship.representativePhone!, vesselCapacity: ConnectionBetweenVC.ship.vesselCapacity!, vesselName: ConnectionBetweenVC.ship.vesselName!, shipId: ConnectionBetweenVC.ship.shipId!, currentStatus: "Not Available")
-            updateShipStatus()
+        updateShipStatus()
         
         if ConnectionBetweenVC.trip.tripStatus == "Initialised" {
             // Initial hit
@@ -430,7 +456,7 @@ extension SailTripViewController2 {
             ConnectionBetweenVC.trip = Trip(amount: ConnectionBetweenVC.trip.amount!, cargo: ConnectionBetweenVC.trip.cargo!, from: ConnectionBetweenVC.trip.from!, to: ConnectionBetweenVC.trip.to!, tripStatus: "Sailing", vesselReferencePath: ConnectionBetweenVC.trip.vesselReferencePath!, tripId: ConnectionBetweenVC.trip.tripId!, fromDate: ConnectionBetweenVC.trip.fromDate!, toDate: ConnectionBetweenVC.trip.toDate!, vesselName: ConnectionBetweenVC.trip.vesselName!)
             performLogicOnButtonTitle()
             updateTripStatus()
-
+            
         }
         else if ConnectionBetweenVC.trip.tripStatus == "Sailing" {
             // Start and Between trip hits
@@ -452,43 +478,18 @@ extension SailTripViewController2 {
         }
     }
     
+    
     func updateTripStatus() {
         let db = Firestore.firestore()
         let tripDictionary: [String: Any?] = ["from": ConnectionBetweenVC.trip.from!, "to": ConnectionBetweenVC.trip.to!, "cargo": ConnectionBetweenVC.trip.cargo!, "amount": ConnectionBetweenVC.trip.amount!, "vesselReferencePath": ConnectionBetweenVC.trip.vesselReferencePath!, "fromDate": ConnectionBetweenVC.trip.fromDate!, "toDate": ConnectionBetweenVC.trip.toDate!, "tripStatus": ConnectionBetweenVC.trip.tripStatus!]
         db.collection("Trips").document(ConnectionBetweenVC.trip.tripId!).setData(tripDictionary)
         
     }
-
+    
     
     func updateShipStatus() {
-        
         let db = Firestore.firestore()
         let vesselDictionary: [String: Any?] = ["vesselName": ConnectionBetweenVC.ship.vesselName!, "vesselCapacity": ConnectionBetweenVC.ship.vesselCapacity!, "representativeName": ConnectionBetweenVC.ship.representativeName!, "representativePhone": ConnectionBetweenVC.ship.representativePhone!, "representativeEmail": ConnectionBetweenVC.ship.representativeName!, "currentStatus": ConnectionBetweenVC.ship.currentStatus!]
         db.collection("Ships").document(ConnectionBetweenVC.ship.shipId!).setData(vesselDictionary)
     }
-
-    
-
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        // This runs only when device location is updated
-        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
-        //        let locationCoorindate = CLLocationCoordinate2DMake(locValue.latitude, locValue.longitude)
-        interactiveBackgroundMap.setCenter(locValue, animated: true)
-        currentLong = locValue.longitude
-        currentLat = locValue.latitude
-        if ConnectionBetweenVC.trip.tripStatus! == "Initialised" {
-            self.navigationItem.title = "Initialised: (" + String(locValue.latitude) + ", " + String(locValue.longitude) + ")"
-        }
-            
-        else if ConnectionBetweenVC.trip.tripStatus! == "Sailing" {
-            self.navigationItem.title = "Sailing: (" + String(locValue.latitude) + ", " + String(locValue.longitude) + ")"
-        }
-            
-        else if ConnectionBetweenVC.trip.tripStatus! == "TripPaused" {
-            self.navigationItem.title = "Trip Paused: (" + String(locValue.latitude) + ", " + String(locValue.longitude) + ")"
-    
-        }
-    }
-    
 }

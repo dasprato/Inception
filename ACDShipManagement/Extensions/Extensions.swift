@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import NotificationBannerSwift
 extension UIViewController {
     @objc func addShadow() {
         
@@ -207,6 +207,20 @@ extension UIViewController {
         barButtonClose.tintColor = .white
         navigationItem.setLeftBarButton(barButtonClose, animated: true)
     }
+    
+    func showInfoBanner(withTitle title: String) {
+        let banner = StatusBarNotificationBanner(title: title, style: .info)
+        banner.show()
+        banner.duration = 0.5
+    }
+    
+    func showSuccessBanner(withTitle title: String) {
+        let banner = StatusBarNotificationBanner(title: title, style: .success)
+        banner.show()
+        banner.duration = 0.5
+    }
+    
+    
 }
 
 extension UIView {
